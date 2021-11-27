@@ -3,6 +3,7 @@ const router = require("express").Router();
 // ℹ️ Handles password encryption
 const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
+const nodemailer = require("nodemailer");
 
 // How many rounds should bcrypt run the salt (default [10 - 12 rounds])
 const saltRounds = 10;
@@ -13,20 +14,24 @@ const User = require("../models/User.model");
 // Require necessary (isLoggedOut and isLiggedIn) middleware in order to control access to specific routes
 const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
-
+///////////////GET route to render signup form////////////////
 router.get("/signup", isLoggedOut, (req, res) => {
-  res.render("auth/signup");
+  res.render("auth/signup", { isLoggedIn: req.session.user });
 });
 
 router.post("/signup", isLoggedOut, (req, res) => {
-  const { username, password, email } = req.body;
-  console.log(req.body)
-  if (!username) {
-    return res
-      .status(400)
-      .render("auth/signup", { errorMessage: "Please provide your username." });
+  const { username, password, email, firstName, lastName } = req.body;
+  console.log(req.body);
+  // if (!username) {
+  //   return res
+  //     .status(400)
+  //     .render("auth/signup", { errorMessage: "Please provide your username." });
+  // }
+  if (!email || !password || !firstName || !lastName) {
+    return res.status(400).render("auth/signup", {
+      errorMessage: "Please fill out all required fields.",
+    });
   }
-
   if (password.length < 8) {
     return res.status(400).render("auth/signup", {
       errorMessage: "Your password needs to be at least 8 characters long.",
@@ -34,12 +39,12 @@ router.post("/signup", isLoggedOut, (req, res) => {
   }
 
   // Search the database for a user with the username submitted in the form
-  User.findOne({ username }).then((found) => {
+  User.findOne({ email: email }).then((found) => {
     // If the user is found, send the message username is taken
     if (found) {
       return res
         .status(400)
-        .render("auth/signup", { errorMessage: "Username already taken." });
+        .render("auth/signup", { errorMessage: "Email already taken." });
     }
 
     // if user is not found, create a new user - start with hashing the password
@@ -52,13 +57,42 @@ router.post("/signup", isLoggedOut, (req, res) => {
           username: username,
           password: hashedPassword,
           email: email,
+          firstName: firstName,
+          lastName: lastName,
         });
       })
       .then((user) => {
-        console.log('hello')
         req.session.user = user;
-        res.redirect("/");
+        // res.redirect("/");
+        console.log("Session", req.session.user);
+        let { email } = req.body;
+        let transporter = nodemailer.createTransport({
+          service: "Gmail",
+          auth: {
+            user: process.env.NODEMAILER_ACC,
+            pass: process.env.NODEMAILER_PASS,
+          },
+        });
+
+        transporter
+          .sendMail({
+            from: `Bulk Beauty <${process.env.NODEMAILER_ACC}>`,
+            to: email,
+            subject: "Thanks for signing up for BulkBeauty.com",
+            text: "Bulk Beauty",
+            html: templates.templateExample(`${firstName} ${lastName}`),
+          })
+          .then((info) => {
+            console.log("Info from nodeamailer", info);
+            res.redirect("/");
+          })
+          .catch((error) =>
+            console.log(
+              `Something went wrong during sending the email to the user: ${error}`
+            )
+          );
       })
+
       .catch((error) => {
         if (error instanceof mongoose.Error.ValidationError) {
           return res
@@ -77,18 +111,18 @@ router.post("/signup", isLoggedOut, (req, res) => {
       });
   });
 });
-
+////////////GET route to render login form //////////////////////
 router.get("/login", isLoggedOut, (req, res) => {
-  res.render("auth/login");
+  res.render("auth/login", { isLoggedIn: req.session.user });
 });
-
+/////////POST route submmit user's username and password///////////////////////
 router.post("/login", isLoggedOut, (req, res, next) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  if (!username) {
+  if (!email) {
     return res
       .status(400)
-      .render("auth/login", { errorMessage: "Please provide your username." });
+      .render("auth/login", { errorMessage: "Please provide your email." });
   }
 
   // Here we use the same logic as above
@@ -100,7 +134,7 @@ router.post("/login", isLoggedOut, (req, res, next) => {
   }
 
   // Search the database for a user with the username submitted in the form
-  User.findOne({ username })
+  User.findOne({ email })
     .then((user) => {
       // If the user isn't found, send the message that user provided wrong credentials
       if (!user) {
@@ -117,6 +151,7 @@ router.post("/login", isLoggedOut, (req, res, next) => {
             .render("auth/login", { errorMessage: "Wrong credentials." });
         }
         req.session.user = user;
+        global.test = user;
         // req.session.user = user._id; // ! better and safer but in this case we saving the entire user object
         return res.redirect("/");
       });
@@ -129,15 +164,16 @@ router.post("/login", isLoggedOut, (req, res, next) => {
       // return res.status(500).render("login", { errorMessage: err.message });
     });
 });
-
+////////GET toute Kill the user's session///////////////////////////
 router.get("/logout", isLoggedIn, (req, res) => {
   req.session.destroy((err) => {
     if (err) {
-      return res
-        .status(500)
-        .render("auth/logout", { errorMessage: err.message });
+      return res.status(500).render("auth/logout", {
+        errorMessage: err.message,
+        isLoggedIn: req.session.user,
+      });
     }
-    res.redirect("/auth/login");
+    res.redirect("/");
   });
 });
 

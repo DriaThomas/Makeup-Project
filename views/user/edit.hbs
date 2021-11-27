@@ -1,0 +1,30 @@
+<form action="/profile" class="edit-form" method="POST" enctype="multipart/form-data">
+   <div class="edit-form-container">
+      <h1>Edit Your Profile</h1>
+
+      <hr>
+
+      <label> <b>First Name</b><br>
+         <input type="text" name="firstName" value="{{user.firstName}}">
+      </label>
+
+      <label> <b>Last Name</b><br>
+         <input type="text" name="lastName" value="{{user.lastName}}">
+      </label>
+
+      <label> <b>Undertone</b><br>
+         <input type="text" name="undertone" value="{{user.undertone}}">
+      </label>
+
+      <label> <b>Favorite Product</b><br>
+         <input type="text" name="currentProduct" value="{{user.currentProduct}}">
+      </label>
+
+      <label>Image<input type="file" name="profilePic"/>
+        <input type="text" name="existingImage" hidden value="{{user.profilePic}}">
+        </label>
+
+      <button type="submit">Submit</button>
+
+   </div>
+</form>

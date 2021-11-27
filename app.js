@@ -1,6 +1,3 @@
-
-
-
 // ℹ️ Gets access to environment variables/settings
 // https://www.npmjs.com/package/dotenv
 require("dotenv/config");
@@ -23,11 +20,10 @@ require("./config")(app);
 
 // default value for title local
 const projectName = "Makeup-Project";
-const capitalized = (string) => string[0].toUpperCase() + string.slice(1).toLowerCase();
-
+const capitalized = (string) =>
+  string[0].toUpperCase() + string.slice(1).toLowerCase();
 
 app.locals.title = `${capitalized(projectName)} created with IronLauncher`;
-
 
 // 👇 Start handling routes here
 const index = require("./routes/index");
@@ -36,21 +32,22 @@ app.use("/", index);
 const auth = require("./routes/auth");
 app.use("/auth", auth);
 
+// const user = require("./routes/user");
+// app.use("/user", user);
 
-const user = require("./routes/user");
-app.use("/user", user)
-
-const products = require("./routes/product");
+const products = require("./routes/product.routes");
 app.use("/product", products);
 
-const aboutUs = require("./routes/about");
-app.use("/about", aboutUs);
+const profileRoutes = require("./routes/profile.routes");
+app.use("/profile", profileRoutes);
 
 app.use("/collection", require("./routes/collection.routes"));
 
-const rankings = require("./routes/rankings");
-app.use("/rankings", rankings);
+// const reviewRoutes = require("./routes/review.routes");
+// app.use("/review", reviewRoutes);
 
+const rankings = require("./routes/rankings.routes");
+app.use("/rankings", rankings);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);

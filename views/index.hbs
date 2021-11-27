@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <title>W3.CSS Template</title>
 <meta charset="UTF-8">
@@ -50,11 +50,11 @@
         {{!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto"> --}}
             {{!-- <a href="/">Home</a> --}}
-            <a href="/about" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i>About Us</a>
+            {{!-- <a href="/about" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i>About Us</a> --}}
             <a href="/rankings" class="w3-bar-item w3-button"><i class="fa fa-th"></i>Product search</a>
             <a href="/product" class="w3-bar-item w3-button"><i class="fa fa-th"></i> All Product</a>
             <a href="/collection/create" class="w3-bar-item w3-button"><i class="fa fa-th"></i> Create Collection </a>
-            <a href="/user/profile" class="w3-bar-item w3-button"> <i class="fa fa-user"></i>Profile Page </a>
+            <a href="/profile" class="w3-bar-item w3-button"> <i class="fa fa-user"></i>Profile Page </a>
             <a href="/auth/signup" class="w3-bar-item w3-button">Sign-Up</a>
             <a href="/auth/login" class="w3-bar-item w3-button">Login</a>
             <a href="/auth/logout" class="w3-bar-item w3-button">Logout</a>
@@ -76,11 +76,10 @@
     <nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large"
       style="display:none" id="mySidebar">
       <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
-      <a href="/about" onclick="w3_close()" class="w3-bar-item w3-button">ABOUT</a>
       <a href="/product" onclick="w3_close()" class="w3-bar-item w3-button">ALL PRODUCTS</a>
       <a href="/rankings" onclick="w3_close()" class="w3-bar-item w3-button">PRODUCT SEARCH</a>
       <a href="/collection/create" onclick="w3_close()" class="w3-bar-item w3-button">CREATE COLLECTION</a>
-      {{!-- <a href="/user/profile" onclick="w3_close()" class="w3-bar-item w3-button">MY PROFILE</a> --}}
+      - <a href="/user/profile" onclick="w3_close()" class="w3-bar-item w3-button">MY PROFILE</a> 
       <a href="/auth/logout" onclick="w3_close()" class="w3-bar-item w3-button">LOGOUT</a>
     </nav>
 
@@ -134,68 +133,6 @@
         </div>
       </div>
     </div>
-    {{!--
-    <!DOCTYPE html>
-    <html>
-
-    <head>
-      <style>
-        body {
-          background-image: url('makeupcollage.jpg');
-          background-repeat: no-repeat;
-          background-attachment: fixed;
-          background-size: cover;
-        }
-      </style>
-    </head>
-
-    <div class="index-selection">
-      <h1>{{title}} 🚀</h1>
-
-
-    </div> --}}
-
-
-    {{!-- <style>
-      body {
-        background-image: url('makeupcollage.jpg');
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-size: cover;
-      }
-    </style> --}}
-
-    {{!-- <h1 style="text-align: center;"></h1> --}}
-
-    {{!-- <a href="/about"> About Us</a>
-
-    <a href="/auth/signup"> Sign-Up</a>
-    <a href="/auth/login"> Login</a> --}}
-
-    {{!-- <a href="/rankings"> Product Search</a>
-    <a href="/user/profile">Profile Page</a> --}}
-
-    {{!-- <h1>{{title}} 🚀</h1>
-    <p>Welcome Ironhacker!</p> --}}
-
-
-
-    {{!-- <a href="/auth/login"> Login</a> --}}
-
-
-
-    {{!--
-    <a href="/rankings/edit/{{id}}">Edit</a>
-
-    <a href="/rankings/delete/{{id}}">Delete</a>
-
-    <a href="/rankings/delete/{{id}}">Delete</a> --}}
-
-
-    {{!-- <a href="/auth/login"> Login</a> --}}
-
-    {{!-- <a href="/product"> Products List </a>
-    <a href="/collection/create"> Create Collection </a> --}}
 
 
 
@@ -204,16 +141,6 @@
 
 
 
-
-
-
-
-
-    <!-- Footer -->
-
-
-
-    {{!--
     <script>
       // Modal Image Gallery
       function onClick(element) {
