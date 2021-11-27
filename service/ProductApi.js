@@ -39,7 +39,7 @@ class ProductApi {
   }
 
   getGeneralLisiting = () => {
-    return this.api.get("");
+    return this.api.get("/product");
   };
 
   getQueriedListings = (

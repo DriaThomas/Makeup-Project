@@ -187,7 +187,7 @@ router.get("/", async (req, res) => {
     const trimmedArrOfProducts = (records || []).filter(
       (curr, i) => i < 5 && curr
     );
-    console.log("products", productsFromApi.data);
+    console.log("products", productsFromApi.name);
 
     const trimmedArrOfProductsAndRevLength = trimmedArrOfProducts.map(
       async (current) => {
@@ -207,12 +207,12 @@ router.get("/", async (req, res) => {
 
     let data = await Promise.all(trimmedArrOfProductsAndRevLength);
     // const products = { productsFromDB };
-    res.render("products/list", {
+    res.render("products/list", productsFromApi.name, {
       // productsFromApi: data,
       // productsFromApi: records,
       // productsApi: data,
       // productsFromApi,
-      productsApi,
+      // productsApi, getGeneralListing
 
       isLoggedIn: req.session.user,
     });
