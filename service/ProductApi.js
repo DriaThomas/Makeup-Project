@@ -37,7 +37,7 @@ class ProductApi {
       baseURL: ``,
     });
   }
-
+  //list of products
   getGeneralLisiting = () => {
     return this.api.get("");
   };
