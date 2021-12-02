@@ -1,0 +1,54 @@
+<div class='header-vehicles-list'>
+  {{#if savedVehiclesPage}}
+  {{#if vehiclesFromApi}}
+  <h2>
+    Saved Vehicles
+  </h2>
+  {{else}}
+  <h2>
+    No saved vehicles yet
+  </h2>
+  {{/if}}
+  {{/if}}
+</div>
+{{#each vehiclesFromApi}}
+<form action="/product/details/{{this.id}}" method="POST">
+  <input type="hidden" name="dealerLink" value="{{this.product_link}}">
+  <div class='list-of-vehicles'>
+    <div class='list-of-vehicles-box'>
+      <button type="submit" class="button-to-open-vehicle-details list-vehicles">
+        <div id='vehicle-card'>
+                
+    <img id='vehicle-primary-img' src="{{this.api_featured_image}}" alt='' /> 
+
+          <div class='vehicle-info'>
+            <h4 class='vehicle-year-make'>
+              {{this.brand}}
+              {{this.name}}
+            
+            </h4>
+            {{!-- <hr style="border-top: 2px solid black"> --}}
+            {{this.category}}
+           
+           
+            <h5>
+            ${{this.price}}
+            </h5>
+             <button href="{{this.product_link}}">Buy Now
+
+            </button>
+          </div>
+        </div>
+      </button>
+    </div>
+  </div>
+</form>
+{{#if ../usersListOfVehicles}}
+<form action="/profile/savedvehicles/delete/{{this.id}}" method='GET'>
+  <button type='submit' class='btn btn-danger'>Remove From Saved List</button>
+</form>
+{{/if}}
+{{/each}}
+{{#if errorMessage}}
+{{errorMessage}}
+{{/if}}

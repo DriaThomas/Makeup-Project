@@ -125,6 +125,87 @@
           <p class="w3-large">Design</p>
           <p>Create different unique collections based on the different makeup brands shown in our database.</p>
         </div>
+        <div id='top-area'>
+  <div id='main-search-area'>
+    <div>
+      <h1 id='slogan'>
+      
+      </h1>
+    </div>
+    <form id='search-form' action='/product' method='POST' autocomplete='off'>
+      <div class='form__group'>
+        <input
+          autofocus
+          list='select'
+          name='brand'
+          class='form__input_make'
+          placeholder='Brand'
+        />
+        <datalist class='form-control-datalist' id='select'>
+          <option value='colourpop'></option>
+          <option value='covergirl'></option>
+          
+         
+        </datalist>
+        <input
+          type='text'
+          class='form__input'
+          id='category'
+          placeholder='Category'
+          name='category'
+        />
+      
+      </div>
+      <button type='submit' class='search-button'>
+        Search
+      </button>
+    </form>
+  </div>
+</div>
+
+<div class='main-section'>
+  <h1>
+    You Might Like
+  </h1>
+  <div class='set-of-vehicles'>
+    {{#each vehiclesFromApi}}
+      <form
+        class='vehicle-card-index-page'
+        action="/product/details/{{this.id}}"
+        method='POST'
+      >
+        <input type='hidden' name='dealerLink' value="{{this.clickoffUrl}}" />
+        <div class='numbers-reviews-badge'>
+          <p>
+            {{this.reviewLength}} <span class="reviews-badge-text">reviews</span> 
+          </p>
+        </div>
+        <button type='submit' class='button-to-open-vehicle-details'>
+          <div class='vehicle-card'>
+            <img class='vehicle-img' src="{{this.primaryPhotoUrl}}" alt='' />
+            <h6>
+              <b>{{this.make}} {{this.model}}</b>
+            </h6>
+            <p>
+              {{this.mileage}}
+            </p>
+            <h6>
+              {{this.price}}
+            </h6>
+            <p style="color: gray;">
+              Only at {{this.dealerName}}
+            </p>
+          </div>
+        </button>
+      </form>
+    {{/each}}
+    {{#if errorMessage}}
+      <p>
+        {{errorMessage}}
+      </p>
+    {{/if}}
+  </div>
+</div>
         <div class="w3-quarter">
           <i class="fa fa-cog w3-margin-bottom w3-jumbo"></i>
           <p class="w3-large">Support</p>

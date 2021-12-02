@@ -26,9 +26,76 @@
 
 // module.exports = ProductsApi;
 
+// const axios = require("axios");
+
+// class ProductApi {
+//   constructor() {
+//     this.api = axios.create({
+//       baseURL: `http://makeup-api.herokuapp.com/api/v1/products.json`,
+//     });
+//     this.customApi = axios.create({
+//       baseURL: ``,
+//     });
+//   }
+
+//   getGeneralLisiting = () => {
+//     return this.api.get("/product");
+//   };
+
+//   getQueriedListings = (
+//     brand,
+//     name,
+//     price,
+//     description,
+//     rating,
+//     tag_list,
+//     image_link
+//   ) => {
+//     if (model.length <= 3) {
+//       model = model.toUpperCase();
+//     } else {
+//       model = model.charAt(0).toUpperCase() + model.slice(1).toLowerCase();
+//     }
+
+//     return this.api.get("", {
+//       params: {
+//         brand: brand,
+//         name: name,
+//         price: price,
+//         description: description,
+//         rating: rating,
+//         tag_list: tag_list,
+//         image_link: image_link,
+//       },
+//     });
+//   };
+
+//   getProductDetails = (id) => {
+//     const baseUrl = this.api.defaults.baseURL;
+//     const indexOfQuerySign = baseUrl.indexOf("?");
+//     const preparedUrl = `${baseUrl.slice(
+//       0,
+//       indexOfQuerySign
+//     )}/${id}${baseUrl.slice(indexOfQuerySign)}`;
+//     this.customApi.defaults.baseURL = preparedUrl;
+//     return this.customApi.get("");
+//   };
+
+//   getProductList = async (arrayOfVins) => {
+//     const products = [];
+//     for (let i = 0; i < arrayOfVins.length; i++) {
+//       const prod = await this.getProductDetails(arrayOfVins[i].id);
+//       prod.data.clickoffUrl = arrayOfVins[i].url;
+//       products.push(prod);
+//     }
+//     return products;
+//   };
+// }
+
+// module.exports = ProductApi;
 const axios = require("axios");
 
-class ProductApi {
+class ProductsApi {
   constructor() {
     this.api = axios.create({
       baseURL: `http://makeup-api.herokuapp.com/api/v1/products.json`,
@@ -39,38 +106,37 @@ class ProductApi {
   }
 
   getGeneralLisiting = () => {
-    return this.api.get("/product");
+    return this.api.get("");
   };
 
-  getQueriedListings = (
-    brand,
-    name,
-    price,
-    description,
-    rating,
-    tag_list,
-    image_link
-  ) => {
-    if (model.length <= 3) {
-      model = model.toUpperCase();
-    } else {
-      model = model.charAt(0).toUpperCase() + model.slice(1).toLowerCase();
-    }
+  getQueriedListings = (name, brand, category) => {
+    // if (brand.length <= 3) {
+    //   brand = brand.toUpperCase();
+    // } else {
+    //   brand = brand.charAt(0).toUpperCase() + brand.slice(1).toLowerCase();
+    // }
 
     return this.api.get("", {
       params: {
-        brand: brand,
         name: name,
-        price: price,
-        description: description,
-        rating: rating,
-        tag_list: tag_list,
-        image_link: image_link,
+        brand: brand,
+        category: category,
       },
     });
   };
 
-  getProductDetails = (id) => {
+  // getVehicleDetails = (id) => {
+  //   const baseUrl = this.api.default.baseURL;
+  //   const indexOfQuerySign = baseUrl.indexOf("?");
+  //   const preparedUrl = `${baseUrl.slice(
+  //     0,
+  //     indexOfQuerySign
+  //   )}/${id}${baseUrl.slice(indexOfQuerySign)}`;
+  //   this.customApi.default.baseURL = preparedUrl;
+  //   return this.customApi.get("");
+  // };
+
+  getVehicleDetails = (id) => {
     const baseUrl = this.api.defaults.baseURL;
     const indexOfQuerySign = baseUrl.indexOf("?");
     const preparedUrl = `${baseUrl.slice(
@@ -81,15 +147,15 @@ class ProductApi {
     return this.customApi.get("");
   };
 
-  getProductList = async (arrayOfVins) => {
+  getVehiclesList = async (arrayOfVins) => {
     const products = [];
     for (let i = 0; i < arrayOfVins.length; i++) {
-      const prod = await this.getProductDetails(arrayOfVins[i].id);
-      prod.data.clickoffUrl = arrayOfVins[i].url;
-      products.push(prod);
+      const car = await this.getVehicleDetails(arrayOfVins[i].id);
+      car.data.clickoffUrl = arrayOfVins[i].url;
+      products.push(car);
     }
     return products;
   };
 }
 
-module.exports = ProductApi;
+module.exports = ProductsApi;

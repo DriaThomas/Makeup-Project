@@ -43,8 +43,8 @@ app.use("/profile", profileRoutes);
 
 app.use("/collection", require("./routes/collection.routes"));
 
-// const reviewRoutes = require("./routes/review.routes");
-// app.use("/review", reviewRoutes);
+const reviewRoutes = require("./routes/review.routes");
+app.use("/review", reviewRoutes);
 
 const rankings = require("./routes/rankings.routes");
 app.use("/rankings", rankings);
