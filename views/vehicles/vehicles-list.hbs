@@ -13,7 +13,7 @@
 </div>
 {{#each vehiclesFromApi}}
 <form action="/product/details/{{this.id}}" method="POST">
-  <input type="hidden" name="dealerLink" value="{{this.product_link}}">
+  <input type="hidden" name="product_link" value="{{this.product_link}}">
   <div class='list-of-vehicles'>
     <div class='list-of-vehicles-box'>
       <button type="submit" class="button-to-open-vehicle-details list-vehicles">

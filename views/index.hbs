@@ -51,12 +51,12 @@
           <ul class="navbar-nav ml-auto"> --}}
             {{!-- <a href="/">Home</a> --}}
             {{!-- <a href="/about" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i>About Us</a> --}}
-            <a href="/rankings" class="w3-bar-item w3-button"><i class="fa fa-th"></i>Product search</a>
-            <a href="/product" class="w3-bar-item w3-button"><i class="fa fa-th"></i> All Product</a>
+            {{!-- <a href="/rankings" class="w3-bar-item w3-button"><i class="fa fa-th"></i>Product search</a>
+            <a href="/product" class="w3-bar-item w3-button"><i class="fa fa-th"></i> All Product</a> --}}
             <a href="/collection/create" class="w3-bar-item w3-button"><i class="fa fa-th"></i> Create Collection </a>
             <a href="/profile" class="w3-bar-item w3-button"> <i class="fa fa-user"></i>Profile Page </a>
-            <a href="/auth/signup" class="w3-bar-item w3-button">Sign-Up</a>
-            <a href="/auth/login" class="w3-bar-item w3-button">Login</a>
+            {{!-- <a href="/auth/signup" class="w3-bar-item w3-button">Sign-Up</a>
+            <a href="/auth/login" class="w3-bar-item w3-button">Login</a> --}}
             <a href="/auth/logout" class="w3-bar-item w3-button">Logout</a>
             {{!-- <a href="/collection/upload/" class="w3-bar-item w3-button">Upload Image</a> --}}
 
@@ -93,40 +93,9 @@
         <p><a href="#about" id="learn-text"
             class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Learn
             more and start today</a></p>
-      </div>
-    </header>
-
-
-
-    <!-- About Section -->
-    <div class="w3-container" style="padding:128px 16px" id="about">
-      <h3 class="w3-center">ABOUT THE COMPANY</h3>
-      <p class="w3-center w3-large">Key features of our company</p>
-      <div class="w3-row-padding w3-center" style="margin-top:64px">
-        <div class="w3-quarter">
-          <i class="fa fa-desktop w3-margin-bottom w3-jumbo w3-center"></i>
-          <p class="w3-large">Responsive</p>
-          <p>If you have a particular makeup look you want to find, simply upload the image and let our database for
-            you.</p>
-        </div>
-        <div class="w3-quarter">
-          <i class="fa fa-heart w3-margin-bottom w3-jumbo"></i>
-          <p class="w3-large">Passion</p>
-          <p>Like a certain look? Save all of your favorite looks with a simple click into your favorites section in
-            your profile.</p>
-        </div>
-        <div class="w3-quarter">
-          <i class="fa fa-diamond w3-margin-bottom w3-jumbo"></i>
-          <a href="http://localhost:3000/rankings"></a>
-          {{!--
-          <a href="http://localhost:3000/rankings"></a> --}}
-
-
-          <p class="w3-large">Design</p>
-          <p>Create different unique collections based on the different makeup brands shown in our database.</p>
-        </div>
-        <div id='top-area'>
-  <div id='main-search-area'>
+            <a class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off" href="/auth/signup">Sign-Up</a> 
+           <a class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off" href="/auth/login">Login</a> 
+           <div id='main-search-area'>
     <div>
       <h1 id='slogan'>
       
@@ -162,10 +131,44 @@
     </form>
   </div>
 </div>
+      </div>
+    </header>
+
+
+
+    <!-- About Section -->
+    <div class="w3-container" style="padding:128px 16px" id="about">
+      <h3 class="w3-center">ABOUT THE COMPANY</h3>
+      <p class="w3-center w3-large">Key features of our company</p>
+      <div class="w3-row-padding w3-center" style="margin-top:64px">
+        <div class="w3-quarter">
+          <i class="fa fa-desktop w3-margin-bottom w3-jumbo w3-center"></i>
+          <p class="w3-large">Responsive</p>
+          <p>If you have a particular makeup look you want to find, simply upload the image and let our database for
+            you.</p>
+        </div>
+        <div class="w3-quarter">
+          <i class="fa fa-heart w3-margin-bottom w3-jumbo"></i>
+          <p class="w3-large">Passion</p>
+          <p>Like a certain look? Save all of your favorite looks with a simple click into your favorites section in
+            your profile.</p>
+        </div>
+        <div class="w3-quarter">
+          <i class="fa fa-diamond w3-margin-bottom w3-jumbo"></i>
+          <a href="http://localhost:3000/rankings"></a>
+          {{!--
+          <a href="http://localhost:3000/rankings"></a> --}}
+
+
+          <p class="w3-large">Design</p>
+          <p>Create different unique collections based on the different makeup brands shown in our database.</p>
+        </div>
+        <div id='top-area'>
+  
 
 <div class='main-section'>
   <h1>
-    You Might Like
+    {{!-- You Might Like --}}
   </h1>
   <div class='set-of-vehicles'>
     {{#each vehiclesFromApi}}

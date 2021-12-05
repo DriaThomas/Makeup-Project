@@ -100,9 +100,10 @@ class ProductsApi {
     this.api = axios.create({
       baseURL: `http://makeup-api.herokuapp.com/api/v1/products.json`,
     });
-    this.customApi = axios.create({
-      baseURL: ``,
-    });
+
+    // this.customApi = axios.create({
+    //   baseURL: ``,
+    // });
   }
 
   getGeneralLisiting = () => {
