@@ -495,11 +495,11 @@ router.post("/", (req, res) => {
 // ****************************************************************************************
 router.post("/details/:id/:isSaved?", isLoggedIn, (req, res, next) => {
   let { _id } = req.session.user;
-  // const dealerLink = req.body.dealerLink
-  //   ? req.body.dealerLink
-  //   : req.session.dealerLinkFromGlobalScope;
+  const dealerLink = req.body.dealerLink
+    ? req.body.dealerLink
+    : req.session.dealerLinkFromGlobalScope;
   const { id, isSaved } = req.params;
-  // const errorDeletion = req.session?.errorDeletion;
+  const errorDeletion = req.session?.errorDeletion;
   productsApi.getVehicleDetails(id).then((vehicleFromAPI) => {
     const dealerName = vehicleFromAPI.data.dealerName;
     Dealer.find({ dealerName: dealerName })
@@ -511,20 +511,21 @@ router.post("/details/:id/:isSaved?", isLoggedIn, (req, res, next) => {
       })
       .then((foundDealerFromDB) => {
         const foundDealer = JSON.parse(JSON.stringify(foundDealerFromDB));
-        // const preparedDelaerLink = dealerLink?.startsWith(`http`)
-        //   ? dealerLink
-        //   : `https://${dealerLink}`;
+        const preparedDelaerLink = dealerLink?.startsWith(`http`)
+          ? dealerLink
+          : `https://${dealerLink}`;
         res.status(200).render("vehicles/vehicle-details", {
           currentActiveUserId: _id,
           vehicle: vehicleFromAPI.data,
-          // foundDealer: foundDealer,
-          // dealerName: dealerName,
-          // dealerLink: preparedDelaerLink,
+          foundDealer: foundDealer,
+          dealerName: dealerName,
+          dealerLink: preparedDelaerLink,
           isSaved: isSaved,
-          // errorDeletion: errorDeletion,
+          errorDeletion: errorDeletion,
         });
       });
-    // delete req.session.errorDeletion;
+    // console.log("vehickle", vehicle);
+    delete req.session.errorDeletion;
   });
 });
 

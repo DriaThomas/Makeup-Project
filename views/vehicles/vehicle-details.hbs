@@ -1,6 +1,6 @@
 <div id="vehicle-details-section">
   <div class="errorDeletioen">{{#if errorDeletion}}
-    <a class='error-banner' href="/product/details/{{vehicle.id}}">
+    <a class='error-banner' href="/vehicles/details/{{vehicleFromAPI.id}}">
       <div class='action-error-message error'>
         <i>
           {{errorDeletion}}
@@ -16,15 +16,15 @@
     <div id="vehicle-details-div">
 
       <div class='set-of-pictures-left-side'>
-        <img class='main-image' src="{{vehicle.primaryPhotoUrl}}" alt="image of {{vehicle.make}} vehicle" />
+        <img class='main-image' src="{{this.api_featured_image}}" alt="image of {{vehicleFromAPI.name}} vehicle" />
         <div class='more-images'>
           <div class="set-of-small-pics">
-            {{#each vehicle.primaryPhotoUrl}}
-            <img class='small-pic' src="{{this}}" alt="small image - {{vehicle.make}}" />
+            {{#each vehicleFromAPI.api_featured_image}}
+            <img class='small-pic' src="{{this}}" alt="small image - {{vehicleFromAPI.name}}" />
             {{/each}}
           </div>
 
-
+{{vehicleFromAPI}}
           <div class='slider'>
             <div class="slide">
               {{#each vehicle.photoUrls}}
@@ -41,37 +41,37 @@
       </div>
       <div class='main-details'>
         <h1>
-          {{product.title}}
+          {{gb.title}}
         </h1>
         <hr style="border-top: 1px solid lightgray">
 
         <div style="font-weight: bold; color:gray">
-          Condition: {{ product.condition }} | Exterior: {{ product.colorExterior }}
+          Condition: {{ vehicle.name }} | Exterior: {{ vehicle.brand }}
         </div>
         <div id="details-price-mileage">
           <div id='details-price'>
-            <h2>{{product.price}}</h2>
+            <h2>{{vehicleFromAPI.brand}}</h2>
           </div>
           <div id='details-mileage'>
-            <h2>{{ product.mileage}} miles</h2>
+            <h2>{{ vehicleFromAPI.name}} miles</h2>
           </div>
         </div>
         <p>
-          {{product.doorCount}} {{product.driveline}}
+          {{vehicle.doorCount}} {{vehicle.driveline}}
         </p>
         <p>
-          Exterior {{product.colorExterior}}
+          Exterior {{vehicle.colorExterior}}
         </p>
-        <p id='vehicle-main-description'>{{product.description}}</p>
+        <p id='vehicle-main-description'>{{vehicle.description}}</p>
         <p>
-          {{product.city}}, {{product.state}}
+          {{vehicle.city}}, {{vehicle.state}}
         </p>
         <div class='save'>
           <form action="/profile/savedvehicles" method="POST" class="save-buy-buttons">
             <input type='hidden' name="userName" value={{user}} />
-            <input type='hidden' name="id" value={{product.id}} />
-            <input type='hidden' name="make" value={{product.make}} />
-            <input type='hidden' name="model" value={{product.model}} />
+            <input type='hidden' name="vin" value={{vehicle.id}} />
+            <input type='hidden' name="make" value={{vehicle.name}} />
+            <input type='hidden' name="model" value={{vehicle.brand}} />
             <input type='hidden' name="dealerLink" value={{dealerLink}} />
             <button type='submit' class='btn btn-success'>
               {{#if isSaved}}
@@ -92,7 +92,9 @@
   </div>
 </div>
 
-
+{{!-- ************ --}}
+{{!-- D E A L E R --}}
+{{!-- ************ --}}
 
 <div id="dealer-section-container">
 
@@ -105,8 +107,9 @@
     <div id='dealer-name-title'>
 
       <div id="logo-dealer">
+ 
         <a href="{{dealerLink}}" class="dealer-link">
-          <h4 style="margin-left: 1rem;">{{product.dealerName}}</h4>
+          <h4 style="margin-left: 1rem;">{{vehicle.dealerName}}</h4>
         </a>
       </div>
 
@@ -114,7 +117,7 @@
 
       <h5>Review this dealer</h5>
       <p>Share your thoughts with other customers</p>
-      <form action="/review/add-review/{{product.dealerName}}/{{vehicle.id}}" method="POST">
+      <form action="/review/add-review/{{vehicle.dealerName}}/{{vehicle.vin}}" method="POST">
         <input type='hidden' name="dealerLink" value={{dealerLink}} />
         <button type='submit' class='btn btn-primary'>
           Write a customer review
@@ -139,13 +142,13 @@
           </div>
           {{#if_equal ../currentActiveUserId this.user_id._id}}
           <div id='review-control-buttons'>
-            <form action="/review/edit/{{this._id}}/{{../dealerName}}/{{../product.id}}" method='POST'>
+            <form action="/review/edit/{{this._id}}/{{../dealerName}}/{{../vehicle.vin}}" method='POST'>
               <input type='hidden' name="dealerLink" value={{../dealerLink}} />
               <button type='submit' id='btn-btn-warning'>
                 Edit
               </button>
             </form>
-            <form action="/review/delete/{{this._id}}/{{../product.id}}" method='post'>
+            <form action="/review/delete/{{this._id}}/{{../vehicle.vin}}" method='post'>
               <input type="hidden" name="dealerLink" value={{../dealerLink}}>
               <input type="hidden" name="dealerName" value="{{../dealerName}}">
               <button type='submit' id='btn-btn-danger'>
