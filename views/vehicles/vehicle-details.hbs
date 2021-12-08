@@ -16,11 +16,11 @@
     <div id="vehicle-details-div">
 
       <div class='set-of-pictures-left-side'>
-        <img class='main-image' src="{{this.api_featured_image}}" alt="image of {{vehicleFromAPI.name}} vehicle" />
+        <img class='main-image' src="{{this.api_featured_image}}" alt="image of {{vehicle.name}} vehicle" />
         <div class='more-images'>
           <div class="set-of-small-pics">
             {{#each vehicleFromAPI.api_featured_image}}
-            <img class='small-pic' src="{{this}}" alt="small image - {{vehicleFromAPI.name}}" />
+            <img class='small-pic' src="{{this}}" alt="small image - {{vehicle.name}}" />
             {{/each}}
           </div>
 
@@ -28,7 +28,7 @@
           <div class='slider'>
             <div class="slide">
               {{#each vehicle.photoUrls}}
-              <img class='small-pic-slide' src="{{this}}" alt="small image - {{vehicle.make}}" />
+              <img class='small-pic-slide' src="{{this}}" alt="small image - {{vehicle.name}}" />
               {{/each}}
             </div>
             <div class="slide">

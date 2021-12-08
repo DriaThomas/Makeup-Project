@@ -436,7 +436,7 @@ router.post("/", (req, res) => {
     .then((queriedProducts) => {
       const records = queriedProducts.data;
       const productcategory = records.filter(
-        (prod) => prod.category === "lipstick"
+        (prod) => prod.brand === "colourpop"
       );
       res.status(200).render("vehicles/vehicles-list", {
         vehiclesFromApi: records,
@@ -493,10 +493,10 @@ router.post("/", (req, res) => {
 // ****************************************************************************************
 // POST route to get the details of selected vehicle and render details page
 // ****************************************************************************************
-router.post("/details/:id/:isSaved?", isLoggedIn, (req, res, next) => {
+router.post("/details/:id", isLoggedIn, (req, res, next) => {
   let { _id } = req.session.user;
-  const dealerLink = req.body.dealerLink
-    ? req.body.dealerLink
+  const product_api_url = req.body.product_api_url
+    ? req.body.product_api_url
     : req.session.dealerLinkFromGlobalScope;
   const { id, isSaved } = req.params;
   const errorDeletion = req.session?.errorDeletion;
@@ -511,15 +511,15 @@ router.post("/details/:id/:isSaved?", isLoggedIn, (req, res, next) => {
       })
       .then((foundDealerFromDB) => {
         const foundDealer = JSON.parse(JSON.stringify(foundDealerFromDB));
-        const preparedDelaerLink = dealerLink?.startsWith(`http`)
-          ? dealerLink
-          : `https://${dealerLink}`;
+        const preparedDelaerLink = product_api_url?.startsWith(`http`)
+          ? product_api_url
+          : `${product_api_url}`;
         res.status(200).render("vehicles/vehicle-details", {
           currentActiveUserId: _id,
           vehicle: vehicleFromAPI.data,
           foundDealer: foundDealer,
           dealerName: dealerName,
-          dealerLink: preparedDelaerLink,
+          product_api_url: preparedDelaerLink,
           isSaved: isSaved,
           errorDeletion: errorDeletion,
         });

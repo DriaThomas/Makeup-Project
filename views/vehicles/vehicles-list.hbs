@@ -1,6 +1,6 @@
 <div class='header-vehicles-list'>
   {{#if savedVehiclesPage}}
-  {{#if vehiclesFromApi}}
+  {{#if vehicleFromApi}}
   <h2>
     Saved Vehicles
   </h2>
@@ -11,9 +11,9 @@
   {{/if}}
   {{/if}}
 </div>
-{{#each vehiclesFromApi}}
+{{#each vehicleFromApi}}
 <form action="/product/details/{{this.id}}" method="POST">
-  <input type="hidden" name="product_link" value="{{this.product_link}}">
+  <input type="hidden" name="product_link" value="{{this.product_api_url}}">
   <div class='list-of-vehicles'>
     <div class='list-of-vehicles-box'>
       <button type="submit" class="button-to-open-vehicle-details list-vehicles">

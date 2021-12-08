@@ -177,7 +177,7 @@
         action="/product/details/{{this.id}}"
         method='POST'
       >
-        <input type='hidden' name='dealerLink' value="{{this.clickoffUrl}}" />
+        <input type='hidden' name='dealerLink' value="{{this.product_api_url}}" />
         <div class='numbers-reviews-badge'>
           <p>
             {{this.reviewLength}} <span class="reviews-badge-text">reviews</span> 
@@ -185,9 +185,9 @@
         </div>
         <button type='submit' class='button-to-open-vehicle-details'>
           <div class='vehicle-card'>
-            <img class='vehicle-img' src="{{this.primaryPhotoUrl}}" alt='' />
+            <img class='vehicle-img' src="{{this.api_featured_image}}" alt='' />
             <h6>
-              <b>{{this.make}} {{this.model}}</b>
+              <b>{{this.name}} {{this.brand}}</b>
             </h6>
             <p>
               {{this.mileage}}
@@ -195,9 +195,7 @@
             <h6>
               {{this.price}}
             </h6>
-            <p style="color: gray;">
-              Only at {{this.dealerName}}
-            </p>
+          
           </div>
         </button>
       </form>
@@ -233,7 +231,7 @@
         var captionText = document.getElementById("caption");
         captionText.innerHTML = element.alt;
       }
-    </script> --}}
+    </script>
     <footer class="w3-center w3-black w3-padding-64">
       <a href="/" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
       <div class="w3-xlarge w3-section">
