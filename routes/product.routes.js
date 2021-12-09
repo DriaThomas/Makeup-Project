@@ -418,33 +418,67 @@ const productsApi = new ProductsApi();
 //****************************************************************************************
 //POST route to submit search query
 //****************************************************************************************
+// router.post("/", (req, res) => {
+//   // .lean()
+//   // .limit(5)
+//   const { brand, name, category } = req.body;
+//   console.log("our queries", {
+//     brand,
+//     name,
+//     category,
+//     name,
+//   });
+
+//   productsApi
+
+//     .getQueriedListings(brand, name, category)
+//     // .lean()
+//     // .limit(5)
+//     .then((queriedProducts) => {
+//       const records = queriedProducts.data;
+//       // const productcategory = records.filter(
+//       //   (prod) => prod.brand === "colourpop"
+//       // );
+//       res.status(200).render("vehicles/vehicles-list", {
+//         vehiclesFromApi: records,
+//         // productcategory: productcategory,
+//       });
+//     })
+//     .catch((err) => {
+//       console.log("Error", err);
+//       res.render("vehicles/vehicles-list", {
+//         errorMessage:
+//           "Oops, something went wrong,\ntry one more time, please 😔",
+//       });
+//     });
+// });
+
+// ****************************************************************************************
+// POST route to submit search query
+// ****************************************************************************************
 router.post("/", (req, res) => {
-  // .lean()
-  // .limit(5)
-  const { brand, name, category } = req.body;
+  const { name, brand, year_min, year_max, city, bodyStyle } = req.body;
   console.log("our queries", {
-    brand,
     name,
-    category,
+    brand,
+    year_min,
+    year_max,
+    city,
+    bodyStyle,
   });
 
   productsApi
-
-    .getQueriedListings(brand, name, category)
-    // .lean()
-    // .limit(5)
-    .then((queriedProducts) => {
-      const records = queriedProducts.data;
-      const productcategory = records.filter(
-        (prod) => prod.brand === "colourpop"
-      );
+    .getQueriedListings(name, brand, year_min, year_max, city, bodyStyle)
+    .then((queriedVehicles) => {
+      const records = queriedVehicles.data;
+      // const suvCars = records.filter((car) => car.brand === "covergirl");
       res.status(200).render("vehicles/vehicles-list", {
         vehiclesFromApi: records,
-        productcategory: productcategory,
+        // suvCars: suvCars,
       });
     })
     .catch((err) => {
-      console.log("Error", err);
+      console.log("Error appaeared during getting cars from API", err);
       res.render("vehicles/vehicles-list", {
         errorMessage:
           "Oops, something went wrong,\ntry one more time, please 😔",

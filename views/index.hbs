@@ -166,47 +166,6 @@
         <div id='top-area'>
   
 
-<div class='main-section'>
-  <h1>
-    {{!-- You Might Like --}}
-  </h1>
-  <div class='set-of-vehicles'>
-    {{#each vehiclesFromApi}}
-      <form
-        class='vehicle-card-index-page'
-        action="/product/details/{{this.id}}"
-        method='POST'
-      >
-        <input type='hidden' name='dealerLink' value="{{this.product_api_url}}" />
-        <div class='numbers-reviews-badge'>
-          <p>
-            {{this.reviewLength}} <span class="reviews-badge-text">reviews</span> 
-          </p>
-        </div>
-        <button type='submit' class='button-to-open-vehicle-details'>
-          <div class='vehicle-card'>
-            <img class='vehicle-img' src="{{this.api_featured_image}}" alt='' />
-            <h6>
-              <b>{{this.name}} {{this.brand}}</b>
-            </h6>
-            <p>
-              {{this.mileage}}
-            </p>
-            <h6>
-              {{this.price}}
-            </h6>
-          
-          </div>
-        </button>
-      </form>
-    {{/each}}
-    {{#if errorMessage}}
-      <p>
-        {{errorMessage}}
-      </p>
-    {{/if}}
-  </div>
-</div>
         <div class="w3-quarter">
           <i class="fa fa-cog w3-margin-bottom w3-jumbo"></i>
           <p class="w3-large">Support</p>
@@ -242,7 +201,7 @@
         <i class="fa fa-twitter w3-hover-opacity"></i>
         <i class="fa fa-linkedin w3-hover-opacity"></i>
       </div>
-      <p>Powered by <a href="https://github.com/rebeccasundel/makeup-project" title="W3.CSS" target="_blank"
+      <p>Powered by <a href="" title="W3.CSS" target="_blank"
           class="w3-hover-text-green">Ironhack</a></p>
     </footer>
 
@@ -269,3 +228,46 @@
 </body>
 
 </html>
+<div class='main-section'>
+  <h1>
+    You Might Like
+  </h1>
+  <div class='set-of-vehicles'>
+    {{#each vehiclesFromApi}}
+      <form
+        class='vehicle-card-index-page'
+        action="/vehicles/details/{{this.id}}"
+        method='POST'
+      >
+        <input type='hidden' name='dealerLink' value="{{this.clickoffUrl}}" />
+        <div class='numbers-reviews-badge'>
+          <p>
+            {{this.reviewLength}} <span class="reviews-badge-text">reviews</span> 
+          </p>
+        </div>
+        <button type='submit' class='button-to-open-vehicle-details'>
+          <div class='vehicle-card'>
+            <img class='vehicle-img' src="{{this.primaryPhotoUrl}}" alt='' />
+            <h6>
+              <b>{{this.name}} {{this.brand}}</b>
+            </h6>
+            <p>
+              {{this.mileage}}
+            </p>
+            <h6>
+              {{this.price}}
+            </h6>
+            <p style="color: gray;">
+              Only at {{this.dealerName}}
+            </p>
+          </div>
+        </button>
+      </form>
+    {{/each}}
+    {{#if errorMessage}}
+      <p>
+        {{errorMessage}}
+      </p>
+    {{/if}}
+  </div>
+</div>
