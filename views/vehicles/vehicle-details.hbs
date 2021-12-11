@@ -1,6 +1,6 @@
 <div id="vehicle-details-section">
   <div class="errorDeletioen">{{#if errorDeletion}}
-    <a class='error-banner' href="/vehicles/details/{{vehicleFromAPI.id}}">
+    <a class='error-banner' href="/vehicles/details/{{vehicle.id}}">
       <div class='action-error-message error'>
         <i>
           {{errorDeletion}}
@@ -16,19 +16,19 @@
     <div id="vehicle-details-div">
 
       <div class='set-of-pictures-left-side'>
-        <img class='main-image' src="{{this.api_featured_image}}" alt="image of {{vehicle.name}} vehicle" />
+        <img class='main-image' src="{{vehicle.primaryPhotoUrl}}" alt="image of {{vehicle.make}} vehicle" />
         <div class='more-images'>
           <div class="set-of-small-pics">
-            {{#each vehicleFromAPI.api_featured_image}}
-            <img class='small-pic' src="{{this}}" alt="small image - {{vehicle.name}}" />
+            {{#each vehicle.photoUrls}}
+            <img class='small-pic' src="{{this}}" alt="small image - {{vehicle.make}}" />
             {{/each}}
           </div>
 
-{{vehicleFromAPI}}
+
           <div class='slider'>
             <div class="slide">
               {{#each vehicle.photoUrls}}
-              <img class='small-pic-slide' src="{{this}}" alt="small image - {{vehicle.name}}" />
+              <img class='small-pic-slide' src="{{this}}" alt="small image - {{vehicle.make}}" />
               {{/each}}
             </div>
             <div class="slide">
@@ -41,7 +41,7 @@
       </div>
       <div class='main-details'>
         <h1>
-          {{gb.title}}
+          {{vehicle.title}}
         </h1>
         <hr style="border-top: 1px solid lightgray">
 
@@ -50,17 +50,17 @@
         </div>
         <div id="details-price-mileage">
           <div id='details-price'>
-            <h2>{{vehicleFromAPI.brand}}</h2>
+            <h2>{{this.price}}</h2>
           </div>
           <div id='details-mileage'>
-            <h2>{{ vehicleFromAPI.name}} miles</h2>
+            <h2>{{ vehicle.mileage}} miles</h2>
           </div>
         </div>
         <p>
-          {{vehicle.doorCount}} {{vehicle.driveline}}
+          {{vehicle.name}} {{vehicle.brand}}
         </p>
         <p>
-          Exterior {{vehicle.colorExterior}}
+          Exterior {{vehicle.name}}
         </p>
         <p id='vehicle-main-description'>{{vehicle.description}}</p>
         <p>
@@ -69,9 +69,9 @@
         <div class='save'>
           <form action="/profile/savedvehicles" method="POST" class="save-buy-buttons">
             <input type='hidden' name="userName" value={{user}} />
-            <input type='hidden' name="vin" value={{vehicle.id}} />
-            <input type='hidden' name="make" value={{vehicle.name}} />
-            <input type='hidden' name="model" value={{vehicle.brand}} />
+            <input type='hidden' name="id" value={{vehicle.id}} />
+            <input type='hidden' name="name" value={{vehicle.name}} />
+            <input type='hidden' name="brand" value={{vehicle.brand}} />
             <input type='hidden' name="dealerLink" value={{dealerLink}} />
             <button type='submit' class='btn btn-success'>
               {{#if isSaved}}
@@ -86,82 +86,6 @@
               Buy
             </button>
           </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-{{!-- ************ --}}
-{{!-- D E A L E R --}}
-{{!-- ************ --}}
-
-<div id="dealer-section-container">
-
-  <div>
-    <h3>Dealer Reviews</h3>
-    <hr style="border-top: 1px solid lightgray">
-  </div>
-
-  <div id="dealer-content-container">
-    <div id='dealer-name-title'>
-
-      <div id="logo-dealer">
- 
-        <a href="{{dealerLink}}" class="dealer-link">
-          <h4 style="margin-left: 1rem;">{{vehicle.dealerName}}</h4>
-        </a>
-      </div>
-
-      <hr style="border-top: 1px solid lightgray">
-
-      <h5>Review this dealer</h5>
-      <p>Share your thoughts with other customers</p>
-      <form action="/review/add-review/{{vehicle.dealerName}}/{{vehicle.vin}}" method="POST">
-        <input type='hidden' name="dealerLink" value={{dealerLink}} />
-        <button type='submit' class='btn btn-primary'>
-          Write a customer review
-        </button>
-      </form>
-    </div>
-
-    <div id='reviews-container'>
-
-      <div class='dealer-review-section'>
-        <div class='reviews' style="margin-left: 2rem;">
-          {{#if foundDealer.0.reviews}}
-          {{#each foundDealer.0.reviews}}
-          <div style="display: flex; flex-direction: row">
-            <img style="width: 33px;" src="{{this.user_id.profilePic}}" alt="image of user" />
-            <p style="margin: auto 1rem;"><b>{{this.user_id.firstName}} {{this.user_id.lastName}}</b></p>
-          </div>
-          <div style="margin: 1rem 0;">
-            <p>
-              {{this.reviewContent}}
-            </p>
-          </div>
-          {{#if_equal ../currentActiveUserId this.user_id._id}}
-          <div id='review-control-buttons'>
-            <form action="/review/edit/{{this._id}}/{{../dealerName}}/{{../vehicle.vin}}" method='POST'>
-              <input type='hidden' name="dealerLink" value={{../dealerLink}} />
-              <button type='submit' id='btn-btn-warning'>
-                Edit
-              </button>
-            </form>
-            <form action="/review/delete/{{this._id}}/{{../vehicle.vin}}" method='post'>
-              <input type="hidden" name="dealerLink" value={{../dealerLink}}>
-              <input type="hidden" name="dealerName" value="{{../dealerName}}">
-              <button type='submit' id='btn-btn-danger'>
-                Delete
-              </button>
-            </form>
-          </div>
-          {{/if_equal}}
-          <hr style="border-top: 1px solid lightgray">
-          {{/each}}
-          {{else}}
-          <p class="no-review-header">There are no reviews about this dealership yet. Be the first to leave a review!<br><span class="arrow-left">🚗</span></p>
-          {{/if}}
         </div>
       </div>
     </div>

@@ -108,7 +108,7 @@ class ProductsApi {
   constructor() {
     // this.apiKey = process.env.API_KEY;
     this.api = axios.create({
-      baseURL: `http://makeup-api.herokuapp.com/api/v1/products.json?brand`,
+      baseURL: `http://makeup-api.herokuapp.com/api/v1/products.json`,
     });
     // this.customApi = axios.create({
     //   baseURL: ``,
@@ -135,27 +135,16 @@ class ProductsApi {
     });
   };
 
-  // getVehicleDetails = (id) => {
-  //   const baseUrl = this.api.default.baseURL;
-  //   const indexOfQuerySign = baseUrl.indexOf("?");
-  //   const preparedUrl = `${baseUrl.slice(
-  //     0,
-  //     indexOfQuerySign
-  //   )}/${id}${baseUrl.slice(indexOfQuerySign)}`;
-  //   this.customApi.default.baseURL = preparedUrl;
-  //   return this.customApi.get("");
-  // };
-
-  // getVehicleDetails = (id) => {
-  //   const baseUrl = this.api._default.baseURL;
-  //   const indexOfQuerySign = baseUrl.indexOf("?");
-  //   const preparedUrl = `${baseUrl.slice(
-  //     0,
-  //     indexOfQuerySign
-  //   )}/${id}${baseUrl.slice(indexOfQuerySign)}`;
-  //   this.customApi._default.baseURL = preparedUrl;
-  //   return this.customApi.get("");
-  // };
+  getVehicleDetails = (id) => {
+    const baseUrl = this.api.defaults.baseURL;
+    const indexOfQuerySign = baseUrl.indexOf("?");
+    const preparedUrl = `${baseUrl.slice(
+      0,
+      indexOfQuerySign
+    )}/${id}${baseUrl.slice(indexOfQuerySign)}`;
+    this.customApi.defaults.baseURL = preparedUrl;
+    return this.customApi.get("");
+  };
 
   // getVehicleDetails = (id) => {
   //   const baseUrl = this.api.defaults.baseURL;
@@ -168,7 +157,7 @@ class ProductsApi {
   //   return this.customApi.get("");
   // };
 
-  getVehicleDetails = (id) => this.api.get(`/product/details/${id}`);
+  // getVehicleDetails = (id) => this.api.get(`/product/details/${id}`);
 
   getVehiclesList = async (arrayOfVins) => {
     const products = [];
