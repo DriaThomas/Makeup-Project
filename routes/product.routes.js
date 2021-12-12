@@ -46,7 +46,7 @@ router.post("/", (req, res) => {
 // ****************************************************************************************
 // POST route to get the details of selected vehicle and render details page
 // ****************************************************************************************
-router.post("/details/:vin/:isSaved?", isLoggedIn, (req, res, next) => {
+router.post("/details/:id/:isSaved?", isLoggedIn, (req, res, next) => {
   let { _id } = req.session.user;
   const product_link = req.body.product_link
     ? req.body.product_link
@@ -82,6 +82,16 @@ router.post("/details/:vin/:isSaved?", isLoggedIn, (req, res, next) => {
     delete req.session.errorDeletion;
   });
 });
+
+// const { id } = req.params;
+// Post.findById(id)
+//   .populate("author comments")
+//   .then((post) => {
+//     User.find().then((dbUsers) => {
+//       console.log(post);
+//       res.render("posts/details", { post, dbUsers });
+//     });
+//   });
 
 // router.post("/details/:id/:isSaved?", isLoggedIn, (req, res, next) => {
 //   const { name, brand, description } = req.body;
