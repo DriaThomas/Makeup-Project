@@ -177,8 +177,7 @@
       </div>
     </div>
 
-
-
+<a href="http://makeup-api.herokuapp.com/api/v1/products.json?product_type=eyeshadow">eye shadow</a>
 
 
 
@@ -247,21 +246,19 @@
             {{this.reviewLength}} <span class="reviews-badge-text">reviews</span> 
           </p>
         </div>
-        <button type='submit' class='button-to-open-vehicle-details'>
-          <div class='vehicle-card'>
-            <img class='vehicle-img' src="{{this.primaryPhotoUrl}}" alt='' />
+        <button type='submit' class='button-to-open-product-details'>
+          <div class='product-card'>
+            <img class='product-img' src="{{this.api_featured_image}}" alt='' width="300em" />
             <h6>
-              <b>{{this.name}} {{this.brand}}</b>
+              <b>{{this.name}}</b>
             </h6>
-            <p>
-              {{this.mileage}}
-            </p>
             <h6>
-              {{this.price}}
+            {{this.brand}}
             </h6>
-            <p style="color: gray;">
-              Only at {{this.dealerName}}
-            </p>
+            <h6>
+              ${{this.price}}0
+            </h6>
+           
           </div>
         </button>
       </form>
