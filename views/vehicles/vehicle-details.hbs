@@ -1,6 +1,6 @@
 <div id="vehicle-details-section">
   <div class="errorDeletioen">{{#if errorDeletion}}
-    <a class='error-banner' href="/vehicles/details/{{data.id}}">
+    <a class='error-banner' href="/vehicles/details/{{vehicle.id}}">
       <div class='action-error-message error'>
         <i>
           {{errorDeletion}}
@@ -46,11 +46,11 @@
         <hr style="border-top: 1px solid lightgray">
 
         <div style="font-weight: bold; color:gray">
-          Condition: {{ data.name }} | Exterior: {{ data.brand }}
+          Condition: {{ vehicle.name }} | Exterior: {{ vehicle.brand }}
         </div>
         <div id="details-price-mileage">
           <div id='details-price'>
-            <h2>{{this.price}}</h2>
+            <h2>{{vehicle.price}}</h2>
           </div>
           <div id='details-mileage'>
             <h2>{{ vehicle.mileage}} miles</h2>

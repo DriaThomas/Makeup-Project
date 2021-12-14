@@ -67,6 +67,7 @@ const userSchema = new Schema({
   lastName: { type: String },
   undertone: { type: String },
   currentVehicle: [{ type: Array }],
+  collectionCreate: [{ type: Schema.Types.ObjectId, ref: "Collection" }],
   product: [{ type: Schema.Types.ObjectId, ref: "Product" }], // VINs will be saved
   savedVehicles: [{ type: Object }],
   reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }], // Reviews in regards to the Delaerships

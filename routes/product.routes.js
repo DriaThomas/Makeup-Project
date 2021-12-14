@@ -46,35 +46,36 @@ router.post("/", (req, res) => {
 // ****************************************************************************************
 // POST route to get the details of selected vehicle and render details page
 // ****************************************************************************************
-router.post("/details/:id/:isSaved?", isLoggedIn, (req, res, next) => {
-  const { name, brand, year_min, year_max, city, bodyStyle } = req.body;
-  console.log("our queries", {
-    name,
-    brand,
-    year_min,
-    year_max,
-    city,
-    bodyStyle,
-  });
+// router.post("/details/:id/:isSaved?", isLoggedIn, (req, res, next) => {
+//   const { name, brand, year_min, year_max, city, bodyStyle } = req.body;
+//   console.log("our queries", {
+//     name,
+//     brand,
+//     year_min,
+//     year_max,
+//     city,
+//     bodyStyle,
+//   });
 
-  productsApi
-    .getVehicleDetails(name, brand, year_min, year_max, city, bodyStyle)
-    .then((vehiclesProducts) => {
-      const records = vehiclesProducts.data;
-      // const suvCars = records.filter((car) => car.brand === "covergirl");
-      res.status(200).render("vehicles/vehicle-details", {
-        vehiclesFromApi: records,
-        // suvCars: suvCars,
-      });
-    })
-    .catch((err) => {
-      console.log("Error appaeared during getting cars from API", err);
-      res.render("vehicles/vehicle-details", {
-        errorMessage:
-          "Oops, something went wrong,\ntry one more time, please 😔",
-      });
-    });
-});
+//   productsApi
+//     .getVehicleDetails(name, brand, year_min, year_max, city, bodyStyle)
+//     .then((vehiclesProducts) => {
+//       const records = vehiclesProducts.data;
+//       // const suvCars = records.filter((car) => car.brand === "covergirl");
+//       res.status(200).render("vehicles/vehicle-details", {
+//         // vehiclesFromApi: records,
+//         vehicle: vehicleFromAPI.data,
+//         // suvCars: suvCars,
+//       });
+//     })
+//     .catch((err) => {
+//       console.log("Error appaeared during getting cars from API", err);
+//       res.render("vehicles/vehicle-details", {
+//         errorMessage:
+//           "Oops, something went wrong,\ntry one more time, please 😔",
+//       });
+//     });
+// });
 
 // const { id } = req.params;
 // Post.findById(id)
@@ -92,4 +93,43 @@ router.post("/details/:id/:isSaved?", isLoggedIn, (req, res, next) => {
 //   console.log("product details", obj);
 //   res.render("vehicles/vehicle-details", obj);
 // });
+
+// ****************************************************************************************
+// POST route to get the details of selected vehicle and render details page
+// ****************************************************************************************
+router.post("/details/:vin/:isSaved?", isLoggedIn, (req, res, next) => {
+  let { _id } = req.session.user;
+  const dealerLink = req.body.dealerLink
+    ? req.body.dealerLink
+    : req.session.dealerLinkFromGlobalScope;
+  const { vin, isSaved } = req.params;
+  const errorDeletion = req.session?.errorDeletion;
+  productsApi.getVehicleDetails(vin).then((vehicleFromAPI) => {
+    const dealerName = vehicleFromAPI.data.dealerName;
+    Dealer.find({ dealerName: dealerName })
+      .populate({
+        path: "reviews",
+        populate: {
+          path: "user_id",
+        },
+      })
+      .then((foundDealerFromDB) => {
+        const foundDealer = JSON.parse(JSON.stringify(foundDealerFromDB));
+        const preparedDelaerLink = dealerLink?.startsWith(`http`)
+          ? dealerLink
+          : `https://${dealerLink}`;
+        res.status(200).render("vehicles/vehicle-details", {
+          currentActiveUserId: _id,
+          vehicle: vehicleFromAPI.data,
+          foundDealer: foundDealer,
+          dealerName: dealerName,
+          dealerLink: preparedDelaerLink,
+          isSaved: isSaved,
+          errorDeletion: errorDeletion,
+        });
+      });
+    delete req.session.errorDeletion;
+  });
+});
+
 module.exports = router;

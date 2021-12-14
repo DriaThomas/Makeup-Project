@@ -305,6 +305,7 @@ router.post(
       undertone,
       currentVehicle,
       existingImage,
+      collectionCreate,
     } = req.body;
 
     // let profilePic;
@@ -322,6 +323,7 @@ router.post(
         email: email,
         undertone: undertone,
         currentVehicle: currentVehicle,
+        collectionCreate: collectionCreate,
         // profilePic,
       },
       {
@@ -398,17 +400,17 @@ router.get("/savedvehicles", isLoggedIn, (req, res) => {
 // ****************************************************************************************
 router.post("/savedvehicles", (req, res) => {
   const user_id = req.session.user._id;
-  const { id, dealerLink } = req.body;
+  const { id, product_api_url } = req.body;
   User.findByIdAndUpdate(
     user_id,
     {
       $push: {
-        savedVehicles: { id: id, url: dealerLink },
+        savedVehicles: { id: id, url: product_api_url },
       },
     },
     { new: true }
   ).then(() => {
-    res.redirect(307, `/vehicles/details/${id}/${true}`);
+    res.redirect(307, `/product/details/${id}/${true}`);
   });
 });
 
