@@ -172,11 +172,30 @@ button:hover {
   }
 }
 
-.button-to-open-product-details {
+/* #product-card {
   margin: 2rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+} */
+
+.list-of-vehicles-box #product-card {
+  margin: 1rem auto;
 }
 
+#product-card {
+  display: flex;
+  flex-direction: row;
+  margin: 5% 10%;
+  box-shadow: 5px 5px 5px lightgray;
+  background-color: white;
+  color: red;
+  border-radius: 10px;
+}
+
+#vehicle-card:active {
+  box-shadow: 0 0px;
+  transform: translateY(4px);
+  outline: none;
+}
 /****************************************************************************************/

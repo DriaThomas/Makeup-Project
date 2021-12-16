@@ -9,6 +9,7 @@ const User = require("../models/User.model");
 const Product = require("../models/Product.model");
 const ProductsApi = require("../service/ProductApi");
 const productsApi = new ProductsApi();
+const axios = require("axios");
 // const Review = require('../models/Review.model');
 
 // ****************************************************************************************
@@ -117,61 +118,107 @@ router.post("/", (req, res) => {
 //   const errorDeletion = req.session?.errorDeletion;
 //   productsApi.getVehicleDetails(vin).then((vehicleFromAPI) => {
 //     const dealerName = vehicleFromAPI.data.dealerName;
-//     Dealer.find({ dealerName: dealerName })
-//       .populate({
-//         path: "reviews",
-//         populate: {
-//           path: "user_id",
-//         },
-//       })
-//       .then((foundDealerFromDB) => {
-//         const foundDealer = JSON.parse(JSON.stringify(foundDealerFromDB));
-//         const preparedDelaerLink = dealerLink?.startsWith(`http`)
-//           ? dealerLink
-//           : `https://${dealerLink}`;
-//         res.status(200).render("vehicles/vehicle-details", {
-//           currentActiveUserId: _id,
-//           vehicle: vehicleFromAPI.data,
-//           foundDealer: foundDealer,
-//           dealerName: dealerName,
-//           dealerLink: preparedDelaerLink,
-//           isSaved: isSaved,
-//           errorDeletion: errorDeletion,
-//         });
-//       });
-//     delete req.session.errorDeletion;
-//   });
-// });
+//     Dealer.find({ dealerName: dealerName }).populate({
+//       path: "reviews",
+//       populate: {
+//         path: "user_id",
+//       },
+//     });
 
-router.post("/details/:id", isLoggedIn, (req, res, next) => {
-  console.log(productsApi.getVehicleDetails());
-  ProductsApi.getVehicleDetails(id).then((productFromDB) => {
-    res.render("products/details", productFromDB);
+//     res.status(200).render("vehicles/vehicle-details", {
+//       currentActiveUserId: _id,
+//       vehicle: vehicleFromAPI.data,
+//       foundDealer: foundDealer,
+//       dealerName: dealerName,
+//       dealerLink: preparedDelaerLink,
+//       isSaved: isSaved,
+//       errorDeletion: errorDeletion,
+//     });
+//   });
+//   delete req.session.errorDeletion;
+// });
+router.get("/:id", (req, res) => {
+  const { id } = req.params;
+  const url = `http://makeup-api.herokuapp.com/api/v1/products/${id}.json`;
+  axios.get(url).then((responseFromTheAPI) => {
+    console.log("a single character", responseFromTheAPI.data.name);
+
+    res.render("vehicles/vehicle-details.hbs", {
+      vehicle: responseFromTheAPI.data,
+    });
   });
-  console
-    .log("details products", { brand })
-    .catch((error) =>
-      console.log(
-        "An error occurred while deleting a book from the database: ",
-        error
-      )
-    ); // <--- .catch() - if some error happens handle it here
 });
 
-function deletePokemon() {
-  let data = {
-    _id: id,
-  };
-  fetch("https://web2-course-project-api-somrad.herokuapp.com/api/pokemons", {
-    method: "DELETE",
-    mode: "cors",
-    headers: {
-      "Content-type": "application/json; charset=utf-8",
-    },
-    body: JSON.stringify(data),
-  });
-  console.log(data);
-  console.log("pokemon deleted");
-}
+// router.post("/:id", (req, res) => {
+//   // console.log("form data", req.body);
+//   const { id } = req.params;
+//   axios
+//     .put(`http://makeup-api.herokuapp.com/api/v1/products/${id}.json`, req.body)
+//     .then((responseFromTheAPI) => {
+//       console.log("response from Put", responseFromTheAPI.data);
+//       res.redirect("vehicles/vehicle-details");
+//     });
+// });
+
+// router.post("/:id", isLoggedIn, (req, res, next) => {
+//   let { _id } = req.session.user;
+//   const dealerLink = req.body.dealerLink
+//     ? req.body.dealerLink
+//     : req.session.dealerLinkFromGlobalScope;
+//   const { id, isSaved } = req.params;
+//   const errorDeletion = req.session?.errorDeletion;
+//   productsApi.getVehicleDetails(id).then((vehicleFromAPI) => {
+//     const dealerName = vehicleFromAPI.data.dealerName;
+//     // Dealer.find({ dealerName: dealerName }).populate({
+//     //   path: "reviews",
+//     //   populate: {
+//     //     path: "user_id",
+//     //   },
+//     // });
+//     console.log("work", dealerName);
+
+//     res.status(200).render("vehicles/vehicle-details", {
+//       currentActiveUserId: _id,
+//       vehicle: vehicleFromAPI.data,
+//       foundDealer: foundDealer,
+//       dealerName: dealerName,
+//       dealerLink: preparedDelaerLink,
+//       isSaved: isSaved,
+//       errorDeletion: errorDeletion,
+//     });
+//   });
+//   delete req.session.errorDeletion;
+// });
+
+// router.post("/details/:id", isLoggedIn, (req, res, next) => {
+//   console.log(productsApi.getVehicleDetails());
+//   ProductsApi.getVehicleDetails(id).then((productFromDB) => {
+//     res.render("products/details", productFromDB);
+//   });
+//   console
+//     .log("details products", { brand })
+//     .catch((error) =>
+//       console.log(
+//         "An error occurred while deleting a book from the database: ",
+//         error
+//       )
+//     ); // <--- .catch() - if some error happens handle it here
+// });
+
+// router.post("/details/:id", isLoggedIn, (req, res, next) => {
+//   let data = {
+//     _id: id,
+//   };
+//   fetch("http://makeup-api.herokuapp.com/api/v1/products/1040.json", {
+//     method: "DELETE",
+//     mode: "cors",
+//     headers: {
+//       "Content-type": "application/json; charset=utf-8",
+//     },
+//     body: JSON.stringify(data),
+//   });
+//   console.log(data);
+//   console.log("pokemon deleted");
+// }
 
 module.exports = router;

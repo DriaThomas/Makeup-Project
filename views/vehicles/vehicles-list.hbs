@@ -1,3 +1,6 @@
+
+
+
 <div class='header-vehicles-list'>
   {{#if savedVehiclesPage}}
   {{#if vehiclesFromApi}}
@@ -12,12 +15,12 @@
   {{/if}}
 </div>
 {{#each vehiclesFromApi}}
-<form action="/product/details/{{this.id}}" method="POST">
+<form action="/product/{{this.id}}" method="GET">
   <input type="hidden" name="product_link" value="{{this.product_api_url}}">
   <div class='list-of-vehicles'>
     <div class='list-of-vehicles-box'>
       <button type="submit" class="button-to-open-vehicle-details list-vehicles">
-        <div id='vehicle-card'>
+        <div id='product-card'>
                 
     <img id='vehicle-primary-img' src="{{this.api_featured_image}}" alt='' /> 
 

@@ -135,16 +135,17 @@ class ProductsApi {
     });
   };
 
-  getVehicleDetails = (id) => {
-    const baseUrl = this.api.defaults.baseURL;
-    const indexOfQuerySign = baseUrl.indexOf("?");
-    const preparedUrl = `${baseUrl.slice(
-      0,
-      indexOfQuerySign
-    )}/${id}${baseUrl.slice(indexOfQuerySign)}`;
-    this.customApi.defaults.baseURL = preparedUrl;
-    return this.customApi.get("");
-  };
+  // getVehicleDetails = (id) => {
+  //   console.log("hello api");
+  //   const baseUrl = this.api.defaults.baseURL;
+  //   const indexOfQuerySign = baseUrl.indexOf("?");
+  //   const preparedUrl = `${baseUrl.slice(
+  //     0,
+  //     indexOfQuerySign
+  //   )}/${id}${baseUrl.slice(indexOfQuerySign)}`;
+  //   this.customApi.defaults.baseURL = preparedUrl;
+  //   return this.customApi.get("");
+  // };
 
   // getVehicleDetails = (id) => {
   //   const baseUrl = this.api.defaults.baseURL;
