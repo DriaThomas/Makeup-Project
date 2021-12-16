@@ -237,7 +237,7 @@
     {{#each vehiclesFromApi}}
       <form
         class='vehicle-card-index-page'
-        action="/vehicles/details/{{this.id}}"
+        action="/product/{{this.id}}"
         method='POST'
       >
         <input type='hidden' name='dealerLink' value="{{this.clickoffUrl}}" />

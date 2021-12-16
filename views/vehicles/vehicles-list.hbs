@@ -15,7 +15,7 @@
   {{/if}}
 </div>
 {{#each vehiclesFromApi}}
-<form action="/product/{{this.id}}" method="GET">
+<form action="/product/{{this.id}}" method="POST">
   <input type="hidden" name="product_link" value="{{this.product_api_url}}">
   <div class='list-of-vehicles'>
     <div class='list-of-vehicles-box'>

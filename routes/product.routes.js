@@ -16,28 +16,15 @@ const axios = require("axios");
 // POST route to submit search query
 // ****************************************************************************************
 router.post("/", (req, res) => {
-  const { name, brand, product_type, year_min, year_max, city, bodyStyle } =
-    req.body;
+  const { name, brand, product_type } = req.body;
   console.log("our queries", {
     name,
     brand,
     product_type,
-    year_min,
-    year_max,
-    city,
-    bodyStyle,
   });
 
   productsApi
-    .getQueriedListings(
-      name,
-      product_type,
-      brand,
-      year_min,
-      year_max,
-      city,
-      bodyStyle
-    )
+    .getQueriedListings(name, product_type, brand)
     .then((queriedVehicles) => {
       const records = queriedVehicles.data;
       // const suvCars = records.filter((car) => car.brand === "covergirl");
@@ -54,6 +41,35 @@ router.post("/", (req, res) => {
       });
     });
 });
+
+// router.post("/", (req, res) => {
+//   const { name, brand, product_type, year_max, city, bodyStyle } = req.body;
+//   console.log("our queries", {
+//     name,
+//     brand,
+//     product_type,
+//     year_max,
+//     city,
+//     bodyStyle,
+//   });
+
+//   productsApi
+//     .getQueriedListings(name, brand, product_type, year_max, city, bodyStyle)
+//     .then((queriedVehicles) => {
+//       const { records } = queriedVehicles.data;
+//       // const suvCars = records.filter((car) => car.bodyStyle === 'suv');
+//       res.status(200).render("vehicles/vehicles-list.hbs", {
+//         vehiclesFromApi: records,
+//         // suvCars: suvCars,
+//       });
+//     });
+//   console.log({ records }).catch((err) => {
+//     console.log("Error appaeared during getting cars from API", err);
+//     res.render("vehicles/vehicles-list", {
+//       errorMessage: "Oops, something went wrong,\ntry one more time, please 😔",
+//     });
+//   });
+// });
 
 // ****************************************************************************************
 // POST route to get the details of selected vehicle and render details page
@@ -137,7 +153,9 @@ router.post("/", (req, res) => {
 //   });
 //   delete req.session.errorDeletion;
 // });
-router.get("/:id", (req, res) => {
+
+///////////////////////////////////////////////////////////////////////////////////////////
+router.post("/:id", (req, res) => {
   const { id } = req.params;
   const url = `http://makeup-api.herokuapp.com/api/v1/products/${id}.json`;
   axios.get(url).then((responseFromTheAPI) => {
@@ -148,7 +166,7 @@ router.get("/:id", (req, res) => {
     });
   });
 });
-
+// /////////////////////////////////////////////////////////////////////////////////////////////
 // router.post("/:id", (req, res) => {
 //   // console.log("form data", req.body);
 //   const { id } = req.params;
