@@ -157,12 +157,14 @@ router.post("/", (req, res) => {
 ///////////////////////////////////////////////////////////////////////////////////////////
 router.post("/:id", (req, res) => {
   const { id } = req.params;
+
   const url = `http://makeup-api.herokuapp.com/api/v1/products/${id}.json`;
   axios.get(url).then((responseFromTheAPI) => {
     console.log("a single character", responseFromTheAPI.data.name);
 
     res.render("vehicles/vehicle-details.hbs", {
       vehicle: responseFromTheAPI.data,
+      // isSaved: isSaved,
     });
   });
 });

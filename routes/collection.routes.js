@@ -6,9 +6,9 @@ const ObjectId = require("mongodb").ObjectId;
 const Post = require("../models/Collection.model");
 const ProductModel = require("../models/Product.model");
 const multer = require("multer");
-const cloudinary = require("../config/cloudinary.config");
+// const cloud = require("../config/cloudinary.config");
 
-const upload = multer({ dest: "./public/uploads/" });
+// const upload = multer({ dest: "./public/uploads/" });
 
 const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
@@ -17,14 +17,14 @@ router.get("/upload/", (req, res, next) => {
   res.render("pages/create-form");
 });
 
-router.post(
-  "/upload/",
-  cloudinary("Makeup-Collection").single("photo"),
-  (req, res) => {
-    console.log("file object", req.file);
-    res.render("pages/create", req.file);
-  }
-);
+// router.post(
+//   "/upload/",
+//   cloud("Makeup-Collection").single("photo"),
+//   (req, res) => {
+//     console.log("file object", req.file);
+//     res.render("pages/create", req.file);
+//   }
+// );
 
 router.get("/create/", isLoggedIn, (req, res, next) => {
   Post.find().then((responseFromDB) => {

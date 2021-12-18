@@ -16,56 +16,28 @@
     <div id="vehicle-details-div">
 
       <div class='set-of-pictures-left-side'>
-        <img class='main-image' src="{{vehicle.primaryPhotoUrl}}" alt="image of {{vehicle.make}} vehicle" />
-        <div class='more-images'>
-          <div class="set-of-small-pics">
-            {{#each vehicle.photoUrls}}
-            <img class='small-pic' src="{{this}}" alt="small image - {{vehicle.make}}" />
-            {{/each}}
-          </div>
-
-
-          <div class='slider'>
-            <div class="slide">
-              {{#each vehicle.photoUrls}}
-              <img class='small-pic-slide' src="{{this}}" alt="small image - {{vehicle.make}}" />
-              {{/each}}
-            </div>
-            <div class="slide">
-              {{#each vehicle.photoUrls}}
-              <img class='small-pic-slide' src="{{this}}" alt="small image - {{vehicle.make}}" />
-              {{/each}}
-            </div>
-          </div>
-        </div>
+        <img class='main-image' src="{{vehicle.image_link}}" alt="image of {{vehicle.name}} vehicle" />
+      
       </div>
       <div class='main-details'>
-        <h1>
-          {{vehicle.title}}
-        </h1>
+      
         <hr style="border-top: 1px solid lightgray">
 
         <div style="font-weight: bold; color:gray">
-          Condition: {{ vehicle.name }} | Exterior: {{ vehicle.brand }}
+      {{ vehicle.name }} | {{ vehicle.brand }}
         </div>
         <div id="details-price-mileage">
           <div id='details-price'>
-            <h2>{{vehicle.price}}</h2>
+            <h2>${{vehicle.price}}0</h2>
           </div>
           {{!-- <div id='details-mileage'>
             <h2>{{ vehicle.mileage}} miles</h2>
           </div> --}}
         </div>
-        <p>
-          {{vehicle.name}} {{vehicle.brand}}
-        </p>
-        <p>
-          Exterior {{vehicle.name}}
-        </p>
+       
+       <p>{{vehicle.tag_list}}</p>
         <p id='vehicle-main-description'>{{vehicle.description}}</p>
-        <p>
-          {{vehicle.city}}, {{vehicle.state}}
-        </p>
+        
         <div class='save'>
           <form action="/profile/savedvehicles" method="POST" class="save-buy-buttons">
             <input type='hidden' name="userName" value={{user}} />
@@ -81,7 +53,7 @@
               {{/if}}
             </button>
           </form>
-          <form action="{{dealerLink}}" class="save-buy-buttons">
+          <form action="{{vehicle.product_link}}" class="save-buy-buttons">
             <button type='submit' class='btn btn-info'>
               Buy
             </button>

@@ -68,6 +68,7 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
          <ul class="navbar-nav ml-auto">
+             {{#if currentUser.email}}
             <li class="nav-item"> <a class="nav-link" href="/">Home</a> </li>
             {{!-- <li class="nav-item"> <a class="nav-link" href="/auth/signup">Sign-Up</a> </li>
             <li class="nav-item"> <a class="nav-link" href="/auth/login">Login</a> </li> --}}
@@ -75,8 +76,17 @@
           {{!-- <li><a id="nav-item" href="/profile">{{currentUser.firstName}}</a></li> --}}
             {{!-- <li class="nav-item"> <a class="nav-link" href="/product"> All Product</a> </li> --}}
             <li class="nav-item"> <a class="nav-link" href="/collection/create"> Create Collection </a> </li>
-   <li class="nav-item"> <a class="nav-link" href="/profile"> Profile Page </a> </li> 
-
+   {{!-- <li class="nav-item"> <a class="nav-link" href="/profile"> Profile Page </a> </li>  --}}
+   <div id="user-image-nav">
+                        <img src="{{currentUser.profilePic}}" alt="image of user" />
+                     </div>
+                     <li><a id="name-top" href="/profile">{{currentUser.firstName}}</a></li>
+                      <li><a href="/auth/logout">Log Out</a></li>
+                  </div>
+ {{else}}
+                  <li><a href="/auth/signup">Sign Up</a></li>
+                  <li><a href="/auth/login">Log In</a></li>
+               {{/if}}
 
          </ul>
       </div>

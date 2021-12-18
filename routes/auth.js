@@ -13,7 +13,7 @@ const saltRounds = 10;
 // Require the User model in order to interact with the database
 const User = require("../models/User.model");
 
-// const fileUploader = require("../config/cloudinary.config");
+const fileUploader = require("../config/cloudinary.config");
 
 // Require necessary (isLoggedOut and isLoggedIn) middleware in order to control access to specific routes
 const isLoggedOut = require("../middleware/isLoggedOut");
@@ -27,10 +27,18 @@ router.get("/signup", isLoggedOut, (req, res) => {
 });
 
 router.post("/signup", (req, res) => {
-  const { email, password, firstName, lastName, undertone } = req.body;
-  console.log("User: ", { email, password, firstName, lastName, undertone });
+  const { email, password, firstName, lastName, undertone, profilePic } =
+    req.body;
+  console.log("User: ", {
+    email,
+    password,
+    firstName,
+    lastName,
+    undertone,
+    profilePic,
+  });
 
-  if (!email || !password || !firstName || !lastName || !undertone) {
+  if (!email || !password || !firstName || !lastName) {
     return res.status(400).render("auth/signup", {
       errorMessage: "Please fill out all required fields.",
     });
@@ -57,7 +65,7 @@ router.post("/signup", (req, res) => {
           firstName: firstName,
           lastName: lastName,
           undertone: undertone,
-          // profilePic: req.file.path,
+          profilePic: req.body.file.path,
         });
       })
       .then((user) => {

@@ -248,7 +248,7 @@ const mongoose = require("mongoose");
 const User = require("../models/User.model");
 const Vehicle = require("../models/Vehicle.model");
 
-// const fileUploader = require("../config/cloudinary.config");
+const fileUploader = require("../config/cloudinary.config");
 
 // Require necessary (isLoggedOut and isLoggedIn) middleware in order to control access to specific routes
 const isLoggedOut = require("../middleware/isLoggedOut");
@@ -294,7 +294,7 @@ router.get("/edit", isLoggedIn, (req, res) => {
 router.post(
   "/",
   isLoggedIn,
-  // fileUploader.single("profilePic"),
+  fileUploader.single("profilePic"),
   (req, res, next) => {
     const user = req.session.user;
     const user_id = mongoose.Types.ObjectId(user._id);
@@ -308,12 +308,12 @@ router.post(
       collectionCreate,
     } = req.body;
 
-    // let profilePic;
-    // if (req.file) {
-    //   profilePic = req.file.path;
-    // } else {
-    //   profilePic = existingImage;
-    // }
+    let profilePic;
+    if (req.file) {
+      profilePic = req.body.file.path;
+    } else {
+      profilePic = existingImage;
+    }
 
     User.findByIdAndUpdate(
       user_id,
@@ -324,7 +324,7 @@ router.post(
         undertone: undertone,
         currentVehicle: currentVehicle,
         collectionCreate: collectionCreate,
-        // profilePic,
+        profilePic,
       },
       {
         new: true,
@@ -410,7 +410,7 @@ router.post("/savedvehicles", (req, res) => {
     },
     { new: true }
   ).then(() => {
-    res.redirect(307, `/product/details/${id}/${true}`);
+    res.redirect(307, `/product/${id}/${true}`);
   });
 });
 
