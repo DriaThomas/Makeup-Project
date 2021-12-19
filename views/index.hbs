@@ -229,18 +229,18 @@
 </body>
 
 </html>
-<div class='main-section'>
+<div class='main-section' style="display: flex; flex-direction: row; width: 50px;">
   <h1>
     You Might Like
   </h1>
   <div class='set-of-vehicles'>
     {{#each vehiclesFromApi}}
-      <form
+      <form 
         class='vehicle-card-index-page'
         action="/product/{{this.id}}"
         method='POST'
       >
-        <input type='hidden' name='dealerLink' value="{{this.clickoffUrl}}" />
+        <input  type='hidden' name='dealerLink' value="{{this.clickoffUrl}}" />
         <div class='numbers-reviews-badge'>
           <p>
             {{this.reviewLength}} <span class="reviews-badge-text">reviews</span> 

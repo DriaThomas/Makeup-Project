@@ -199,3 +199,16 @@ button:hover {
   outline: none;
 }
 /****************************************************************************************/
+.vehicle-card-index-page {
+  text-decoration: none !important;
+  position: relative;
+}
+
+.vehicle-card-index-page .vehicle-card .vehicle-img {
+  margin-bottom: 0.5rem;
+}
+
+.vehicle-card-index-page .vehicle-card * {
+  margin-bottom: 0.5rem;
+  color: #225473;
+}
