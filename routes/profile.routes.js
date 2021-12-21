@@ -248,7 +248,7 @@ const mongoose = require("mongoose");
 const User = require("../models/User.model");
 const Vehicle = require("../models/Vehicle.model");
 
-const fileUploader = require("../config/cloudinary.config");
+// const fileUploader = require("../config/cloudinary.config");
 
 // Require necessary (isLoggedOut and isLoggedIn) middleware in order to control access to specific routes
 const isLoggedOut = require("../middleware/isLoggedOut");
@@ -294,7 +294,7 @@ router.get("/edit", isLoggedIn, (req, res) => {
 router.post(
   "/",
   isLoggedIn,
-  fileUploader.single("profilePic"),
+  // fileUploader.single("profilePic"),
   (req, res, next) => {
     const user = req.session.user;
     const user_id = mongoose.Types.ObjectId(user._id);
@@ -314,6 +314,7 @@ router.post(
     } else {
       profilePic = existingImage;
     }
+    console.log("profilepic", profilePic);
 
     User.findByIdAndUpdate(
       user_id,
@@ -324,11 +325,11 @@ router.post(
         undertone: undertone,
         currentVehicle: currentVehicle,
         collectionCreate: collectionCreate,
-        profilePic,
-      },
-      {
-        new: true,
+        // profilePic,
       }
+      // {
+      //   new: true,
+      // }
     )
       .then((updatedProfile) => {
         res.render("user/profile", {
