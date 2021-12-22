@@ -308,13 +308,13 @@ router.post(
       collectionCreate,
     } = req.body;
 
-    let profilePic;
-    if (req.file) {
-      profilePic = req.body.file.path;
-    } else {
-      profilePic = existingImage;
-    }
-    console.log("profilepic", profilePic);
+    // let profilePic;
+    // if (req.file) {
+    //   profilePic = req.body.file.path;
+    // } else {
+    //   profilePic = existingImage;
+    // }
+    // console.log("profilepic", profilePic);
 
     User.findByIdAndUpdate(
       user_id,
@@ -401,12 +401,12 @@ router.get("/savedvehicles", isLoggedIn, (req, res) => {
 // ****************************************************************************************
 router.post("/savedvehicles", (req, res) => {
   const user_id = req.session.user._id;
-  const { id, product_api_url } = req.body;
+  const { _id, product_api_url } = req.body;
   User.findByIdAndUpdate(
     user_id,
     {
       $push: {
-        savedVehicles: { id: id, url: product_api_url },
+        savedVehicles: { _id: _id, url: product_api_url },
       },
     },
     { new: true }

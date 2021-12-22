@@ -14,38 +14,45 @@
   {{/if}}
   {{/if}}
 </div>
+<table class="table ">
+ 
 {{#each vehiclesFromApi}}
 <form action="/product/{{this.id}}" method="POST">
   <input type="hidden" name="product_link" value="{{this.product_api_url}}">
-  <div class='list-of-vehicles'>
+  <div class='list-of-vehicles'style="display:flex; flex-direction: row">
     <div class='list-of-vehicles-box'>
       <button type="submit" class="button-to-open-vehicle-details list-vehicles">
-        <div id='product-card'>
+        <div id='product-card' style="width: 18rem;">
                 
-    <img id='vehicle-primary-img' src="{{this.api_featured_image}}" alt='' /> 
+    <img  class="card-img-top"  src="{{this.api_featured_image}}" alt=''  width="50px"/> 
 
-          <div class='vehicle-info'>
-            <h4 class='vehicle-year-make'>
-              {{this.brand}}
+         <div class="card-body">
+            <h4  class="card-title">
+           
               {{this.name}}
             
             </h4>
+            <h5"card-text">{{this.brand}}</h5>
             {{!-- <hr style="border-top: 2px solid black"> --}}
             {{this.category}}
            
-           
-            <h5>
-            ${{this.price}}
-            </h5>
-             <button href="{{this.product_link}}">Buy Now
+         {{!-- <a class="btn btn-primary" href="{{this.product_link}}">Buy Now
 
-            </button>
+            </a> --}}
+ 
+            <h5 class="card-text">
+            ${{this.price}}0
+            </h5>
+     <a class="btn btn-primary" href="{{this.product_link}}">Buy Now
+
+            </a>
           </div>
         </div>
       </button>
     </div>
   </div>
 </form>
+</table>
 {{#if ../usersListOfVehicles}}
 <form action="/profile/savedvehicles/delete/{{this.id}}" method='GET'>
   <button type='submit' class='btn btn-danger'>Remove From Saved List</button>

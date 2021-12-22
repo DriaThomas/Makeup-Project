@@ -7,6 +7,7 @@ const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
 const User = require("../models/User.model");
 const Product = require("../models/Product.model");
+const Review = require("../models/Review.model");
 const ProductsApi = require("../service/ProductApi");
 const productsApi = new ProductsApi();
 const axios = require("axios");
@@ -27,6 +28,7 @@ router.post("/", (req, res) => {
     .getQueriedListings(name, product_type, brand)
     .then((queriedVehicles) => {
       const records = queriedVehicles.data;
+
       // const suvCars = records.filter((car) => car.brand === "covergirl");
       res.status(200).render("vehicles/vehicles-list", {
         vehiclesFromApi: records,
@@ -155,13 +157,20 @@ router.post("/", (req, res) => {
 // });
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-router.post("/:id", (req, res) => {
+router.post("/:id", isLoggedIn, (req, res) => {
   const { id } = req.params;
-
+  let { _id } = req.session.user;
   const url = `http://makeup-api.herokuapp.com/api/v1/products/${id}.json`;
   axios.get(url).then((responseFromTheAPI) => {
     console.log("a single character", responseFromTheAPI.data.name);
-
+    const dealerName = responseFromTheAPI.data.dealerName;
+    User.find({ dealerName: dealerName }).populate({
+      path: "reviews",
+      populate: {
+        path: "user_id",
+      },
+    });
+    console.log("work", dealerName);
     res.render("vehicles/vehicle-details.hbs", {
       vehicle: responseFromTheAPI.data,
       // isSaved: isSaved,

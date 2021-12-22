@@ -179,7 +179,7 @@ button:hover {
   justify-content: space-between;
 } */
 
-.list-of-vehicles-box #product-card {
+/* .list-of-vehicles-box #product-card {
   margin: 1rem auto;
 }
 
@@ -197,9 +197,9 @@ button:hover {
   box-shadow: 0 0px;
   transform: translateY(4px);
   outline: none;
-}
+} */
 /****************************************************************************************/
-.vehicle-card-index-page {
+/* .vehicle-card-index-page {
   text-decoration: none !important;
   position: relative;
 }
@@ -210,5 +210,6 @@ button:hover {
 
 .vehicle-card-index-page .vehicle-card * {
   margin-bottom: 0.5rem;
-  color: #225473;
-}
+  color: #225473; */
+
+/*************************************************************************************/

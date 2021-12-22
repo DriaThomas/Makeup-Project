@@ -9,8 +9,8 @@ const Review = require("../models/Review.model");
 const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
 
-const VehiclesApi = require("../service/ProductApi");
-const vehiclesApi = new VehiclesApi();
+const ProductsApi = require("../service/ProductApi");
+const productsApi = new ProductsApi();
 
 // ****************************************************************************************
 // GET route to render the form for adding review about a dealer

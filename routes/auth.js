@@ -222,7 +222,7 @@ router.get("/signup", isLoggedOut, (req, res) => {
   res.render("auth/signup", { isLoggedIn: req.session.user });
 });
 
-router.post("/signup", fileUploader.single("profilePic"), (req, res) => {
+router.post("/signup", (req, res) => {
   const { email, password, firstName, lastName } = req.body;
   console.log("User: ", { email, password, firstName, lastName });
 
@@ -252,7 +252,7 @@ router.post("/signup", fileUploader.single("profilePic"), (req, res) => {
           password: hashedPassword,
           firstName: firstName,
           lastName: lastName,
-          profilePic: req.file.path,
+          profilePic: req.files.path,
         });
       })
       .then((user) => {
@@ -271,11 +271,11 @@ router.post("/signup", fileUploader.single("profilePic"), (req, res) => {
 
         transporter
           .sendMail({
-            from: `CarAmerican <${process.env.NODEMAILER_ACC}>`,
+            from: `Bulk Beauty <${process.env.NODEMAILER_ACC}>`,
             to: email,
-            subject: "Congrats, you are registered on CarAmerican.com",
-            text: "CarAmerican",
-            html: templates.templateExample(`${firstName} ${lastName}`),
+            subject: "Congrats, you are registered on BulkBeauty.com",
+            text: "BulkBeauty",
+            // html: templates.templateExample(`${firstName} ${lastName}`),
           })
           .then((info) => {
             console.log("Info from nodeamailer", info);
