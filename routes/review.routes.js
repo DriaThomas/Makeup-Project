@@ -3,7 +3,7 @@ const app = express();
 const router = require("express").Router();
 const mongoose = require("mongoose");
 const User = require("../models/User.model");
-const Dealer = require("../models/Dealer.model");
+// const Dealer = require("../models/Dealer.model");
 const Review = require("../models/Review.model");
 
 const isLoggedOut = require("../middleware/isLoggedOut");
@@ -15,39 +15,39 @@ const productsApi = new ProductsApi();
 // ****************************************************************************************
 // GET route to render the form for adding review about a dealer
 // ****************************************************************************************
-router.post("/add-review/:dealerName/:id", isLoggedIn, (req, res) => {
+router.post("/add-review/:userName/:id", isLoggedIn, (req, res) => {
   const { dealerLink } = req.body;
   req.session.dealerLinkFromGlobalScope = dealerLink;
-  const { dealerName, id } = req.params;
+  const { userName, id } = req.params;
   res.render("reviews/new-review", {
-    dealerName,
+    userName,
     id,
   });
 });
 
 // ****************************************************************************************
-// POST route to post a revireew
+// POST route to post a review
 // ****************************************************************************************
 router.post("/add-review", isLoggedIn, async (req, res) => {
-  const { dealerName, reviewContent, id } = req.body;
+  const { userName, reviewContent, id } = req.body;
   let { _id, firstName, lastName, vehicles, reviews } = req.session.user;
   const user_id = mongoose.Types.ObjectId(_id);
   try {
-    const dealerInDb = await Dealer.findOne({ dealerName: dealerName });
+    const dealerInDb = await User.findOne({ userName: userName });
     const createdReviewInDb = await Review.create({
       reviewContent,
       user_id,
       id,
     });
     if (!dealerInDb) {
-      await Dealer.create({ dealerName: dealerName });
+      await User.create({ userName: userName });
     }
-    await Dealer.findByIdAndUpdate(dealerInDb.User_id, {
+    await User.findByIdAndUpdate(dealerInDb.User_id, {
       $push: { reviews: createdReviewInDb._id },
     });
-    res.redirect(307, `/product/details/${id}`);
+    res.redirect(307, `/product/${id}`);
   } catch (err) {
-    console.log("Soemthing went wrong during posting the review:", err);
+    console.log("Something went wrong during posting the review:", err);
   }
 });
 
@@ -59,7 +59,7 @@ router.post("/delete/:reviewId/:id", isLoggedIn, async (req, res) => {
   let reviewCreatorIdFromDB;
   const { _id } = req.session.user;
   let { reviewId, id } = req.params;
-  const { dealerLink, dealerName } = req.body;
+  const { dealerLink, userName } = req.body;
   req.session.dealerLinkFromGlobalScope = dealerLink;
 
   try {
@@ -69,8 +69,8 @@ router.post("/delete/:reviewId/:id", isLoggedIn, async (req, res) => {
     if (_id === reviewCreatorIdFromDB) {
       await Review.findByIdAndRemove(reviewId);
 
-      await Dealer.findOneAndUpdate(
-        { dealerName: dealerName },
+      await User.findOneAndUpdate(
+        { userName: userName },
         {
           $pull: { reviews: reviewId },
         }
@@ -83,14 +83,14 @@ router.post("/delete/:reviewId/:id", isLoggedIn, async (req, res) => {
     console.log("Soemthing went wrong during deletion of the review:", err);
   }
   console.log("REDIRECTING DELETE");
-  res.redirect(307, `/product/details/${id}`);
+  res.redirect(307, `/product/${id}`);
 });
 
 // ****************************************************************************************
 // GET route to render the review for editing
 // ****************************************************************************************
 router.post("/edit/:reviewId/:dealerName/:id", (req, res) => {
-  const { reviewId, dealerName, id } = req.params;
+  const { reviewId, userName, id } = req.params;
   const { dealerLink } = req.body;
   Review.findById(reviewId)
     .populate("user_id")
@@ -98,7 +98,7 @@ router.post("/edit/:reviewId/:dealerName/:id", (req, res) => {
       console.log("My review:", foundReview);
       res.render("reviews/update-review-form", {
         foundReview: foundReview,
-        dealerName: dealerName,
+        userName: userName,
         reviewId: reviewId,
         id: id,
         dealerLink: dealerLink,
@@ -134,7 +134,7 @@ router.post("/edit/:reviewId/:id", async (req, res) => {
     console.log("Soemthing went wrong during editing the review:", err);
   }
   console.log("REDIRECTING EDIT");
-  res.redirect(307, `/product/details/${id}`);
+  res.redirect(307, `/product/${id}`);
 });
 
 module.exports = router;

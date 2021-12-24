@@ -16,7 +16,7 @@
     <div id="vehicle-details-div">
 
       <div class='set-of-pictures-left-side'>
-        <img class='main-image' src="{{vehicle.image_link}}" alt="image of {{vehicle.name}} vehicle" />
+        <img class='main-image' src="{{vehicle.api_featured_image}}" alt="image of {{vehicle.name}} vehicle" />
       
       </div>
       <div class='main-details'>
@@ -49,7 +49,7 @@
               {{#if isSaved}}
               Saved
               {{else}}
-              Save This Vehicle
+              Save This Product
               {{/if}}
             </button>
           </form>
@@ -79,7 +79,7 @@
     <div id='dealer-name-title'>
 
       <div id="logo-dealer">
-        <img style="height: 21px; margin: auto 0" src="../../images/carDealershipIcon.png">
+        {{!-- <img style="height: 21px; margin: auto 0" src="../../images/carDealershipIcon.png"> --}}
         <a href="{{dealerLink}}" class="dealer-link">
           <h4 style="margin-left: 1rem;">{{vehicle.dealerName}}</h4>
         </a>
@@ -87,9 +87,8 @@
 
       <hr style="border-top: 1px solid lightgray">
 
-      <h5>Review this dealer</h5>
-      <p>Share your thoughts with other customers</p>
-      <form action="/review/add-review/{{vehicle.dealerName}}/{{vehicle.id}}" method="POST">
+
+      <form action="/review/add-review/{{vehicle.name}}/{{vehicle.id}}" method="POST">
         <input type='hidden' name="dealerLink" value={{dealerLink}} />
         <button type='submit' class='btn btn-primary'>
           Write a customer review
@@ -132,7 +131,7 @@
           <hr style="border-top: 1px solid lightgray">
           {{/each}}
           {{else}}
-          <p class="no-review-header">There are no reviews about this dealership yet. Be the first to leave a review!<br><span class="arrow-left">🚗</span></p>
+          <p class="no-review-header">There are no reviews yet. Be the first to leave a review!<br><span class="arrow-left"></span></p>
           {{/if}}
         </div>
       </div>

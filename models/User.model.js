@@ -65,10 +65,11 @@ const userSchema = new Schema({
   },
   firstName: { type: String, required: true },
   lastName: { type: String },
+  userName: { type: String },
   undertone: { type: String },
   currentVehicle: [{ type: Array }],
   collectionCreate: [{ type: Schema.Types.ObjectId, ref: "Collection" }],
-  product: [{ type: Schema.Types.ObjectId, ref: "Product" }], // VINs will be saved
+  product: [{ type: Schema.Types.ObjectId, ref: "Product" }],
   savedVehicles: [{ type: Object }],
   reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }], // Reviews in regards to the Delaerships
   profilePic: { type: String, required: false },
