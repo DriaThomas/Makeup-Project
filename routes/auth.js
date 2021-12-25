@@ -223,10 +223,10 @@ router.get("/signup", isLoggedOut, (req, res) => {
 });
 
 router.post("/signup", (req, res) => {
-  const { email, password, firstName, lastName, userName } = req.body;
-  console.log("User: ", { email, password, firstName, lastName, userName });
+  const { email, password, firstName, lastName } = req.body;
+  console.log("User: ", { email, password, firstName, lastName });
 
-  if (!email || !password || !firstName || !lastName || !userName) {
+  if (!email || !password || !firstName || !lastName) {
     return res.status(400).render("auth/signup", {
       errorMessage: "Please fill out all required fields.",
     });
@@ -234,7 +234,7 @@ router.post("/signup", (req, res) => {
 
   // Search the database for a user with the email submitted in the form
   User.findOne({ email: email }).then((found) => {
-    console.log({ found });
+    console.log("problem?:", { found });
     //   // If the user is found, send the message email is already used
     if (found) {
       return res.status(400).render("auth/signup", {
