@@ -209,7 +209,7 @@ const saltRounds = 10;
 // Require the User model in order to interact with the database
 const User = require("../models/User.model");
 
-const fileUploader = require("../config/cloudinary.config");
+// const fileUploader = require("../config/cloudinary.config");
 
 // Require necessary (isLoggedOut and isLoggedIn) middleware in order to control access to specific routes
 const isLoggedOut = require("../middleware/isLoggedOut");
