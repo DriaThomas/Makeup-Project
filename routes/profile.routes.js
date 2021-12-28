@@ -373,7 +373,7 @@ router.post("/delete/:user_id", isLoggedIn, (req, res, next) => {
 // ****************************************************************************************
 // GET route to show saved vehicles
 // ****************************************************************************************
-router.get("/savedvehicles", isLoggedIn, (req, res) => {
+router.get("/savedproducts", isLoggedIn, (req, res) => {
   const user = req.session.user;
   const user_id = req.session.user._id;
   User.findById(user_id)
@@ -382,7 +382,7 @@ router.get("/savedvehicles", isLoggedIn, (req, res) => {
     })
     .then((foundUserWithVehicles) => {
       productsApi
-        .getVehiclesList(foundUserWithVehicles.savedVehicles)
+        .getVehiclesList(foundUserWithVehicles.savedproducts)
         .then((list) => {
           const normalizedList = list.map((current) => {
             return current.data;
@@ -399,14 +399,14 @@ router.get("/savedvehicles", isLoggedIn, (req, res) => {
 // ****************************************************************************************
 // POST route to add saved vehicles
 // ****************************************************************************************
-router.post("/savedvehicles", (req, res) => {
+router.put("/savedproducts", (req, res) => {
   const user_id = req.session.user._id;
-  const { _id, product_api_url } = req.body;
+  const { id, product_api_url } = req.body;
   User.findByIdAndUpdate(
     user_id,
     {
       $push: {
-        savedVehicles: { _id: _id, url: product_api_url },
+        savedproducts: { id: id, url: product_api_url },
       },
     },
     { new: true }
@@ -418,20 +418,20 @@ router.post("/savedvehicles", (req, res) => {
 // ****************************************************************************************
 // GET route to delete a saved vehicle
 // ****************************************************************************************
-router.get("/savedvehicles/delete/:id", (req, res) => {
+router.get("/savedproducts/delete/:id", (req, res) => {
   const user_id = req.session.user._id;
   const { id } = req.params;
   User.findByIdAndUpdate(
     user_id,
     {
       $pull: {
-        savedVehicles: { id: id },
+        savedproducts: { id: id },
       },
     },
     { new: true }
   ).then((updatedSave) => {
     console.log("deleted", updatedSave);
-    res.redirect("/profile/savedvehicles");
+    res.redirect("/profile/savedproducts");
   });
 });
 

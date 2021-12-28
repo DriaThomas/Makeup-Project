@@ -70,7 +70,7 @@ const userSchema = new Schema({
   currentVehicle: [{ type: Array }],
   collectionCreate: [{ type: Schema.Types.ObjectId, ref: "Collection" }],
   product: [{ type: Schema.Types.ObjectId, ref: "Product" }],
-  savedVehicles: [{ type: Object }],
+  savedproducts: [{ type: Object }],
   reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }], // Reviews in regards to the Delaerships
   profilePic: { type: String, required: false },
 });

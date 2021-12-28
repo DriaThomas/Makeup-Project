@@ -2,7 +2,7 @@
 
 
 <div class='header-vehicles-list'>
-  {{#if savedVehiclesPage}}
+  {{#if savedproductsPage}}
   {{#if vehiclesFromApi}}
   <h2>
     Saved Vehicles
@@ -54,7 +54,7 @@
 </form>
 </table>
 {{#if ../usersListOfVehicles}}
-<form action="/profile/savedvehicles/delete/{{this.id}}" method='GET'>
+<form action="/profile/savedproducts/delete/{{this.id}}" method='GET'>
   <button type='submit' class='btn btn-danger'>Remove From Saved List</button>
 </form>
 {{/if}}

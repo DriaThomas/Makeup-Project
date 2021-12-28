@@ -1,15 +1,15 @@
 <form action='/review/add-review' class='auth-form' method='POST'>
   <div class='auth-form-container'>
-    <input type='hidden' name="id" value="{{id}}" />
+    <input type='hidden' name="id" value="{{this.id}}" />
     <h1>
       Welcome to Bulk Beauty
     </h1>
  
     <p>
-      Add a review here:
+      Add a review {{this.name}} here:
     </p>
     <h4>
-      "{{userName}}"
+      "{{this.userName}}"
     </h4>
     <input type='hidden' name='userName' value="{{userName}}" />
     <hr />

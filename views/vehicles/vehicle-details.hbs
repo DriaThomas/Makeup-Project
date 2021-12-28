@@ -39,7 +39,7 @@
         <p id='vehicle-main-description'>{{vehicle.description}}</p>
         
         <div class='save'>
-          <form action="/profile/savedvehicles" method="POST" class="save-buy-buttons">
+          <form action="/profile/savedproducts" method="POST" class="save-buy-buttons">
             <input type='hidden' name="userName" value={{user}} />
             <input type='hidden' name="id" value={{vehicle.id}} />
             <input type='hidden' name="name" value={{vehicle.name}} />

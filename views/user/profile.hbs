@@ -73,6 +73,7 @@
       {{!-- <p>{{userObject.firstName}}</p> --}}
       <h1 id="profile-name"><b>
         {{userObject.firstName}} {{userObject.lastName}}
+        {{userObject.userName}}
       </b></h1>
       <p>
         Email: {{userObject.email}}
@@ -104,7 +105,7 @@
 
         <div id="saved-vehicles">
           <h3>Saved Products</h3>
-          <a href="/profile/savedvehicles">View {{userObject.savedVehicles.length}} Favorite Product(s)</a>
+          <a href="/profile/savedproducts">View {{userObject.savedproducts.length}} Favorite Product(s)</a>
         </div>
         
 

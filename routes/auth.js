@@ -223,10 +223,10 @@ router.get("/signup", isLoggedOut, (req, res) => {
 });
 
 router.post("/signup", (req, res) => {
-  const { email, password, firstName, lastName } = req.body;
-  console.log("User: ", { email, password, firstName, lastName });
+  const { email, password, firstName, lastName, userName } = req.body;
+  console.log("User: ", { email, password, firstName, lastName, userName });
 
-  if (!email || !password || !firstName || !lastName) {
+  if (!email || !password || !firstName || !lastName || !userName) {
     return res.status(400).render("auth/signup", {
       errorMessage: "Please fill out all required fields.",
     });
@@ -252,8 +252,8 @@ router.post("/signup", (req, res) => {
           password: hashedPassword,
           firstName: firstName,
           lastName: lastName,
-          // userName: userName,
-          profilePic: req.files.path,
+          userName: userName,
+          // profilePic: req.files.path,
         });
       })
       .then((user) => {
