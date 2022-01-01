@@ -2,8 +2,9 @@ const { Schema, model } = require("mongoose");
 
 // TODO: Please make sure you edit the user model to whatever makes sense in this case
 const dealerSchema = new Schema({
-  dealerName: {
+  userName: {
     type: String,
+    ref: "User",
   },
   dealerUrl: {
     type: String,

@@ -47,17 +47,24 @@
       <!-- Right-sided navbar links -->
 
       <div class="w3-right w3-hide-small">
-        {{!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ml-auto"> --}}
+        {{!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">--}}
+          {{!-- <ul class="navbar-nav ml-auto"> --}} 
             {{!-- <a href="/">Home</a> --}}
             {{!-- <a href="/about" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i>About Us</a> --}}
             {{!-- <a href="/rankings" class="w3-bar-item w3-button"><i class="fa fa-th"></i>Product search</a>
             <a href="/product" class="w3-bar-item w3-button"><i class="fa fa-th"></i> All Product</a> --}}
+            <ul class="navbar-nav ml-auto">
+            <div>
             <a href="/collection/create" class="w3-bar-item w3-button"><i class="fa fa-th"></i> Create Collection </a>
-            <a href="/profile" class="w3-bar-item w3-button"> <i class="fa fa-user"></i>Profile Page </a>
+            {{!-- <a href="/profile" class="w3-bar-item w3-button"> <i class="fa fa-user"></i>Profile Page </a> --}}
             {{!-- <a href="/auth/signup" class="w3-bar-item w3-button">Sign-Up</a>
             <a href="/auth/login" class="w3-bar-item w3-button">Login</a> --}}
-            <a href="/auth/logout" class="w3-bar-item w3-button">Logout</a>
+                  <img src="{{currentUser.profilePic}}" alt="image of user" />
+      
+                     <a href="/profile"> <i class="w3-bar-item w3-button fa fa-user"></i>{{currentUser.firstName}}</a>
+       
+            </div>
+                 <a href="/auth/logout" class="w3-bar-item w3-button">Logout</a>
             {{!-- <a href="/collection/upload/" class="w3-bar-item w3-button">Upload Image</a> --}}
 
           </ul>
@@ -177,7 +184,7 @@
       </div>
     </div>
 
-<a href="http://makeup-api.herokuapp.com/api/v1/products.json?product_type=eyeshadow">eye shadow</a>
+{{!-- <a href="http://makeup-api.herokuapp.com/api/v1/products.json?product_type=eyeshadow">eye shadow</a> --}}
 
 
 
@@ -202,8 +209,8 @@
         <i class="fa fa-twitter w3-hover-opacity"></i>
         <i class="fa fa-linkedin w3-hover-opacity"></i>
       </div>
-      <p>Powered by <a href="" title="W3.CSS" target="_blank"
-          class="w3-hover-text-green">Ironhack</a></p>
+      {{!-- <p>Powered by <a href="" title="W3.CSS" target="_blank"
+          class="w3-hover-text-green">Ironhack</a></p> --}}
     </footer>
 
 

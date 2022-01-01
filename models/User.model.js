@@ -71,7 +71,7 @@ const userSchema = new Schema({
   collectionCreate: [{ type: Schema.Types.ObjectId, ref: "Collection" }],
   product: [{ type: Schema.Types.ObjectId, ref: "Product" }],
   savedproducts: [{ type: Object }],
-  reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }], // Reviews in regards to the Delaerships
+  reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
   profilePic: { type: String, required: false },
 });
 

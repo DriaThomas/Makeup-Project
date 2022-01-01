@@ -136,11 +136,11 @@ class ProductsApi {
   // };
 
   getQueriedListings = (name, brand, category) => {
-    if (brand.length <= 3) {
-      brand = brand.toUpperCase();
-    } else {
-      brand = brand.charAt(0).toUpperCase() + brand.slice(1).toLowerCase();
-    }
+    // if (brand.length <= 3) {
+    //   brand = brand.toUpperCase();
+    // } else {
+    //   brand = brand.charAt(0).toUpperCase() + brand.slice(1).toLowerCase();
+    // }
 
     return this.api.get("", {
       params: {
