@@ -113,14 +113,14 @@
           </div>
           {{#if_equal ../currentActiveUserId this.user_id._id}}
           <div id='review-control-buttons'>
-            <form action="/review/edit/{{this._id}}/{{../dealerName}}/{{../vehicle.id}}" method='POST'>
+            <form action="/review/edit/{{this._id}}/{{../userName}}/{{../vehicle.id}}" method='POST'>
               <input type='hidden' name="dealerLink" value={{../dealerLink}} />
               <button type='submit' id='btn-btn-warning'>
                 Edit
               </button>
             </form>
             <form action="/review/delete/{{this._id}}/{{../vehicle.id}}" method='post'>
-              <input type="hidden" name="dealerLink" value={{../dealerLink}}>
+              <input type="hidden" name="dealerLink" value={{../userName}}>
               <input type="hidden" name="dealerName" value="{{../dealerName}}">
               <button type='submit' id='btn-btn-danger'>
                 Delete

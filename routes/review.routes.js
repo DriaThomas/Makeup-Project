@@ -161,9 +161,9 @@ const productsApi = new ProductsApi();
 // GET route to render the form for adding review
 // ****************************************************************************************
 router.post("/add-review/:userName/:id", isLoggedIn, (req, res) => {
-  const { dealerLink } = req.body;
-  console.log({ dealerLink });
-  req.session.dealerLinkFromGlobalScope = dealerLink;
+  // const { dealerLink } = req.body;
+  // console.log({ dealerLink });
+  // req.session.dealerLinkFromGlobalScope = dealerLink;
   const { userName, id } = req.params;
   res.render("reviews/new-review", {
     userName,
@@ -176,7 +176,7 @@ router.post("/add-review/:userName/:id", isLoggedIn, (req, res) => {
 // ****************************************************************************************
 router.post("/add-review", isLoggedIn, async (req, res) => {
   const { userName, reviewContent, id } = req.body;
-  let { _id, firstName, lastName, products, reviews } = req.session.user;
+  let { _id, products, reviews } = req.session.user;
   const user_id = mongoose.Types.ObjectId(_id);
   try {
     const dealerInDb = await Dealer.findOne({ userName: userName });
@@ -185,6 +185,7 @@ router.post("/add-review", isLoggedIn, async (req, res) => {
       user_id,
       id,
     });
+    console.log({ reviewContent });
     if (!dealerInDb) {
       await Dealer.create({ userName: userName });
     }
@@ -194,7 +195,7 @@ router.post("/add-review", isLoggedIn, async (req, res) => {
     console.log("review", reviewContent);
     res.redirect(307, `/product/${id}`);
   } catch (err) {
-    console.log("Soemthing went wrong during posting the review:", err);
+    console.log("Something went wrong during posting the review:", err);
   }
 });
 
@@ -227,7 +228,7 @@ router.post("/delete/:reviewId/:id", isLoggedIn, async (req, res) => {
         "You are not Authorized to Delete this review, you are not a creator of it....";
     }
   } catch (err) {
-    console.log("Soemthing went wrong during deletion of the review:", err);
+    console.log("Something went wrong during deletion of the review:", err);
   }
   console.log("REDIRECTING DELETE");
   res.redirect(307, `/product/${id}`);
