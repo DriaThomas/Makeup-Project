@@ -1,4 +1,4 @@
-<form action='/review/add-review' class='auth-form' method='POST'>
+{{!-- <form action='/review/add-review/:dealerName' class='auth-form' method='POST'>
   <div class='auth-form-container'>
     <input type='hidden' name="id" value="{{this.id}}" />
     <h1>
@@ -12,6 +12,42 @@
       "{{this.userName}}"
     </h4>
     <input type='hidden' name='userName' value="{{userName}}" />
+    <hr />
+    <label>
+      <b>
+        Review
+      </b>
+      <br />
+      <textarea autofocus name='reviewContent' rows='4' cols='50'></textarea>
+    </label>
+    <button type='submit'>
+      Submit
+    </button>
+
+    {{#if errorMessage}}
+      <p class='error'>
+        {{errorMessage}}
+      </p>
+    {{/if}}
+  </div>
+</form> --}}
+
+<form action='/review/add-review' class='auth-form' method='POST'>
+  <div class='auth-form-container'>
+    <input type='hidden' name="id" value="{{id}}" />
+    <h1>
+      Welcome to Bulk Beauty
+    </h1>
+    <h1>
+      {{userName}}
+    </h1>
+    <p>
+    
+    </p>
+    <h4>
+      "{{dealerName}}"
+    </h4>
+    <input type='hidden' name='dealerName' value="{{dealerName}}" />
     <hr />
     <label>
       <b>

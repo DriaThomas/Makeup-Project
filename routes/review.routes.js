@@ -160,34 +160,44 @@ const productsApi = new ProductsApi();
 // ****************************************************************************************
 // GET route to render the form for adding review
 // ****************************************************************************************
-router.post("/add-review/:userName/:id", isLoggedIn, (req, res) => {
-  // const { dealerLink } = req.body;
-  // console.log({ dealerLink });
-  // req.session.dealerLinkFromGlobalScope = dealerLink;
-  const { userName, id } = req.params;
+// router.post("/add-review/:dealerName/:id", isLoggedIn, (req, res) => {
+//   // const { dealerLink } = req.body;
+//   // console.log({ dealerLink });
+//   // req.session.dealerLinkFromGlobalScope = dealerLink;
+//   // const { userName, id } = req.params;
+//   // console.log("what", dealerLink);
+//   res.render("reviews/new-review", {
+//     dealerName,
+//     id,
+//   });
+// });
+
+router.post("/add-review/:name/:id", isLoggedIn, (req, res) => {
+  const { dealerLink } = req.body;
+  req.session.dealerLinkFromGlobalScope = dealerLink;
+  const { dealerName, id } = req.params;
   res.render("reviews/new-review", {
-    userName,
+    dealerName,
     id,
   });
 });
-
 // ****************************************************************************************
 // POST route to post a review
 // ****************************************************************************************
 router.post("/add-review", isLoggedIn, async (req, res) => {
-  const { userName, reviewContent, id } = req.body;
+  const { dealerName, reviewContent, id } = req.body;
   let { _id, products, reviews } = req.session.user;
   const user_id = mongoose.Types.ObjectId(_id);
   try {
-    const dealerInDb = await Dealer.findOne({ userName: userName });
+    const dealerInDb = await Dealer.findOne({ dealerName: dealerName });
     const createdReviewInDb = await Review.create({
       reviewContent,
       user_id,
       id,
     });
-    console.log({ reviewContent });
+
     if (!dealerInDb) {
-      await Dealer.create({ userName: userName });
+      await Dealer.create({ dealerName: dealerName });
     }
     await Dealer.findByIdAndUpdate(dealerInDb._id, {
       $push: { reviews: createdReviewInDb._id },
