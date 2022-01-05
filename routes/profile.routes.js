@@ -400,7 +400,7 @@ router.get("/savedproducts", isLoggedIn, (req, res) => {
 // ****************************************************************************************
 // POST route to add saved vehicles
 // ****************************************************************************************
-router.put("/savedproducts", (req, res) => {
+router.post("/savedproducts", (req, res) => {
   const user_id = req.session.user._id;
   const { id, product_api_url } = req.body;
   User.findByIdAndUpdate(
