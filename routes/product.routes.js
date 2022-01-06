@@ -157,30 +157,30 @@ router.post("/", (req, res) => {
 // });
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-// router.post("/:id", isLoggedIn, (req, res) => {
-//   const { id } = req.params;
-//   let { _id } = req.session.user;
+router.post("/details/:id", isLoggedIn, (req, res) => {
+  const { id } = req.params;
+  let { _id } = req.session.user;
 
-//   const url = `http://makeup-api.herokuapp.com/api/v1/products/${id}.json`;
-//   axios.get(url).then((responseFromTheAPI) => {
-//     console.log("a single character", responseFromTheAPI.data.name);
-//     const userName = responseFromTheAPI.data.userName;
-//     User.find({ userName: userName }).populate({
-//       path: "reviews",
-//       populate: {
-//         path: "user_id",
-//       },
-//     });
-//     console.log("work", userName);
-//     res.render("vehicles/vehicle-details.hbs", {
-//       vehicle: responseFromTheAPI.data,
-//       // isSaved: isSaved,
-//     });
-//   });
-// });
+  const url = `http://makeup-api.herokuapp.com/api/v1/products/${id}.json`;
+  axios.get(url).then((responseFromTheAPI) => {
+    console.log("a single character", responseFromTheAPI.data.name);
+    const userName = responseFromTheAPI.data.userName;
+    User.find({ userName: userName }).populate({
+      path: "reviews",
+      populate: {
+        path: "user_id",
+      },
+    });
+    console.log("work", userName);
+    res.render("vehicles/vehicle-details.hbs", {
+      vehicle: responseFromTheAPI.data,
+      // isSaved: isSaved,
+    });
+  });
+});
 // /////////////////////////////////////////////////////////////////////////////////////////////
 
-router.post("/:id/:isSaved?", isLoggedIn, (req, res, next) => {
+router.post("/details/:id/:isSaved?", isLoggedIn, (req, res, next) => {
   let { _id } = req.session.user;
   const dealerLink = req.body.dealerLink
     ? req.body.dealerLink

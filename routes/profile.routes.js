@@ -326,10 +326,10 @@ router.post(
         currentVehicle: currentVehicle,
         collectionCreate: collectionCreate,
         // profilePic,
+      },
+      {
+        new: true,
       }
-      // {
-      //   new: true,
-      // }
     )
       .then((updatedProfile) => {
         res.render("user/profile", {
