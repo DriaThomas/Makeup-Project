@@ -69,7 +69,7 @@ const userSchema = new Schema({
   undertone: { type: String },
   currentVehicle: [{ type: Array }],
   collectionCreate: [{ type: Schema.Types.ObjectId, ref: "Collection" }],
-  product: [{ type: Schema.Types.ObjectId, ref: "Product" }],
+  products: [{ type: Schema.Types.ObjectId, ref: "Product" }],
   savedproducts: [{ type: Object }],
   reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
   profilePic: { type: String, required: false },

@@ -1,4 +1,4 @@
-{{!-- 
+{{!-- {{!-- 
 
 <div class='user-profile'>
 
@@ -62,7 +62,16 @@
 
 
   </div>  --}}
-  <div class='user-profile'>
+  {{!-- <div class='user-profile'>
+
+  <div id="user-profile-top">
+    <div id="user-image-div">
+      <img src="{{userObject.profilePic}}" alt="image of user" />
+    </div>
+
+    
+
+    <div class='user-profile'>
 
   <div id="user-profile-top">
     <div id="user-image-div">
@@ -73,7 +82,6 @@
       {{!-- <p>{{userObject.firstName}}</p> --}}
       <h1 id="profile-name"><b>
         {{userObject.firstName}} {{userObject.lastName}}
-        {{userObject.userName}}
       </b></h1>
       <p>
         Email: {{userObject.email}}
@@ -89,23 +97,26 @@
             My Info
           </h3>
         <p>
-          undertone: {{userObject.undertone}}
+          Lives in {{userObject.undertone}}
         </p>
-        {{!-- <p>
-         Favorite Product {{userObject.currentVehicle}}
-        </p> --}}
         <p>
-         Collection Looks: {{userObject.collectionCreate}}
+          Drives a {{userObject.currentVehicle}}
         </p>
-     
       </div>
       </div>
 
-  
+      {{!-- <div id="right-side-content">
+        <div id="user-listings">
+          <div id="user-listings-content">
+          <h3>My Listings</h3>
+          <li><a href="">Listing 1</a></li>
+          <li><a href="">Listing 2</a></li>
+          </div>
+        </div> --}}
 
         <div id="saved-vehicles">
-          <h3>Saved Products</h3>
-          <a href="/profile/savedproducts">View {{userObject.savedproducts.length}} Favorite Product(s)</a>
+          <h3>Saved Vehicles</h3>
+          <a href="/profile/savedvehicles">View {{userObject.savedVehicles.length}} Saved Vehicle(s)</a>
         </div>
         
 

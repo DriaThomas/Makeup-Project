@@ -178,7 +178,7 @@ class ProductsApi {
 
   getVehiclesList = async (arrayOfVins) => {
     const products = [];
-    for (let i = 0; i < arrayOfVins.length; i++) {
+    for (let i = 0; i < products.length; i++) {
       const car = await this.getVehicleDetails(arrayOfVins[i].id);
       car.data.product_link = arrayOfVins[i].url;
       products.push(car);
