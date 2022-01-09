@@ -572,7 +572,7 @@ router.post("/delete/:user_id", isLoggedIn, (req, res, next) => {
 // ****************************************************************************************
 // GET route to show saved vehicles
 // ****************************************************************************************
-router.get("/savedvehicles", isLoggedIn, (req, res) => {
+router.get("/savedproducts", isLoggedIn, (req, res) => {
   const user = req.session.user;
   const user_id = req.session.user._id;
   User.findById(user_id)
@@ -598,39 +598,39 @@ router.get("/savedvehicles", isLoggedIn, (req, res) => {
 // ****************************************************************************************
 // POST route to add saved vehicles
 // ****************************************************************************************
-router.post("/savedvehicles", (req, res) => {
+router.post("/savedproducts", (req, res) => {
   const user_id = req.session.user._id;
-  const { vin, dealerLink } = req.body;
+  const { id, dealerLink } = req.body;
   User.findByIdAndUpdate(
     user_id,
     {
       $push: {
-        savedVehicles: { vin: vin, url: dealerLink },
+        savedVehicles: { id: id, url: dealerLink },
       },
     },
     { new: true }
   ).then(() => {
-    res.redirect(307, `/vehicles/details/${vin}/${true}`);
+    res.redirect(307, `/products/details/${id}/${true}`);
   });
 });
 
 // ****************************************************************************************
 // GET route to delete a saved vehicle
 // ****************************************************************************************
-router.get("/savedvehicles/delete/:vin", (req, res) => {
+router.get("/savedproducts/delete/:id", (req, res) => {
   const user_id = req.session.user._id;
-  const { vin } = req.params;
+  const { vidn } = req.params;
   User.findByIdAndUpdate(
     user_id,
     {
       $pull: {
-        savedVehicles: { vin: vin },
+        savedVehicles: { id: id },
       },
     },
     { new: true }
   ).then((updatedSave) => {
     console.log("deleted", updatedSave);
-    res.redirect("/profile/savedvehicles");
+    res.redirect("/profile/savedproducts");
   });
 });
 

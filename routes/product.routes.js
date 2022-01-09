@@ -11,6 +11,7 @@ const Review = require("../models/Review.model");
 const ProductsApi = require("../service/ProductApi");
 const productsApi = new ProductsApi();
 const axios = require("axios");
+
 // const Review = require('../models/Review.model');
 
 // ****************************************************************************************
@@ -157,36 +158,47 @@ router.post("/", (req, res) => {
 // });
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-// router.post("/details/:id", isLoggedIn, (req, res) => {
-//   const { id } = req.params;
-//   let { _id } = req.session.user;
-
-//   const url = `http://makeup-api.herokuapp.com/api/v1/products/${id}.json`;
-//   axios.get(url).then((responseFromTheAPI) => {
-//     console.log("a single character", responseFromTheAPI.data.name);
-//     const userName = responseFromTheAPI.data.userName;
-//     User.find({ userName: userName }).populate({
-//       path: "reviews",
-//       populate: {
-//         path: "user_id",
-//       },
-//     });
-//     console.log("work", userName);
-//     res.render("vehicles/vehicle-details.hbs", {
-//       vehicle: responseFromTheAPI.data,
-//       // isSaved: isSaved,
-//     });
-//   });
-// });
+router.post("/details/:id/:isSaved?", isLoggedIn, (req, res) => {
+  const { id, isSaved } = req.params;
+  let { _id } = req.session.user;
+  const dealerLink = req.body.dealerLink
+    ? req.body.dealerLink
+    : req.session.dealerLinkFromGlobalScope;
+  const url = `http://makeup-api.herokuapp.com/api/v1/products/${id}.json`;
+  axios.get(url).then((responseFromTheAPI) => {
+    console.log("a single character", responseFromTheAPI.data.name);
+    //   productsApi.getVehicleDetails(id).then((vehicleFromAPI) => {
+    //     const dealerName = vehicleFromAPI.data.dealerName;
+    const preparedDelaerLink = dealerLink?.startsWith(`http`)
+      ? dealerLink
+      : `https://${dealerLink}`;
+    const dealerName = responseFromTheAPI.data.dealerName;
+    Dealer.find({ dealerName: dealerName }).populate({
+      path: "reviews",
+      populate: {
+        path: "user_id",
+      },
+    });
+    console.log("work", dealerName);
+    // res.render("vehicles/vehicle-details.hbs", {
+    res.status(200).render("vehicles/vehicle-details", {
+      vehicle: responseFromTheAPI.data,
+      isSaved: isSaved,
+      // foundDealer: foundDealer,
+      dealerName: dealerName,
+      dealerLink: preparedDelaerLink,
+    });
+  });
+});
 // /////////////////////////////////////////////////////////////////////////////////////////////
 
 // router.post("/details/:id/:isSaved?", isLoggedIn, (req, res, next) => {
 //   let { _id } = req.session.user;
-//   const dealerLink = req.body.dealerLink
-//     ? req.body.dealerLink
-//     : req.session.dealerLinkFromGlobalScope;
+//   // const dealerLink = req.body.dealerLink
+//   //   ? req.body.dealerLink
+//   //   : req.session.dealerLinkFromGlobalScope;
 //   const { id, isSaved } = req.params;
-//   const errorDeletion = req.session?.errorDeletion;
+//   // const errorDeletion = req.session?.errorDeletion;
 //   productsApi.getVehicleDetails(id).then((vehicleFromAPI) => {
 //     const dealerName = vehicleFromAPI.data.dealerName;
 //     Dealer.find({ dealerName: dealerName })
@@ -197,21 +209,21 @@ router.post("/", (req, res) => {
 //         },
 //       })
 //       .then((foundDealerFromDB) => {
-//         const foundDealer = JSON.parse(JSON.stringify(foundDealerFromDB));
-//         const preparedDelaerLink = dealerLink?.startsWith(`http`)
-//           ? dealerLink
-//           : `https://${dealerLink}`;
+//         // const foundDealer = JSON.parse(JSON.stringify(foundDealerFromDB));
+//         // const preparedDelaerLink = dealerLink?.startsWith(`http`)
+//         //   ? dealerLink
+//         //   : `https://${dealerLink}`;
 //         res.status(200).render("vehicles/vehicle-details", {
 //           currentActiveUserId: _id,
 //           vehicle: vehicleFromAPI.data,
-//           foundDealer: foundDealer,
+//           // foundDealer: foundDealer,
 //           dealerName: dealerName,
-//           dealerLink: preparedDelaerLink,
+//           // dealerLink: preparedDelaerLink,
 //           isSaved: isSaved,
-//           errorDeletion: errorDeletion,
+//           // errorDeletion: errorDeletion,
 //         });
 //       });
-//     delete req.session.errorDeletion;
+//     // delete req.session.errorDeletion;
 //   });
 // });
 
@@ -287,39 +299,86 @@ router.post("/", (req, res) => {
 //   console.log("pokemon deleted");
 // }
 
-router.post("/details/:id/:isSaved?", isLoggedIn, (req, res, next) => {
-  let { _id } = req.session.user;
-  const dealerLink = req.body.dealerLink
-    ? req.body.dealerLink
-    : req.session.dealerLinkFromGlobalScope;
-  const { id, isSaved } = req.params;
-  const errorDeletion = req.session?.errorDeletion;
-  productsApi.getVehicleDetails(id).then((vehicleFromAPI) => {
-    const dealerName = vehicleFromAPI.data.dealerName;
-    Dealer.find({ dealerName: dealerName })
-      .populate({
-        path: "reviews",
-        populate: {
-          path: "user_id",
-        },
-      })
-      .then((foundDealerFromDB) => {
-        const foundDealer = JSON.parse(JSON.stringify(foundDealerFromDB));
-        const preparedDelaerLink = dealerLink?.startsWith(`http`)
-          ? dealerLink
-          : `https://${dealerLink}`;
-        res.status(200).render("vehicles/vehicle-details", {
-          currentActiveUserId: _id,
-          vehicle: vehicleFromAPI.data,
-          foundDealer: foundDealer,
-          dealerName: dealerName,
-          dealerLink: preparedDelaerLink,
-          isSaved: isSaved,
-          errorDeletion: errorDeletion,
-        });
-      });
-    delete req.session.errorDeletion;
-  });
-});
+// router.post("/details/:id", isLoggedIn, (req, res, next) => {
+//   // console.log("form data", req.body);
+//   const { id } = req.params;
+//   axios
+//     .put(`http://makeup-api.herokuapp.com/api/v1/products/${id}.json`, req.body)
+//     .then((responseFromTheAPI) => {
+//       console.log("response from Put", responseFromTheAPI.data);
+//       res.redirect("vehicles/vehicle-details");
+//     });
+// });
+// router.post("/details/:id/:isSaved?", isLoggedIn, (req, res, next) => {
+//   let { _id } = req.session.user;
+//   const dealerLink = req.body.dealerLink
+//     ? req.body.dealerLink
+//     : req.session.dealerLinkFromGlobalScope;
+//   const { id, isSaved } = req.params;
+//   const errorDeletion = req.session?.errorDeletion;
+//   productsApi.getVehicleDetails(id).then((vehicleFromAPI) => {
+//     const dealerName = vehicleFromAPI.data.dealerName;
+//     Dealer.find({ dealerName: dealerName })
+//       .populate({
+//         path: "reviews",
+//         populate: {
+//           path: "user_id",
+//         },
+//       })
+//       .then((foundDealerFromDB) => {
+//         const foundDealer = JSON.parse(JSON.stringify(foundDealerFromDB));
+//         const preparedDelaerLink = dealerLink?.startsWith(`http`)
+//           ? dealerLink
+//           : `https://${dealerLink}`;
+//         res.status(200).render("vehicles/vehicle-details", {
+//           currentActiveUserId: _id,
+//           vehicle: vehicleFromAPI.data,
+//           foundDealer: foundDealer,
+//           dealerName: dealerName,
+//           dealerLink: preparedDelaerLink,
+//           isSaved: isSaved,
+//           errorDeletion: errorDeletion,
+//         });
+//       });
+//     delete req.session.errorDeletion;
+//   });
+// });
 
+// ****************************************************************************************
+// HACK, POST route to get the details of selected vehicle and get the dealerUrl for single
+// vehicle (pref of the API) to render vehcile details page with all the details. This route
+// 98% repeats the previous one but with '*' which cannot be applied after this one ':isSaved?'
+// ****************************************************************************************
+// router.post("/details/:id", isLoggedIn, (req, res, next) => {
+//   let { _id } = req.session.user;
+//   // Grab params that are attached on the end of the /details/:vin/:isSaved/ route
+//   console.log("HEEEEEEEEEEEEERE!!!!!!");
+//   const dealerLink = req.params[0];
+//   const { id, isSaved } = req.params;
+//   const errorDeletion = req.session?.errorDeletion;
+
+//   productsApi.getVehicleDetails(id).then((vehicleFromAPI) => {
+//     const dealerName = vehicleFromAPI.data.dealerName;
+//     Dealer.find({ dealerName: dealerName })
+//       .populate({
+//         path: "reviews",
+//         populate: {
+//           path: "user_id",
+//         },
+//       })
+//       .then((foundDealerFromDB) => {
+//         const foundDealer = JSON.parse(JSON.stringify(foundDealerFromDB));
+//         res.render("vehicles/vehicle-details", {
+//           currentActiveUserId: _id,
+//           vehicle: vehicleFromAPI.data,
+//           foundDealer: foundDealer,
+//           dealerName: dealerName,
+//           dealerLink: dealerLink,
+//           isSaved: isSaved,
+//           errorDeletion: errorDeletion,
+//         });
+//       });
+//     delete req.session.errorDeletion;
+//   });
+// });
 module.exports = router;

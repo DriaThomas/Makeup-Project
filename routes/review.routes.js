@@ -328,7 +328,7 @@ router.post("/add-review/:dealerName/:id", isLoggedIn, (req, res) => {
 });
 
 // ****************************************************************************************
-// POST route to post a revireew
+// POST route to post a review
 // ****************************************************************************************
 router.post("/add-review", isLoggedIn, async (req, res) => {
   const { dealerName, reviewContent, id } = req.body;
@@ -347,7 +347,8 @@ router.post("/add-review", isLoggedIn, async (req, res) => {
     await Dealer.findByIdAndUpdate(dealerInDb._id, {
       $push: { reviews: createdReviewInDb._id },
     });
-    res.redirect(307, `/product/${id}`);
+    console.log("review", reviewContent);
+    res.redirect(307, `/product/details/${id}`);
   } catch (err) {
     console.log("Soemthing went wrong during postin the review:", err);
   }

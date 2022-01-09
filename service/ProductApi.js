@@ -96,19 +96,11 @@
 const axios = require("axios");
 
 class ProductsApi {
-  // constructor() {
-  //   this.api = axios.create({
-  //     baseURL: `http://makeup-api.herokuapp.com/api/v1/products.json?`,
-  //   });
-
-  //   this.customApi = axios.create({
-  //     baseURL: ``,
-  //   });
-  // }
-  constructor(id) {
-    // this.apiKey = process.env.API_KEY;
+  constructor() {
+    this.apiKey = process.env.API_KEY;
     this.api = axios.create({
-      baseURL: `http://makeup-api.herokuapp.com/api/v1/products.json`,
+      baseURL: `http://makeup-api.herokuapp.com/api/v1/products.json?apikey=${this.apiKey}`,
+      // baseURL: `https://auto.dev/api/listings?apikey=${this.apiKey}`,
     });
     this.customApi = axios.create({
       baseURL: ``,
@@ -136,10 +128,10 @@ class ProductsApi {
   // };
 
   getQueriedListings = (name, brand, category) => {
-    // if (brand.length <= 3) {
-    //   brand = brand.toUpperCase();
+    // if (name.length <= 3) {
+    //   name = name.toUpperCase();
     // } else {
-    //   brand = brand.charAt(0).toUpperCase() + brand.slice(1).toLowerCase();
+    //   name = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
     // }
 
     return this.api.get("", {
@@ -150,20 +142,8 @@ class ProductsApi {
       },
     });
   };
-
-  getVehicleDetails = (id) => {
-    console.log("hello api");
-    const baseUrl = this.api.defaults.baseURL;
-    const indexOfQuerySign = baseUrl.indexOf("?");
-    const preparedUrl = `${baseUrl.slice(
-      0,
-      indexOfQuerySign
-    )}/${id}${baseUrl.slice(indexOfQuerySign)}`;
-    this.customApi.defaults.baseURL = preparedUrl;
-    return this.customApi.get("");
-  };
-
   // getVehicleDetails = (id) => {
+  //   console.log("hello api");
   //   const baseUrl = this.api.defaults.baseURL;
   //   const indexOfQuerySign = baseUrl.indexOf("?");
   //   const preparedUrl = `${baseUrl.slice(
@@ -174,7 +154,19 @@ class ProductsApi {
   //   return this.customApi.get("");
   // };
 
+  // http://localhost:3000/profile/savedvehicles
   // getVehicleDetails = (id) => this.api.get(`/product/details/${id}`);
+
+  getVehicleDetails = (id) => {
+    const baseUrl = this.api.defaults.baseURL;
+    const indexOfQuerySign = baseUrl.indexOf("?");
+    const preparedUrl = `${baseUrl.slice(
+      0,
+      indexOfQuerySign
+    )}/${id}${baseUrl.slice(indexOfQuerySign)}`;
+    this.customApi.defaults.baseURL = preparedUrl;
+    return this.customApi.get("");
+  };
 
   getVehiclesList = async (arrayOfVins) => {
     const products = [];
