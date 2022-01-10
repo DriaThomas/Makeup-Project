@@ -18,7 +18,7 @@
  
 {{#each vehiclesFromApi}}
 <form action="/product/details/{{this.id}}" method="POST">
-  <input type="hidden" name="product_link" value="{{this.product_api_url}}">
+  <input type="hidden" name="dealerLink" value="{{this.dealerLink}}">
   <div class='list-of-vehicles'style="display:flex; flex-direction: row">
     <div class='list-of-vehicles-box'>
       <button type="submit" class="button-to-open-vehicle-details list-vehicles">
@@ -43,7 +43,7 @@
             <h5 class="card-text">
             ${{this.price}}0
             </h5>
-     <a class="btn btn-primary" href="{{this.product_link}}">Buy Now
+     <a class="btn btn-primary" href="{{this.dealerLink}}">Buy Now
 
             </a>
           </div>

@@ -596,7 +596,7 @@ router.get("/savedproducts", isLoggedIn, (req, res) => {
 });
 
 // ****************************************************************************************
-// POST route to add saved vehicles
+// POST route to add saved products
 // ****************************************************************************************
 router.post("/savedproducts", (req, res) => {
   const user_id = req.session.user._id;
@@ -611,15 +611,16 @@ router.post("/savedproducts", (req, res) => {
     { new: true }
   ).then(() => {
     res.redirect(307, `/products/details/${id}/${true}`);
+    console.log("savedproducts", dealerLink);
   });
 });
 
 // ****************************************************************************************
-// GET route to delete a saved vehicle
+// GET route to delete a saved product
 // ****************************************************************************************
 router.get("/savedproducts/delete/:id", (req, res) => {
   const user_id = req.session.user._id;
-  const { vidn } = req.params;
+  const { id } = req.params;
   User.findByIdAndUpdate(
     user_id,
     {

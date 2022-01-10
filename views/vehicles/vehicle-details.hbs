@@ -1,6 +1,6 @@
 <div id="vehicle-details-section">
   <div class="errorDeletioen">{{#if errorDeletion}}
-    <a class='error-banner' href="/product/details/{{responseFromTheAPI.id}}">
+    <a class='error-banner' href="/product/details/{{this.id}}">
       <div class='action-error-message error'>
         <i>
           {{errorDeletion}}
@@ -16,7 +16,7 @@
     <div id="vehicle-details-div">
 
       <div class='set-of-pictures-left-side'>
-        <img class='main-image' src="{{vehicle.api_featured_image}}" alt="image of {{vehicle.name}} vehicle" />
+        <img class='main-image' src="{{this.user_id.api_featured_image}}" alt="image of {{this.user_id.name}} product" />
       
       </div>
       <div class='main-details'>
@@ -24,11 +24,11 @@
         <hr style="border-top: 1px solid lightgray">
 
         <div style="font-weight: bold; color:gray">
-      {{ vehicle.name }} | {{ vehicle.brand }}
+      {{ this.name }} | {{this.brand }}
         </div>
         <div id="details-price-mileage">
           <div id='details-price'>
-            <h2>${{vehicle.price}}0</h2>
+            <h2>${{this.price}}0</h2>
           </div>
           {{!-- <div id='details-mileage'>
             <h2>{{ vehicle.mileage}} miles</h2>
@@ -44,7 +44,7 @@
             <input type='hidden' name="id" value={{vehicle.id}} />
             <input type='hidden' name="name" value={{vehicle.name}} />
             <input type='hidden' name="brand" value={{vehicle.brand}} />
-            <input type='hidden' name="product_link" value={{product_link}} />
+            <input type='hidden' name="dealerLink" value={{dealerLink}} />
             <button type='submit' class='btn btn-success'>
               {{#if isSaved}}
               Saved
@@ -53,7 +53,7 @@
               {{/if}}
             </button>
           </form>
-          <form action="{{product_link}}" class="save-buy-buttons">
+          <form action="{{dealerLink}}" class="save-buy-buttons">
             <button type='submit' class='btn btn-info'>
               Buy
             </button>
@@ -80,7 +80,7 @@
 
       <div id="logo-dealer">
         {{!-- <img style="height: 21px; margin: auto 0" src="../../images/carDealershipIcon.png"> --}}
-        <a href="{{product_link}}" class="dealer-link">
+        <a href="{{dealerLink}}" class="dealer-link">
           <h4 style="margin-left: 1rem;">{{vehicle.dealerName}}</h4>
         </a>
       </div>
@@ -88,8 +88,8 @@
       <hr style="border-top: 1px solid lightgray">
 
 
-      <form action="/review/add-review/{{vehicle.name}}/{{vehicle.id}}" method="POST">
-        <input type='hidden' name="product_link" value={{product_link}} />
+      <form action="/review/add-review/{{this.user_id.name}}/{{this.user_id.id}}" method="POST">
+        <input type='hidden' name="dealerLink" value={{dealerLink}} />
         <button type='submit' class='btn btn-primary'>
           Write a customer review
         </button>
@@ -111,23 +111,25 @@
               {{this.reviewContent}}
             </p>
           </div>
-          {{#if_equal ../currentActiveUserId this.user_id._id}}
+          {{!-- {{#if  currentActiveUserId}}
+          {{#if this.user_id._id }} --}}
           <div id='review-control-buttons'>
             <form action="/review/edit/{{this._id}}/{{../userName}}/{{../vehicle.id}}" method='POST'>
-              <input type='hidden' name="product_link" value={{../product_link}} />
+              <input type='hidden' name="dealerLink" value={{../dealerLink}} />
               <button type='submit' id='btn-btn-warning'>
                 Edit
               </button>
             </form>
             <form action="/review/delete/{{this._id}}/{{../vehicle.id}}" method='post'>
-              <input type="hidden" name="product_link" value={{../userName}}>
+              <input type="hidden" name="dealerLink" value={{../userName}}>
               <input type="hidden" name="dealerName" value="{{../dealerName}}">
               <button type='submit' id='btn-btn-danger'>
                 Delete
               </button>
             </form>
           </div>
-          {{/if_equal}}
+          {{!-- {{/if}}
+          {{/if}} --}}
           <hr style="border-top: 1px solid lightgray">
           {{/each}}
           {{else}}

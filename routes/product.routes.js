@@ -196,13 +196,13 @@ router.post("/", (req, res) => {
 
 router.post("/details/:id/:isSaved?", isLoggedIn, (req, res, next) => {
   let { _id } = req.session.user;
-  // const product_link = req.body.product_link
-  //   ? req.body.product_link
-  //   : req.session.product_linkFromGlobalScope;
+  const dealerLink = req.body.dealerLink
+    ? req.body.dealerLink
+    : req.session.dealerLinkFromGlobalScope;
   const { id, isSaved } = req.params;
   const errorDeletion = req.session?.errorDeletion;
 
-  productsApi.getVehicleDetails(id).then((vehicleFromAPI) => {
+  productsApi.getGeneralLisiting(id).then((vehicleFromAPI) => {
     const dealerName = vehicleFromAPI.data.dealerName;
     Dealer.find({ dealerName: dealerName })
       .populate({
@@ -213,18 +213,19 @@ router.post("/details/:id/:isSaved?", isLoggedIn, (req, res, next) => {
       })
       .then((foundDealerFromDB) => {
         const foundDealer = JSON.parse(JSON.stringify(foundDealerFromDB));
-        // const preparedDelaerLink = product_link?.startsWith(`http`)
-        //   ? product_link
-        //   : `https://${product_link}`;
+        const preparedDelaerLink = dealerLink?.startsWith(`http`)
+          ? dealerLink
+          : `https://${dealerLink}`;
         res.status(200).render("vehicles/vehicle-details", {
           currentActiveUserId: _id,
           vehicle: vehicleFromAPI.data,
           foundDealer: foundDealer,
           dealerName: dealerName,
-          // product_link: product_link,
+          dealerLink: preparedDelaerLink,
           isSaved: isSaved,
           errorDeletion: errorDeletion,
         });
+        console.log("nice", _id);
       });
     delete req.session.errorDeletion;
   });
