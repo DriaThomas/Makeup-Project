@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+
 const router = require("express").Router({ mergeParams: true });
 const mongoose = require("mongoose");
 const Dealer = require("../models/Dealer.model");
@@ -158,74 +159,76 @@ router.post("/", (req, res) => {
 // });
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-router.post("/details/:id/:isSaved?", isLoggedIn, (req, res) => {
-  const { id, isSaved } = req.params;
-  let { _id } = req.session.user;
-  const dealerLink = req.body.dealerLink
-    ? req.body.dealerLink
-    : req.session.dealerLinkFromGlobalScope;
-  const url = `http://makeup-api.herokuapp.com/api/v1/products/${id}.json`;
-  axios.get(url).then((responseFromTheAPI) => {
-    console.log("a single character", responseFromTheAPI.data.name);
-    //   productsApi.getVehicleDetails(id).then((vehicleFromAPI) => {
-    //     const dealerName = vehicleFromAPI.data.dealerName;
-    const preparedDelaerLink = dealerLink?.startsWith(`http`)
-      ? dealerLink
-      : `https://${dealerLink}`;
-    const dealerName = responseFromTheAPI.data.dealerName;
-    Dealer.find({ dealerName: dealerName }).populate({
-      path: "reviews",
-      populate: {
-        path: "user_id",
-      },
-    });
-    console.log("work", dealerName);
-    // res.render("vehicles/vehicle-details.hbs", {
-    res.status(200).render("vehicles/vehicle-details", {
-      vehicle: responseFromTheAPI.data,
-      isSaved: isSaved,
-      // foundDealer: foundDealer,
-      dealerName: dealerName,
-      dealerLink: preparedDelaerLink,
-    });
-  });
-});
-// /////////////////////////////////////////////////////////////////////////////////////////////
-
-// router.post("/details/:id/:isSaved?", isLoggedIn, (req, res, next) => {
-//   let { _id } = req.session.user;
-//   // const dealerLink = req.body.dealerLink
-//   //   ? req.body.dealerLink
-//   //   : req.session.dealerLinkFromGlobalScope;
+// router.post("/details/:id/:isSaved?", isLoggedIn, (req, res) => {
 //   const { id, isSaved } = req.params;
-//   // const errorDeletion = req.session?.errorDeletion;
+//   let { _id } = req.session.user;
+//   const product_link = req.body.product_link
+//     ? req.body.product_link
+//     : req.session.product_linkFromGlobalScope;
+//   console.log("product_link", product_link);
+//   // const url = `http://makeup-api.herokuapp.com/api/v1/products/${id}.json`;
+//   // axios.get(url).then((responseFromTheAPI) => {
+//   console.log("a single character", responseFromTheAPI.data.name);
 //   productsApi.getVehicleDetails(id).then((vehicleFromAPI) => {
 //     const dealerName = vehicleFromAPI.data.dealerName;
-//     Dealer.find({ dealerName: dealerName })
-//       .populate({
-//         path: "reviews",
-//         populate: {
-//           path: "user_id",
-//         },
-//       })
-//       .then((foundDealerFromDB) => {
-//         // const foundDealer = JSON.parse(JSON.stringify(foundDealerFromDB));
-//         // const preparedDelaerLink = dealerLink?.startsWith(`http`)
-//         //   ? dealerLink
-//         //   : `https://${dealerLink}`;
-//         res.status(200).render("vehicles/vehicle-details", {
-//           currentActiveUserId: _id,
-//           vehicle: vehicleFromAPI.data,
-//           // foundDealer: foundDealer,
-//           dealerName: dealerName,
-//           // dealerLink: preparedDelaerLink,
-//           isSaved: isSaved,
-//           // errorDeletion: errorDeletion,
-//         });
-//       });
-//     // delete req.session.errorDeletion;
+//     const preparedDelaerLink = product_link?.startsWith(`http`)
+//       ? product_link
+//       : `https://${product_link}`;
+//     Dealer.find({ dealerName: dealerName }).populate({
+//       path: "reviews",
+//       populate: {
+//         path: "user_id",
+//       },
+//     });
+//     console.log("work", dealerName);
+//     // res.render("vehicles/vehicle-details.hbs", {
+//     res.status(200).render("vehicles/vehicle-details", {
+//       vehicle: responseFromTheAPI.data,
+//       isSaved: isSaved,
+//       foundDealer: foundDealer,
+//       dealerName: dealerName,
+//       product_link: preparedDelaerLink,
+//     });
 //   });
 // });
+// });
+// /////////////////////////////////////////////////////////////////////////////////////////////
+
+router.post("/details/:id/:isSaved?", isLoggedIn, (req, res, next) => {
+  let { _id } = req.session.user;
+  // const product_link = req.body.product_link
+  //   ? req.body.product_link
+  //   : req.session.product_linkFromGlobalScope;
+  const { id, isSaved } = req.params;
+  const errorDeletion = req.session?.errorDeletion;
+
+  productsApi.getVehicleDetails(id).then((vehicleFromAPI) => {
+    const dealerName = vehicleFromAPI.data.dealerName;
+    Dealer.find({ dealerName: dealerName })
+      .populate({
+        path: "reviews",
+        populate: {
+          path: "user_id",
+        },
+      })
+      .then((foundDealerFromDB) => {
+        const foundDealer = JSON.parse(JSON.stringify(foundDealerFromDB));
+        // const preparedDelaerLink = product_link?.startsWith(`http`)
+        //   ? product_link
+        //   : `https://${product_link}`;
+        res.status(200).render("vehicles/vehicle-details", {
+          currentActiveUserId: _id,
+          vehicle: vehicleFromAPI.data,
+          foundDealer: foundDealer,
+          dealerName: dealerName,
+          // product_link: product_link,
+          isSaved: isSaved,
+          errorDeletion: errorDeletion,
+        });
+      });
+    delete req.session.errorDeletion;
+  });
+});
 
 // router.post("/:id", (req, res) => {
 //   // console.log("form data", req.body);

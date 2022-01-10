@@ -318,8 +318,8 @@ const productsApi = new ProductsApi();
 // GET route to render the form for adding review about a dealer
 // ****************************************************************************************
 router.post("/add-review/:dealerName/:id", isLoggedIn, (req, res) => {
-  const { dealerLink } = req.body;
-  req.session.dealerLinkFromGlobalScope = dealerLink;
+  const { product_link } = req.body;
+  req.session.product_linkFromGlobalScope = product_link;
   const { dealerName, id } = req.params;
   res.render("reviews/new-review", {
     dealerName,
@@ -362,8 +362,8 @@ router.post("/delete/:reviewId/:id", isLoggedIn, async (req, res) => {
   let reviewCreatorIdFromDB;
   const { _id } = req.session.user;
   let { reviewId, id } = req.params;
-  const { dealerLink, dealerName } = req.body;
-  req.session.dealerLinkFromGlobalScope = dealerLink;
+  const { product_link, dealerName } = req.body;
+  req.session.product_linkFromGlobalScope = product_link;
 
   try {
     reviewId = mongoose.Types.ObjectId(reviewId);
@@ -394,7 +394,7 @@ router.post("/delete/:reviewId/:id", isLoggedIn, async (req, res) => {
 // ****************************************************************************************
 router.post("/edit/:reviewId/:dealerName/:id", (req, res) => {
   const { reviewId, dealerName, id } = req.params;
-  const { dealerLink } = req.body;
+  const { product_link } = req.body;
   Review.findById(reviewId)
     .populate("user_id")
     .then((foundReview) => {
@@ -404,7 +404,7 @@ router.post("/edit/:reviewId/:dealerName/:id", (req, res) => {
         dealerName: dealerName,
         reviewId: reviewId,
         id: id,
-        dealerLink: dealerLink,
+        product_link: product_link,
       });
     });
 });
@@ -414,8 +414,8 @@ router.post("/edit/:reviewId/:dealerName/:id", (req, res) => {
 // ****************************************************************************************
 router.post("/edit/:reviewId/:id", async (req, res) => {
   const { reviewId, id } = req.params;
-  const { reviewContent, dealerLink } = req.body;
-  req.session.dealerLinkFromGlobalScope = dealerLink;
+  const { reviewContent, product_link } = req.body;
+  req.session.product_linkFromGlobalScope = product_link;
   const { _id } = req.session.user;
   let reviewFromDB;
   let reviewCreatorIdFromDB;
