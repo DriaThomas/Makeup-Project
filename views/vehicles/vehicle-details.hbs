@@ -1,6 +1,6 @@
 <div id="vehicle-details-section">
   <div class="errorDeletioen">{{#if errorDeletion}}
-    <a class='error-banner' href="/product/details/{{this.id}}">
+    <a class='error-banner' href="/product/details/{{vehicle.id}}">
       <div class='action-error-message error'>
         <i>
           {{errorDeletion}}
@@ -12,11 +12,13 @@
     </a>
     {{/if}}
   </div>
+
+
   <div class='vehicle-details'>
     <div id="vehicle-details-div">
 
       <div class='set-of-pictures-left-side'>
-        <img class='main-image' src="{{this.user_id.api_featured_image}}" alt="image of {{this.user_id.name}} product" />
+        <img class='main-image' src="{{vehicle.api_featured_image}}" alt="image of {{vehicle.name}} product" />
       
       </div>
       <div class='main-details'>
@@ -24,11 +26,11 @@
         <hr style="border-top: 1px solid lightgray">
 
         <div style="font-weight: bold; color:gray">
-      {{ this.name }} | {{this.brand }}
+      {{ vehicle.name }} | {{vehicle.brand }} 
         </div>
         <div id="details-price-mileage">
           <div id='details-price'>
-            <h2>${{this.price}}0</h2>
+            <h2>${{dealerName.price}}0</h2>
           </div>
           {{!-- <div id='details-mileage'>
             <h2>{{ vehicle.mileage}} miles</h2>
@@ -37,7 +39,7 @@
        
        <p>{{vehicle.tag_list}}</p>
         <p id='vehicle-main-description'>{{vehicle.description}}</p>
-        
+       
         <div class='save'>
           <form action="/profile/savedproducts" method="POST" class="save-buy-buttons">
             <input type='hidden' name="userName" value={{user}} />
@@ -51,6 +53,7 @@
               {{else}}
               Save This Product
               {{/if}}
+           
             </button>
           </form>
           <form action="{{dealerLink}}" class="save-buy-buttons">
@@ -111,16 +114,18 @@
               {{this.reviewContent}}
             </p>
           </div>
-          {{!-- {{#if  currentActiveUserId}}
+          {{!-- {{!-- {{#if  currentActiveUserId}} --}}
+          {{!-- {{#each currentActiveUserId }} 
           {{#if this.user_id._id }} --}}
+            {{#if_equal ../currentActiveUserId this.user_id._id}}
           <div id='review-control-buttons'>
-            <form action="/review/edit/{{this._id}}/{{../userName}}/{{../vehicle.id}}" method='POST'>
+            <form action="/review/edit/{{product._id}}/{{../userName}}/{{../product.id}}" method='POST'>
               <input type='hidden' name="dealerLink" value={{../dealerLink}} />
               <button type='submit' id='btn-btn-warning'>
                 Edit
               </button>
             </form>
-            <form action="/review/delete/{{this._id}}/{{../vehicle.id}}" method='post'>
+            <form action="/review/delete/{{product._id}}/{{../product.id}}" method='post'>
               <input type="hidden" name="dealerLink" value={{../userName}}>
               <input type="hidden" name="dealerName" value="{{../dealerName}}">
               <button type='submit' id='btn-btn-danger'>
@@ -128,8 +133,9 @@
               </button>
             </form>
           </div>
-          {{!-- {{/if}}
-          {{/if}} --}}
+          {{!-- {{{/if}} --}}
+       
+          {{/if_equal }}
           <hr style="border-top: 1px solid lightgray">
           {{/each}}
           {{else}}

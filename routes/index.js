@@ -19,6 +19,7 @@ const productsApi = new ProductsApi();
 router.get("/", async (req, res) => {
   try {
     const vehiclesFromApi = await productsApi.getGeneralLisiting();
+
     let records = vehiclesFromApi.data;
     const trimmedArrOfCars = records.filter((curr, i) => i < 5 && curr);
     const trimmedArrOfCarsAndRevLength = trimmedArrOfCars.map(
@@ -38,7 +39,7 @@ router.get("/", async (req, res) => {
     );
 
     let data = await Promise.all(trimmedArrOfCarsAndRevLength);
-
+    console.log("homepage", vehiclesFromApi);
     res.render("index", {
       vehiclesFromApi: data,
       isLoggedIn: req.session.user,

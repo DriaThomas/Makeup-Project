@@ -445,7 +445,6 @@ const mongoose = require("mongoose");
 
 // Require the User model in order to interact with the database
 const User = require("../models/User.model");
-const Vehicle = require("../models/Vehicle.model");
 
 const fileUploader = require("../config/cloudinary.config");
 

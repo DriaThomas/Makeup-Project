@@ -155,18 +155,19 @@ class ProductsApi {
   // };
 
   // http://localhost:3000/profile/savedvehicles
-  // getVehicleDetails = (id) => this.api.get(`/product/details/${id}`);
+  getVehicleDetails = (id, dealerLink, product) =>
+    this.api.get(`/product/details/${id}`);
 
-  getVehicleDetails = (id) => {
-    const baseUrl = this.api.defaults.baseURL;
-    const indexOfQuerySign = baseUrl.indexOf("?");
-    const preparedUrl = `${baseUrl.slice(
-      0,
-      indexOfQuerySign
-    )}/${id}${baseUrl.slice(indexOfQuerySign)}`;
-    this.customApi.defaults.baseURL = preparedUrl;
-    return this.customApi.get("");
-  };
+  // getVehicleDetails = (id) => {
+  //   const baseUrl = this.api.defaults.baseURL;
+  //   const indexOfQuerySign = baseUrl.indexOf("?");
+  //   const preparedUrl = `${baseUrl.slice(
+  //     0,
+  //     indexOfQuerySign
+  //   )}/${id}${baseUrl.slice(indexOfQuerySign)}`;
+  //   this.customApi.defaults.baseURL = preparedUrl;
+  //   return this.customApi.get("");
+  // };
 
   getVehiclesList = async (arrayOfVins) => {
     const products = [];
