@@ -169,11 +169,11 @@ router.post("/details/:id/:isSaved?", isLoggedIn, (req, res) => {
   axios.get(url).then((responseFromTheAPI) => {
     // console.log("a single character", responseFromTheAPI.data.name);
     productsApi.getVehicleDetails(id).then((vehicleFromAPI) => {
-      const dealerName = vehicleFromAPI.data.dealerName;
+      const name = vehicleFromAPI.data.name;
       // const preparedDelaerLink = dealerLink?.startsWith(`http`)
       //   ? dealerLink
       //   : `https://${dealerLink}`;
-      Dealer.find({ dealerName: dealerName })
+      Dealer.find({ name: name })
         .populate({
           path: "reviews",
           populate: {
@@ -189,10 +189,10 @@ router.post("/details/:id/:isSaved?", isLoggedIn, (req, res) => {
 
           res.status(200).render("vehicles/vehicle-details", {
             vehicle: responseFromTheAPI.data,
-
+            url: url,
             isSaved: isSaved,
             foundDealer: foundDealer,
-            dealerName: dealerName,
+            name: name,
             // dealerLink: preparedDelaerLink,
           });
         });

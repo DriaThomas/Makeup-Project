@@ -452,10 +452,6 @@ const fileUploader = require("../config/cloudinary.config");
 const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
 
-// const VehiclesApi = require('../service/VehiclesApi');
-// const Review = require('../models/Review.model');
-// const vehiclesApi = new VehiclesApi();
-
 const ProductsApi = require("../service/ProductApi");
 const Review = require("../models/Review.model");
 const productsApi = new ProductsApi();
@@ -609,6 +605,7 @@ router.post("/savedproducts", (req, res) => {
     },
     { new: true }
   ).then(() => {
+    console.log("dfs", savedVehicles);
     res.redirect(307, `/products/details/${id}/${true}`);
     console.log("savedproducts", dealerLink);
   });

@@ -30,11 +30,9 @@
         </div>
         <div id="details-price-mileage">
           <div id='details-price'>
-            <h2>${{dealerName.price}}0</h2>
+            <h2>${{vehicle.price}}0</h2>
           </div>
-          {{!-- <div id='details-mileage'>
-            <h2>{{ vehicle.mileage}} miles</h2>
-          </div> --}}
+         
         </div>
        
        <p>{{vehicle.tag_list}}</p>
@@ -56,7 +54,7 @@
            
             </button>
           </form>
-          <form action="{{dealerLink}}" class="save-buy-buttons">
+          <form action="{{vehicle.product_link}}" class="save-buy-buttons">
             <button type='submit' class='btn btn-info'>
               Buy
             </button>
@@ -91,7 +89,7 @@
       <hr style="border-top: 1px solid lightgray">
 
 
-      <form action="/review/add-review/{{this.user_id.name}}/{{this.user_id.id}}" method="POST">
+      <form action="/review/add-review/{{vehicle.name}}/{{vehicle.id}}" method="POST">
         <input type='hidden' name="dealerLink" value={{dealerLink}} />
         <button type='submit' class='btn btn-primary'>
           Write a customer review
@@ -114,18 +112,16 @@
               {{this.reviewContent}}
             </p>
           </div>
-          {{!-- {{!-- {{#if  currentActiveUserId}} --}}
-          {{!-- {{#each currentActiveUserId }} 
-          {{#if this.user_id._id }} --}}
+         
             {{#if_equal ../currentActiveUserId this.user_id._id}}
           <div id='review-control-buttons'>
-            <form action="/review/edit/{{product._id}}/{{../userName}}/{{../product.id}}" method='POST'>
+            <form action="/review/edit/{{this._id}}/{{../dealerName}}/{{../vehicle.id}}" method='POST'>
               <input type='hidden' name="dealerLink" value={{../dealerLink}} />
               <button type='submit' id='btn-btn-warning'>
                 Edit
               </button>
             </form>
-            <form action="/review/delete/{{product._id}}/{{../product.id}}" method='post'>
+            <form action="/review/delete/{{this._id}}/{{../vehicle.id}}" method='post'>
               <input type="hidden" name="dealerLink" value={{../userName}}>
               <input type="hidden" name="dealerName" value="{{../dealerName}}">
               <button type='submit' id='btn-btn-danger'>
