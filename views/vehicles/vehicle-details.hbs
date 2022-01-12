@@ -113,25 +113,25 @@
             </p>
           </div>
          
-            {{#if_equal ../currentActiveUserId this.user_id._id}}
+           {{!-- {{#if_equal ../currentActiveUserId this.user_id._id}}  --}}
           <div id='review-control-buttons'>
-            <form action="/review/edit/{{this._id}}/{{../dealerName}}/{{../vehicle.id}}" method='POST'>
+            <form action="/review/edit/{{this._id}}/{{../vehicle.name}}/{{../vehicle.id}}" method='POST'>
               <input type='hidden' name="dealerLink" value={{../dealerLink}} />
               <button type='submit' id='btn-btn-warning'>
                 Edit
               </button>
             </form>
             <form action="/review/delete/{{this._id}}/{{../vehicle.id}}" method='post'>
-              <input type="hidden" name="dealerLink" value={{../userName}}>
+              <input type="hidden" name="dealerLink" value={{../dealerLink}}>
               <input type="hidden" name="dealerName" value="{{../dealerName}}">
               <button type='submit' id='btn-btn-danger'>
                 Delete
               </button>
             </form>
           </div>
-          {{!-- {{{/if}} --}}
        
-          {{/if_equal }}
+       
+       {{!-- {{/if_equal }}  --}}
           <hr style="border-top: 1px solid lightgray">
           {{/each}}
           {{else}}

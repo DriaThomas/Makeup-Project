@@ -168,11 +168,16 @@ router.post("/details/:id/:isSaved?", isLoggedIn, (req, res) => {
   const url = `http://makeup-api.herokuapp.com/api/v1/products/${id}.json`;
   axios.get(url).then((responseFromTheAPI) => {
     // console.log("a single character", responseFromTheAPI.data.name);
+
     productsApi.getVehicleDetails(id).then((vehicleFromAPI) => {
       const name = vehicleFromAPI.data.name;
-      // const preparedDelaerLink = dealerLink?.startsWith(`http`)
-      //   ? dealerLink
-      //   : `https://${dealerLink}`;
+      const dealerLink = req.body.dealerLink
+        ? req.body.dealerLink
+        : req.session.dealerLinkFromGlobalScope;
+
+      const preparedDelaerLink = dealerLink?.startsWith(`http`)
+        ? dealerLink
+        : `https://${dealerLink}`;
       Dealer.find({ name: name })
         .populate({
           path: "reviews",
@@ -183,17 +188,13 @@ router.post("/details/:id/:isSaved?", isLoggedIn, (req, res) => {
         .then((foundDealerFromDB) => {
           const foundDealer = JSON.parse(JSON.stringify(foundDealerFromDB));
 
-          // const dealerLink = req.body.dealerLink
-          //   ? req.body.dealerLink
-          //   : req.session.dealerLinkFromGlobalScope;
-
           res.status(200).render("vehicles/vehicle-details", {
             vehicle: responseFromTheAPI.data,
             url: url,
             isSaved: isSaved,
             foundDealer: foundDealer,
             name: name,
-            // dealerLink: preparedDelaerLink,
+            dealerLink: preparedDelaerLink,
           });
         });
     });

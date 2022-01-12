@@ -1,9 +1,48 @@
-<div class=''>
+{{!-- <div class=''>
   <form action="/review/edit/{{reviewId}}/{{id}}" method='POST' class='auth-form'>
     <div class='auth-form-container'>
       <input type='hidden' name='id' value="{{foundReview._id}}" />
       <p>
         You are welcome to update your review for this dealaer
+        <h1>
+          {{dealerName}}
+        </h1>
+      </p>
+      <h3>
+        Author: {{foundReview.user_id.firstName}} {{
+          foundReview.user_id.lastName
+        }}
+      </h3>
+      <input type='hidden' name='name' value="{{name}}" />
+      <input type='hidden' name='dealerLink' value="{{dealerLink}}" />
+      <label>
+        <br />
+        <textarea autofocus name='reviewContent' rows='10' cols='50'>
+          {{foundReview.reviewContent}}
+        </textarea>
+      </label>
+      <button type='submit'>
+        Update
+      </button>
+
+      {{#if errorMessage}}
+        <p class='error'>
+          {{errorMessage}}
+        </p>
+      {{/if}}
+    </div>
+  </form>
+</div> --}}
+
+
+
+
+<div class=''>
+  <form action="/review/edit/{{reviewId}}/{{id}}" method='POST' class='auth-form'>
+    <div class='auth-form-container'>
+      <input type='hidden' name='id' value="{{foundReview._id}}" />
+      <p>
+        You are welcome to update your review for this {{name}}
         <h1>
           {{dealerName}}
         </h1>

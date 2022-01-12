@@ -386,7 +386,7 @@ router.post("/delete/:reviewId/:id", isLoggedIn, async (req, res) => {
     console.log("Soemthing went wrong during deletion of the review:", err);
   }
   console.log("REDIRECTING DELETE");
-  res.redirect(307, `/product/${id}`);
+  res.redirect(307, `/product/details/${id}`);
 });
 
 // ****************************************************************************************
@@ -437,7 +437,7 @@ router.post("/edit/:reviewId/:id", async (req, res) => {
     console.log("Soemthing went wrong during editing the review:", err);
   }
   console.log("REDIRECTING EDIT");
-  res.redirect(307, `/product/${id}`);
+  res.redirect(307, `/product/details/${id}`);
 });
 
 module.exports = router;
