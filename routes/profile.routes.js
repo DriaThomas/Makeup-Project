@@ -565,7 +565,7 @@ router.post("/delete/:user_id", isLoggedIn, (req, res, next) => {
 });
 
 // ****************************************************************************************
-// GET route to show saved vehicles
+// GET route to show saved products
 // ****************************************************************************************
 router.get("/savedproducts", isLoggedIn, (req, res) => {
   const user = req.session.user;
@@ -605,9 +605,9 @@ router.post("/savedproducts", (req, res) => {
     },
     { new: true }
   ).then(() => {
-    console.log("dfs", savedVehicles);
-    res.redirect(307, `/products/details/${id}/${true}`);
-    console.log("savedproducts", dealerLink);
+    // console.log("dfs", savedVehicles);
+    res.redirect(307, `/product/details/${id}/${true}`);
+    // console.log("savedproducts", dealerLink);
   });
 });
 

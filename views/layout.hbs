@@ -51,46 +51,56 @@
    </script>
 
    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css'>
+<link rel="stylesheet"  href="/stylesheets/style.css">
 
-   {{!-- <link rel='stylesheet' href="/css/style.css" /> --}}
+
+{{!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> --}}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
 
-   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-      <a class="navbar-brand" href="/">
-      </a>
 
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-         <span class="navbar-toggler-icon"></span>
-      </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-         <ul class="navbar-nav ml-auto">
-             {{#if currentUser.email}}
-            <li class="nav-item"> <a class="nav-link" href="/">Home</a> </li>
-            {{!-- <li class="nav-item"> <a class="nav-link" href="/auth/signup">Sign-Up</a> </li>
-            <li class="nav-item"> <a class="nav-link" href="/auth/login">Login</a> </li> --}}
-            {{!-- <li class="nav-item"> <a class="nav-link" href="/rankings">Product search</a> </li> --}}
-          {{!-- <li><a id="nav-item" href="/profile">{{currentUser.firstName}}</a></li> --}}
-            {{!-- <li class="nav-item"> <a class="nav-link" href="/product"> All Product</a> </li> --}}
-            <li class="nav-item"> <a class="nav-link" href="/collection/create"> Create Collection </a> </li>
-   {{!-- <li class="nav-item"> <a class="nav-link" href="/profile"> Profile Page </a> </li>  --}}
-   <div id="user-image-nav">
-                        <img src="{{currentUser.profilePic}}" alt="image of user" />
-                     </div>
-                     <li><a id="name-top" href="/profile">{{currentUser.firstName}}</a></li>
-                      <li><a href="/auth/logout">Log Out</a></li>
-                  </div>
- {{else}}
-                  <li><a href="/auth/signup">Sign Up</a></li>
-                  <li><a href="/auth/login">Log In</a></li>
-               {{/if}}
 
-         </ul>
+  <div class="w3-top">
+    <div class="w3-bar w3-white w3-card" id="myNavbar">
+      <a href="/" class="w3-bar-item w3-button w3-wide">BULK BEAUTY</a>
+
+      <!-- Right-sided navbar links -->
+
+      <div class="w3-right w3-hide-small">
+     <nav class="authNav">
+            <ul class="navbar-nav ml-auto">
+            <div>
+            <a href="/collection/create" class="w3-bar-item w3-button"><i class="fa fa-th"></i> Create Collection </a>
+        
+                  <img  class="w3-bar-item"src="{{currentUser.profilePic}}" alt="image of user" />
+      
+                     <a href="/profile"> <i class="w3-bar-item w3-button fa fa-user"></i>{{currentUser.firstName}}</a>
+                      <a href="/auth/logout" class="w3-bar-item w3-button">Logout</a>
+            </div>
+                 {{!-- <a href="/auth/logout" class="w3-bar-item w3-button">Logout</a> --}}
+           
+          </ul>
+          </nav>
+        </div>
+
+        <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+
+        {{!-- <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium"
+          onclick="w3_open()">
+          <i class="fa fa-bars"></i>
+        </a> --}}
       </div>
-   </nav>
+    </div>
+
+
+
+
+
+
 
    <main>
       {{{body}}}

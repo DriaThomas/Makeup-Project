@@ -1,7 +1,7 @@
 
 
 
-<div class='header-vehicles-list'>
+<div class='header-products-list'>
   {{#if savedproductsPage}}
   {{#if vehiclesFromApi}}
   <h2>
@@ -14,17 +14,17 @@
   {{/if}}
   {{/if}}
 </div>
-<table class="table ">
+<table class="table">
  
 {{#each vehiclesFromApi}}
-<form action="/product/details/{{this.id}}" method="POST">
+<form class='list-of-products-container' action="/product/details/{{this.id}}" method="POST">
   <input type="hidden" name="dealerLink" value="{{this.dealerLink}}">
-  <div class='list-of-vehicles'style="display:flex; flex-direction: row">
+  <div class='list-of-products'>
     <div class='list-of-vehicles-box'>
-      <button type="submit" class="button-to-open-vehicle-details list-vehicles">
-        <div id='product-card' style="width: 18rem;">
+      <button type="submit" class="button-to-open-product-details list-vehicles">
+        <div id='product-card' >
                 
-    <img  class="card-img-top"  src="{{this.api_featured_image}}" alt=''  width="50px"/> 
+    <img  class="card-img-top"  src="{{this.api_featured_image}}" alt='{{this.name}}'  /> 
 
          <div class="card-body">
             <h4  class="card-title">

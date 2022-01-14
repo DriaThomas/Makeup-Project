@@ -1,4 +1,4 @@
-<div id="vehicle-details-section">
+<div id="product-details-section">
   <div class="errorDeletioen">{{#if errorDeletion}}
     <a class='error-banner' href="/product/details/{{vehicle.id}}">
       <div class='action-error-message error'>
@@ -14,8 +14,8 @@
   </div>
 
 
-  <div class='vehicle-details'>
-    <div id="vehicle-details-div">
+  <div class='product-details'>
+    <div id="product-details-div">
 
       <div class='set-of-pictures-left-side'>
         <img class='main-image' src="{{vehicle.api_featured_image}}" alt="image of {{vehicle.name}} product" />
@@ -28,15 +28,15 @@
         <div style="font-weight: bold; color:gray">
       {{ vehicle.name }} | {{vehicle.brand }} 
         </div>
-        <div id="details-price-mileage">
-          <div id='details-price'>
+        <div id="details-price1">
+          <div id='details-price2'>
             <h2>${{vehicle.price}}0</h2>
           </div>
          
         </div>
        
        <p>{{vehicle.tag_list}}</p>
-        <p id='vehicle-main-description'>{{vehicle.description}}</p>
+        <p id='product-main-description'>{{vehicle.description}}</p>
        
         <div class='save'>
           <form action="/profile/savedproducts" method="POST" class="save-buy-buttons">
@@ -66,22 +66,21 @@
 </div>
 
 {{!-- ************ --}}
-{{!-- D E A L E R --}}
-{{!-- ************ --}}
 
-<div id="dealer-section-container">
+
+<div id="review-section-container">
 
   <div>
     <h3>{{vehicle.name}} Reviews</h3>
     <hr style="border-top: 1px solid lightgray">
   </div>
 
-  <div id="dealer-content-container">
-    <div id='dealer-name-title'>
+  <div id="review-content-container">
+    <div id='review-name-title'>
 
-      <div id="logo-dealer">
+      <div id="logo-review">
         {{!-- <img style="height: 21px; margin: auto 0" src="../../images/carDealershipIcon.png"> --}}
-        <a href="{{dealerLink}}" class="dealer-link">
+        <a href="{{dealerLink}}" class="review-link">
           <h4 style="margin-left: 1rem;">{{vehicle.dealerName}}</h4>
         </a>
       </div>
@@ -99,7 +98,7 @@
 
     <div id='reviews-container'>
 
-      <div class='dealer-review-section'>
+      <div class='review-review-section'>
         <div class='reviews' style="margin-left: 2rem;">
           {{#if foundDealer.0.reviews}}
           {{#each foundDealer.0.reviews}}

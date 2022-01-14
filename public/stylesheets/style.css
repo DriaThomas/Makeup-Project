@@ -1,9 +1,5 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-nav {
-  margin-top: 3rem;
 }
 
 bigimg {
@@ -66,35 +62,38 @@ html {
   color: grey;
 }
 
-.button {
-  border: none;
-  outline: 0;
-  display: inline-block;
-  padding: 8px;
-  color: white;
-  background-color: #000;
-  text-align: center;
-  cursor: pointer;
-  width: 100%;
-}
+/* #product-details-div {
+  display: flex;
+  justify-content: center;
 
+  background-color: rgba(198, 192, 192, 0.367);
+}
+#product-main-description {
+  width: 40%;
+/* } */
+.main-details {
+  display: flex;
+  justify-content: center;
+}
+/* img.main-image {
+  width: auto;
+} */
+#review-section-container.h3 {
+  padding: 10px;
+}
 .button:hover {
   background-color: #555;
 }
 
-@media screen and (max-width: 650px) {
+/* @media screen and (max-width: 650px) {
   .column {
     width: 100%;
     display: block;
   }
-}
+} */
 
 a {
   color: #400542;
-}
-
-h1 {
-  color: 15px;
 }
 
 * {
@@ -125,13 +124,13 @@ hr {
 
 /* Set a style for all buttons */
 button {
-  background-color: #04aa6d;
+  background-color: black;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
   cursor: pointer;
-  width: 100%;
+  width: 30%;
   opacity: 0.9;
 }
 
@@ -213,3 +212,97 @@ button:hover {
   color: #225473; */
 
 /*************************************************************************************/
+
+/* 
+@media only screen and (max-width: 600px) {
+  body {
+    background-color: lightblue;
+  } */
+/* } */
+
+.main-image {
+  width: 70%;
+}
+/* login/logout*/
+.form-contianer {
+  border: 1px solid black;
+  width: 40%;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.auth-form-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+}
+main {
+  display: flex;
+  justify-content: center;
+  padding-top: 100px;
+}
+
+.authNav {
+  background-color: white;
+  -webkit-box-shadow: 0px 1px 1px #3e3d3e;
+  -moz-box-shadow: 0px 1px 1px #3e3d3e;
+  box-shadow: 0px 10px 10px #3e3d3e5a;
+}
+/*index/homepage*/
+.set-of-vehicles {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+.product-img {
+  width: 13em;
+  max-height: 13em;
+}
+.set-of-products {
+  display: flex;
+  flex-direction: flex-end;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+/* .button-to-open-product-details {
+  width: 50%;
+} */
+/*product list*/
+.list-of-vehicles-box {
+  /* display: flex;
+  width: 60%;
+  flex-direction: column;
+  background-color: blue; */
+}
+.list-of-products {
+  /* padding: 20px;
+  width: 15em; */
+}
+.header-products-list {
+  /* display: flex;
+  flex-flow: row wrap;
+  background-color: teal; */
+}
+.table {
+  /* display: flex;
+  flex-flow: row wrap;
+  background-color: red; */
+}
+/* .list-of-products-container {
+  display: flex;
+  flex-flow: column wrap;
+  width: 100px;
+} */
+/* .button-to-open-product-details {
+  width: 50em;
+} */
+/* .card-img-top {
+  width: 60%;
+} */
+/* html {
+  display: flex;
+  flex-flow: row wrap;
+} */
