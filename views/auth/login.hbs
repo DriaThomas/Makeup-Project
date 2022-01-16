@@ -10,7 +10,7 @@
 </form>
  --}}
 
-<div class='form-contianer'>
+<div class='form-contianer-login'>
   <form action='/auth/login' class='auth-form' method='POST'>
     <div class='auth-form-container'>
       <h1>
@@ -59,9 +59,11 @@
       {{/if}}
     </div>
   </form>
+   <h6  class='auth-form-text' ><i>Create an account</i></h6>
   <form action='/auth/signup' class='auth-form' method='GET'>
-    <div class='auth-form-container'>
- 
+  
+    <div class='auth-form'>
+
       <button type='submit' id="sign-up-button">
         Sign Up
       </button>

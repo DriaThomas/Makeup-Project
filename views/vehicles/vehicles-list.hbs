@@ -1,4 +1,4 @@
-
+{{!-- 
 
 
 <div class='header-products-list'>
@@ -14,7 +14,7 @@
   {{/if}}
   {{/if}}
 </div>
-<table class="table">
+<div class="table">
  
 {{#each vehiclesFromApi}}
 <form class='list-of-products-container' action="/product/details/{{this.id}}" method="POST">
@@ -38,7 +38,7 @@
            
          {{!-- <a class="btn btn-primary" href="{{this.product_link}}">Buy Now --}}
 
-            </a>
+            {{!-- </a>
 
             <h5 class="card-text">
             ${{this.price}}0
@@ -52,7 +52,65 @@
     </div>
   </div>
 </form>
-</table>
+</div>
+{{#if ../usersListOfVehicles}}
+<form action="/profile/savedproducts/delete/{{this.id}}" method='GET'>
+  <button type='submit' class='btn btn-danger'>Remove From Saved List</button>
+</form>
+{{/if}}
+{{/each}}
+{{#if errorMessage}}
+{{errorMessage}}
+{{/if}}  --}}
+
+
+
+
+
+<div class='header-products-list'>
+  {{#if savedVehiclesPage}}
+  {{#if vehiclesFromApi}}
+  <h2>
+    Saved Products
+  </h2>
+  {{else}}
+  <h2>
+    No saved products yet
+  </h2>
+  {{/if}}
+  {{/if}}
+</div>
+{{#each vehiclesFromApi}}
+<form class="table-list-product" action="/product/details/{{this.id}}" method="POST">
+  <input type="hidden" name="dealerLink" value="{{this.clickoffUrl}}">
+  <div class='list-of-products'>
+    <div class='list-of-products-box'>
+      <button type="submit" class="button-to-open-products-details list-products">
+        <div id='product-card'>
+          <img id='product-primary-img' src="{{this.api_featured_image}}" alt='{{this.name}}' />
+          <div class='product-info'>
+            <h4 class='product-year-make'>
+           {{this.brand}}
+              {{this.name}}
+         
+            </h4>
+            {{!-- <hr style="border-top: 2px solid black"> --}}
+            {{this.bodyStyle}}
+            <h6>
+                Exterior
+            </h6>{{this.displayColor}}
+            <h6>
+                Location
+            </h6>{{this.city}}, {{this.state}}
+            <h5>
+          {{this.price}}
+            </h5>
+          </div>
+        </div>
+      </button>
+    </div>
+  </div>
+</form>
 {{#if ../usersListOfVehicles}}
 <form action="/profile/savedproducts/delete/{{this.id}}" method='GET'>
   <button type='submit' class='btn btn-danger'>Remove From Saved List</button>

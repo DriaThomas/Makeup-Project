@@ -6,7 +6,7 @@ bigimg {
   padding: 50px;
   text-align: center;
 
-  background-image: url("makeupcollage.jpg");
+  /* background-image: url("makeupcollage.jpg"); */
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -47,16 +47,16 @@ html {
   margin: 8px;
 }
 
-.container {
+/* .container {
   padding: 0 16px;
-}
+} */
 
-.container::after,
+/* .container::after,
 .row::after {
   content: "";
   clear: both;
   display: table;
-}
+} */
 
 .title {
   color: grey;
@@ -75,9 +75,19 @@ html {
   display: flex;
   justify-content: center;
 }
+
 /* img.main-image {
   width: auto;
 } */
+/* .homepage-body {
+  display: flex;
+  justify-content: center; */
+/* display: flex;
+  background-color: teal; */
+/* flex-direction: row;
+  flex-wrap: wrap; */
+/* flex-flow: row wrap; */
+/* } */
 #review-section-container.h3 {
   padding: 10px;
 }
@@ -126,14 +136,14 @@ hr {
 button {
   background-color: black;
   color: white;
+  font-size: 1.5vw;
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
   cursor: pointer;
-  width: 30%;
+  /* width: 45%; */
   opacity: 0.9;
 }
-
 button:hover {
   opacity: 1;
 }
@@ -178,11 +188,14 @@ button:hover {
   justify-content: space-between;
 } */
 
-/* .list-of-vehicles-box #product-card {
-  margin: 1rem auto;
-}
+/* .list-of-products-container {
+  background-color: teal;
+  display: flex;
+  flex-direction: row;
+  flex-flow: row wrap;
+} */
 
-#product-card {
+/* #product-card {
   display: flex;
   flex-direction: row;
   margin: 5% 10%;
@@ -196,7 +209,7 @@ button:hover {
   box-shadow: 0 0px;
   transform: translateY(4px);
   outline: none;
-} */
+}  */
 /****************************************************************************************/
 /* .vehicle-card-index-page {
   text-decoration: none !important;
@@ -225,25 +238,48 @@ button:hover {
 }
 /* login/logout*/
 .form-contianer {
-  border: 1px solid black;
+  border: 10px solid black;
   width: 40%;
-  padding: 30px;
-  display: flex;
+
+  /* display: flex;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: column; */
 }
 
-.auth-form-container {
+.auth-form {
   display: flex;
   justify-content: center;
-  flex-direction: column;
-  padding: 10px;
+  flex-direction: row;
+  /* padding-top: 10px; */
 }
-main {
+.auth-form-container {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  padding: 50px;
+  margin-top: 100px;
+  width: 30vw;
+  border: 1px solid black;
+}
+#sign-up-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.auth-form-text {
+  padding: 15px 0 0 0;
+  display: flex;
+  justify-content: center;
+}
+/* .form-contianer-login {
+  display: flex;
+  justify-content: center;
+} */
+/* main {
   display: flex;
   justify-content: center;
   padding-top: 100px;
-}
+} */
 
 .authNav {
   background-color: white;
@@ -252,26 +288,51 @@ main {
   box-shadow: 0px 10px 10px #3e3d3e5a;
 }
 /*index/homepage*/
-.set-of-vehicles {
+/* .set-of-vehicles {
   display: flex;
   justify-content: center;
   flex-direction: row;
-}
+} */
 .product-img {
   width: 13em;
   max-height: 13em;
 }
 .set-of-products {
   display: flex;
-  flex-direction: flex-end;
+
   justify-content: center;
   padding-bottom: 10px;
 }
 /* .button-to-open-product-details {
-  width: 50%;
+  background-color: black;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 45%;
+  opacity: 0.9;
 } */
+.button-to-mightlike-product-list {
+  background-color: black;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 45%;
+  opacity: 0.9;
+}
 /*product list*/
-.list-of-vehicles-box {
+.button-to-open-product-details {
+  display: flex;
+  flex-flow: column wrap;
+}
+.list-of-products-container {
+  padding: 20px;
+}
+
+.list-of-products-box {
   /* display: flex;
   width: 60%;
   flex-direction: column;
@@ -286,10 +347,11 @@ main {
   flex-flow: row wrap;
   background-color: teal; */
 }
-.table {
+.table-list-product {
   /* display: flex;
-  flex-flow: row wrap;
-  background-color: red; */
+  justify-content: space-;
+  flex-direction: column;
+  padding: 20px; */
 }
 /* .list-of-products-container {
   display: flex;
@@ -306,3 +368,4 @@ main {
   display: flex;
   flex-flow: row wrap;
 } */
+/*index.hbs*/
