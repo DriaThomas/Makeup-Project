@@ -66,21 +66,22 @@
 
   <div class="w3-top">
     <div class="w3-bar w3-white w3-card" id="myNavbar">
-      <a href="/" class="w3-bar-item w3-button w3-wide">BULK BEAUTY</a>
+      <a href="/" class="w3-bar-item">BULK BEAUTY</a>
 
       <!-- Right-sided navbar links -->
 
       <div class="w3-right w3-hide-small">
      <nav class="authNav">
-            <ul class="navbar-nav ml-auto">
-            <div>
-            <a href="/collection/create" class="w3-bar-item w3-button"><i class="fa fa-th"></i> Create Collection </a>
-        
-                  <img  class="w3-bar-item"src="{{currentUser.profilePic}}" alt="image of user" />
+            <ul class="nav justify-content-end"> 
+            <li>
+                    <a href="/auth/logout" id="logout-nav"  class="w3-button">Logout</a></li>
+          
+        <li>
+                  <img class="w3-button" src="{{currentUser.profilePic}}" alt="image of user" />
       
-                     <a href="/profile"> <i class="w3-bar-item w3-button fa fa-user"></i>{{currentUser.firstName}}</a>
-                      <a href="/auth/logout" class="w3-bar-item w3-button">Logout</a>
-            </div>
+                     <a href="/profile"> <i  id="profile-nav" class="w3-button"></i>{{currentUser.firstName}}</a></li>
+                  <li><a href="/collection/create" id="create-nav" class=" w3-button"><i class="fa fa-th"></i> Create Collection </a></li>
+           
                  {{!-- <a href="/auth/logout" class="w3-bar-item w3-button">Logout</a> --}}
            
           </ul>
