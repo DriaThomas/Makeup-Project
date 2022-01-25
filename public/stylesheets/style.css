@@ -13,9 +13,9 @@ body {
   background-size: cover; */
   /* z-index: 1; */
 }
-#search-form {
+/* #search-form {
   min-height: 100vh;
-}
+} */
 .main-section {
   min-height: 15vh;
   border-top: 1px #555 solid;
@@ -68,10 +68,10 @@ html {
   display: table;
 } */
 /******************************************/
-.w3-text-white {
+/* .w3-text-white {
   height: 200vh;
   display: flex;
-}
+} */
 :root {
   --blue: #74abea;
   --red: #f5766b;
@@ -178,8 +178,23 @@ body {
   --initialAngle: -85deg;
   --endAngle: -99deg;
 }
-.w3-display-left {
-  height: 50vh;
+.search-sign-homepage {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.homepage-button {
+  border: black;
+  color: #ddd;
+  background-color: black;
+  padding: 1em;
+  margin: 1em;
+  display: flex;
+  flex-direction: row;
+}
+.homepage-button:hover {
+  opacity: 1;
+  list-style: none;
 }
 @keyframes show {
   0% {
@@ -189,7 +204,11 @@ body {
     opacity: 1;
   }
 }
-.w3-button
+.navbar-items-homepage {
+  display: flex;
+  flex-direction: row;
+}
+/* .w3-button
   w3-white
   w3-padding-large
   w3-large
@@ -197,14 +216,12 @@ body {
   w3-opacity
   w3-hover-opacity-off {
   width: 10vw;
-}
-.w3-display-left w3-text-white {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
+} */
+/* .homepage-button{
+  d
+} */
 .box-dsiplay {
-  width: 100%;
+  width: 40vw;
   display: flex;
   justify-content: center;
 }
@@ -415,6 +432,47 @@ button:hover {
 .main-image {
   width: 70%;
 }
+
+/*index*/
+.index-selection {
+  /* height: 100vh; */
+  min-height: 100vh;
+  padding: 0 1em;
+  max-width: 136rem;
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-start;
+  /* border: 2px solid red; */
+  /* border: solid black; */
+  /* display: flex;
+  justify-content: center; */
+}
+.index-sign-search {
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+@media (max-width: 40em) {
+  .index-selection {
+    display: flex;
+    flex-direction: column;
+  }
+}
+.sign-login-homepage {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 35vw;
+  align-items: center;
+  /* display: flex;
+  
+  justify-content: center;
+  flex-direction: column; */
+  /* padding: 0 1em;
+  max-width: 60rem;
+  margin: 0 auto; */
+}
 /* login/logout*/
 .form-container-login {
   /* border: 10px solid black; */
@@ -426,12 +484,6 @@ button:hover {
   display: flex;
   justify-content: center;
   flex-direction: row;
-}
-.index-selection w3-display-container w3-grayscale-min {
-  height: 100vh;
-  border: solid black;
-  display: flex;
-  justify-content: center;
 }
 .auth-form {
   display: flex;

@@ -14,13 +14,13 @@ const ProductsApi = require("../service/ProductApi");
 const productsApi = new ProductsApi();
 
 // ****************************************************************************************
-// GET route to get the default set of 20 vehicles and render index/landing page
+// GET route to get the default set of 20 products and render index/landing page
 // ****************************************************************************************
 router.get("/", async (req, res) => {
   try {
-    const vehiclesFromApi = await productsApi.getGeneralLisiting();
+    const productsFromApi = await productsApi.getGeneralLisiting();
 
-    let records = vehiclesFromApi.data;
+    let records = productsFromApi.data;
     const trimmedArrOfCars = records.filter((curr, i) => i < 5 && curr);
     const trimmedArrOfCarsAndRevLength = trimmedArrOfCars.map(
       async (current) => {
@@ -39,9 +39,9 @@ router.get("/", async (req, res) => {
     );
 
     let data = await Promise.all(trimmedArrOfCarsAndRevLength);
-    console.log("homepage", vehiclesFromApi);
-    res.render("index", {
-      vehiclesFromApi: data,
+    // console.log("homepage", productsFromApi);
+    res.render("index.hbs", {
+      productsFromApi: data,
       isLoggedIn: req.session.user,
     });
   } catch (err) {

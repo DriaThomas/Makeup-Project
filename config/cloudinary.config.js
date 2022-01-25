@@ -48,7 +48,7 @@ const storage = new CloudinaryStorage({
   cloudinary,
   params: {
     allowed_formats: ["jpg", "png"],
-    folder: "folderName",
+    folder: "Makeup-Collection",
   },
 });
 
