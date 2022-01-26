@@ -30,15 +30,19 @@ router.post("/", (req, res) => {
     .getQueriedListings(name, product_type, brand)
     .then((queriedVehicles) => {
       const records = queriedVehicles.data;
+      console.log(records.name);
+      // if (records.name == 0) {
+      //   document.getElementById(records.name).style.display = "none";
+      // }
 
       // const suvCars = records.filter((car) => car.brand === "covergirl");
       res.status(200).render("vehicles/vehicles-list", {
-        vehiclesFromApi: records,
+        productsFromApi: records,
         // suvCars: suvCars,
       });
     })
     .catch((err) => {
-      console.log("Error appaeared during getting cars from API", err);
+      console.log("Error appaeared during getting products from API", err);
       res.render("vehicles/vehicles-list", {
         errorMessage:
           "Oops, something went wrong,\ntry one more time, please 😔",

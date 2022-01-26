@@ -45,7 +45,7 @@ router.get("/", async (req, res) => {
       isLoggedIn: req.session.user,
     });
   } catch (err) {
-    console.log("Error appaeared during getting cars from API", err);
+    console.log("Error appaeared during getting products from API", err);
     res.render("index", {
       errorMessage: "Oops, something went wrong,\ntry one more time, please 😔",
     });

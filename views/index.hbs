@@ -16,60 +16,8 @@
 
 <body>
 
-  <!-- Navbar (sit on top) -->
 
-  <div class="w3-top">
-    <div class="w3-bar w3-white w3-card" id="myNavbar">
-      <a href="#home" class="w3-bar-item w3-button w3-wide">BULK BEAUTY</a>
 
-      <!-- Right-sided navbar links -->
-
-      <div class="w3-right w3-hide-small">
-        {{!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">--}}
-          {{!-- <ul class="navbar-nav ml-auto"> --}} 
-            {{!-- <a href="/">Home</a> --}}
-            {{!-- <a href="/about" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i>About Us</a> --}}
-            {{!-- <a href="/rankings" class="w3-bar-item w3-button"><i class="fa fa-th"></i>Product search</a>
-            <a href="/product" class="w3-bar-item w3-button"><i class="fa fa-th"></i> All Product</a> --}}
-            <ul class="navbar-nav ml-auto">
-            <div class="navbar-items-homepage">
-              <li>
-            <a href="/collection/create" class="w3-bar-item w3-button"><i class="fa fa-th"></i> Create Collection </a></li>
-            {{!-- <a href="/profile" class="w3-bar-item w3-button"> <i class="fa fa-user"></i>Profile Page </a> --}}
-            {{!-- <a href="/auth/signup" class="w3-bar-item w3-button">Sign-Up</a>
-            <a href="/auth/login" class="w3-bar-item w3-button">Login</a> --}}
-               <li><a href="/profile"> <i class="w3-bar-item w3-button fa fa-user"></i>{{currentUser.firstName}}</a>
-                  {{!-- <img class="w3-bar-item " src="{{currentUser.profilePic}}" alt="image of user" /> --}}
-      </li>  
-                     {{!-- <a href="/profile"> <i class="w3-bar-item w3-button fa fa-user"></i>{{currentUser.firstName}}</a> --}}
-       
-   <li>
-                 <a href="/auth/logout" class="w3-bar-item w3-button">Logout</a>
-                 </li>
-            {{!-- <a href="/collection/upload/" class="w3-bar-item w3-button">Upload Image</a> --}}
-         </div>
-          </ul>
-        </div>
-
-        <!-- Hide right-floated links on small screens and replace them with a menu icon -->
-
-        <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium"
-          onclick="w3_open()">
-          <i class="fa fa-bars"></i>
-        </a>
-      </div>
-    </div>
-
-    <!-- Sidebar on small screens when clicking the menu icon -->
-    <nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large"
-      style="display:none" id="mySidebar">
-      <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
-      <a href="/product" onclick="w3_close()" class="w3-bar-item w3-button">ALL PRODUCTS</a>
-      {{!-- <a href="/rankings" onclick="w3_close()" class="w3-bar-item w3-button">PRODUCT SEARCH</a> --}}
-      <a href="/collection/create" onclick="w3_close()" class="w3-bar-item w3-button">CREATE COLLECTION</a>
-      - <a href="/user/profile" onclick="w3_close()" class="w3-bar-item w3-button">MY PROFILE</a> 
-      <a href="/auth/logout" onclick="w3_close()" class="w3-bar-item w3-button">LOGOUT</a>
-    </nav>
 
 
     <!-- Header with full-height image -->
