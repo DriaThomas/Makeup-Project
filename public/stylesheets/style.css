@@ -56,7 +56,41 @@ html {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   margin: 8px;
 }
-
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: 50px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.signup-container {
+  display: flex;
+  justify-content: center;
+}
+.clearfix {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.account-message-signup {
+  text-align: center;
+}
+.signup-form-container {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+}
+#signupbtn {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  margin: 20px; */
+}
 /* .container {
   padding: 0 16px;
 } */
@@ -178,14 +212,32 @@ body {
   --initialAngle: -85deg;
   --endAngle: -99deg;
 }
+.footer-button-container {
+  display: flex;
+  justify-content: center;
+}
 @media screen and (max-width: 1200px) {
   .search-sign-homepage {
-    /* width: 10vw; */
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-right: 11vw;
+  }
+  .homepage-button {
+    width: 31vw;
     display: flex;
     justify-content: center;
   }
 }
+.auth-form-container {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  padding: 30px;
+  margin-top: 100px;
 
+  border: 1px solid black;
+}
 .search-sign-homepage {
   display: flex;
   justify-content: center;
@@ -318,8 +370,8 @@ body {
   }
 
   .index-sign-search {
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
   }
 }
 
@@ -589,7 +641,7 @@ button:hover {
   width: auto;
   /* padding-top: 10px; */
 }
-.auth-form-container {
+/* .auth-form-container {
   display: flex;
   justify-content: flex-end;
   flex-direction: column;
@@ -597,7 +649,7 @@ button:hover {
   margin-top: 100px;
   width: 30vw;
   border: 1px solid black;
-}
+} */
 #sign-up-button {
   display: flex;
   flex-direction: column;
@@ -647,11 +699,21 @@ button:hover {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    padding: 66px;
+  }
+
+  .button-to-open-product-details {
+    width: 67vw;
+  }
+  #table {
+    width: 100vw;
   }
   .products-card-index-page {
     width: 56vw;
   }
+  /* footer {
+    width: 100vw;
+  } */
 }
 .products-card-index-page {
   width: 25vw;
@@ -752,4 +814,9 @@ button:hover {
 /*footer*/
 footer {
   width: 100vw;
+  display: flex;
+  justify-content: center;
 }
+/* footer {
+  width: 100vw;
+} */
