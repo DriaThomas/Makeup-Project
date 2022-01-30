@@ -19,7 +19,7 @@ const productsApi = new ProductsApi();
 router.get("/", async (req, res) => {
   try {
     const productsFromApi = await productsApi.getGeneralLisiting();
-
+    console.log(productsApi.getGeneralLisiting);
     let records = productsFromApi.data;
     const trimmedArrOfProducts = records.filter((curr, i) => i < 5 && curr);
     const trimmedArrOfProductsAndRevLength = trimmedArrOfProducts.map(
@@ -42,8 +42,9 @@ router.get("/", async (req, res) => {
     // console.log("homepage", productsFromApi);
     res.render("index.hbs", {
       productsFromApi: data,
-      // isLoggedIn: req.session.user,
+      isLoggedIn: req.session.user,
     });
+    console.log("hello", productsApi.getGeneralLisiting);
   } catch (err) {
     console.log("Error appaeared during getting products from API", err);
     res.render("index", {
