@@ -39,7 +39,7 @@ router.get("/", async (req, res) => {
     );
 
     let data = await Promise.all(trimmedArrOfProductsAndRevLength);
-    // console.log("homepage", productsFromApi);
+    console.log("productaapi");
     res.render("index.hbs", {
       productsFromApi: data,
       isLoggedIn: req.session.user,
