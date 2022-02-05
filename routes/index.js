@@ -40,11 +40,11 @@ router.get("/", async (req, res) => {
 
     let data = await Promise.all(trimmedArrOfProductsAndRevLength);
 
-    res.render("index.hbs", {
+    res.render("index", {
       productsFromApi: data,
       isLoggedIn: req.session.user,
     });
-    console.log("hello", productsApi.getGeneralLisiting);
+    // console.log("hello", productsApi.getGeneralLisiting);
   } catch (err) {
     console.log("Error appaeared during getting products from API", err);
     res.render("index", {
