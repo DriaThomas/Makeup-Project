@@ -610,7 +610,7 @@ router.post("/savedproducts", (req, res) => {
     // console.log("savedproducts", dealerLink);
   });
 });
-//get
+//get route
 // ****************************************************************************************
 // GET route to delete a saved product
 // ****************************************************************************************
